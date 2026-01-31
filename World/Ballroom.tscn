@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=9 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
 [ext_resource type="Texture2D" uid="uid://c2m6xaql8ae0x" path="res://Resources/Checkerboard.png" id="1_q8mcj"]
 [ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
+[ext_resource type="PackedScene" uid="uid://dxlfq43dxm2tl" path="res://World/Metronome/Metronome.tscn" id="5_ikc2b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
 albedo_texture = ExtResource("1_q8mcj")
@@ -58,6 +59,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
 
 [node name="Npc4" parent="Actors" instance=ExtResource("2_ebwhw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 9)
+
+[node name="Metronome" parent="Actors" instance=ExtResource("5_ikc2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58438325, 3.557118, -2.951208)
 
 [node name="Lights" type="Node" parent="."]
 
