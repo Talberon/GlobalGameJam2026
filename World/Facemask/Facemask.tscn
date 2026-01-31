@@ -266,15 +266,18 @@ _data = {
 &"Sun": SubResource("Animation_0aapc")
 }
 
-[node name="Facemask" type="Node3D" node_paths=PackedStringArray("Label")]
+[node name="Facemask" type="Node3D" node_paths=PackedStringArray("Label", "AnimationPlayer")]
 script = ExtResource("1_i477a")
 Label = NodePath("Label")
+AnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.395, 0, 0, 0, 2.395, 0, 0, 0, 2.395, 0, 0, 0)
 mesh = SubResource("QuadMesh_2pkv1")
 
 [node name="Label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07177156)
+visible = false
 billboard = 1
 text = "PLACEHOLDER"
 

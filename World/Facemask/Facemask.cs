@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Facemask : Node3D
@@ -23,17 +24,41 @@ public partial class Facemask : Node3D
 	}
 
 	[Export] public Label3D Label;
-	[Export] public MaskTypes MaskType = MaskTypes.Jester;
+	[Export] public AnimationPlayer AnimationPlayer;
 
-	public void SetMaskType(MaskTypes type)
+	[Export]
+	public MaskTypes MaskType
 	{
-		MaskType = type;
-		Label.Text = type.ToString();
+		get => currentMaskType;
+		set
+		{
+			currentMaskType = value;
+			AnimationPlayer.Play(AnimationForMask(currentMaskType));
+			Label.Text = currentMaskType.ToString();
+		}
 	}
+
+	private MaskTypes currentMaskType = MaskTypes.Jester;
+
+	private string AnimationForMask(MaskTypes type) => type switch
+	{
+		MaskTypes.Jester => "Jester",
+		MaskTypes.Happy => "Happy",
+		MaskTypes.Flower => "Flower",
+		MaskTypes.Hummingbird => "Hummingbird",
+		MaskTypes.Crown => "Crown",
+		MaskTypes.Sun => "Sun",
+		MaskTypes.Sad => "Sad",
+		MaskTypes.Donkey => "Donkey",
+		MaskTypes.CheshireCat => "CheshireCat",
+		MaskTypes.Owl => "Owl",
+		MaskTypes.Moon => "Moon",
+		_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+	};
 
 	public override void _Ready()
 	{
-		Label.Text = MaskType.ToString();
+		MaskType = currentMaskType;
 		base._Ready();
 	}
 }

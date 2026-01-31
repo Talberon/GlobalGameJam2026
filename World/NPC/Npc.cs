@@ -7,7 +7,7 @@ public partial class Npc : Node3D
 	public const float JumpVelocity = 4.5f;
 
 	[Export] private CharacterBody3D characterBody3D;
-	
+
 	[Export] private Metronome metronome;
 	[Export] private Facemask.MaskTypes initialMask = Facemask.MaskTypes.Jester;
 	[Export] public Facemask CurrentMask;
@@ -32,7 +32,6 @@ public partial class Npc : Node3D
 		{
 			targetHeight = onBeatHeight;
 			danceBeatSpeed = 50f;
-
 		};
 		metronome.OffBeat += () =>
 		{
@@ -53,8 +52,15 @@ public partial class Npc : Node3D
 				player.SetDancePartner(this);
 			}
 		};
+		dancePartnerZone.BodyExited += (other) =>
+		{
+			if (other is Player player && player.CurrentDancePartner == this)
+			{
+				player.SetDancePartner(null);
+			}
+		};
 
-		CurrentMask.SetMaskType(initialMask);
+		CurrentMask.MaskType = initialMask;
 		base._Ready();
 	}
 
@@ -96,5 +102,4 @@ public partial class Npc : Node3D
 		float easedT = t * t;
 		ZoneMesh.Radius = Mathf.Lerp(0, maxRadius, easedT);
 	}
-
 }

@@ -19,7 +19,7 @@ public partial class ActorPose : Node3D
 	[Export]
 	public Poses CurrentPose
 	{
-		get { return currentPose; }
+		get => currentPose;
 		set
 		{
 			currentPose = value;

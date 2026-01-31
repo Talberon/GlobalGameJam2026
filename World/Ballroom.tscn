@@ -95,3 +95,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 10, 0)
 light_color = Color(1, 0.901, 0.73, 1)
 light_energy = 13.371
 omni_range = 50.637
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.9765748, 0.21517852, 0, -0.21517852, 0.9765748, 0, 18, 0)
+light_color = Color(1, 0.9533333, 0.44, 1)
+light_energy = 0.66
