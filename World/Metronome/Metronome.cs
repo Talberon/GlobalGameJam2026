@@ -20,6 +20,11 @@ public partial class Metronome : Node3D
 
 	private bool onBeat;
 
+	public delegate void TriggerOnBeat();
+	public delegate void TriggerOffBeat();
+
+	public TriggerOnBeat OnBeat = () => { };
+	public TriggerOffBeat OffBeat = () => { };
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -45,6 +50,7 @@ public partial class Metronome : Node3D
 					Y = beatScaleY
 				};
 				GD.Print("BEAT!");
+				OnBeat();
 			}
 			else
 			{
@@ -54,6 +60,7 @@ public partial class Metronome : Node3D
 					Y = restScaleY
 				};
 				GD.Print("OFF BEAT!");
+				OffBeat();
 			}
 
 			nextBeat += beatDelaySeconds;

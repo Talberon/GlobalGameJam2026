@@ -1,221 +1,29 @@
-[gd_scene load_steps=15 format=3 uid="uid://bq37yh8m720tk"]
+[gd_scene load_steps=10 format=3 uid="uid://bq37yh8m720tk"]
 
 [ext_resource type="Script" uid="uid://bfa1axsilaxtj" path="res://World/Player/Player.cs" id="1_oytbf"]
 [ext_resource type="Script" uid="uid://bgk7p80wct2cg" path="res://World/Player/Camera.cs" id="2_kogn4"]
+[ext_resource type="PackedScene" uid="uid://171xggqqlmkp" path="res://World/Facemask/Facemask.tscn" id="3_6teo4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oytbf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oytbf"]
-albedo_color = Color(0.47000003, 0.64666677, 1, 1)
+[sub_resource type="Gradient" id="Gradient_6teo4"]
+offsets = PackedFloat32Array(0, 0.5466667)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.75, 1)
 
-[sub_resource type="Shader" id="Shader_kogn4"]
-code = "shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_back,specular_schlick_ggx, diffuse_toon;
-// Texturas
-uniform sampler2D albedo_texture : source_color;
-uniform sampler2D roughness_texture : source_color;
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yh66h"]
+frequency = 0.0155
 
-// Dirección de luz
-uniform vec3 light_direction = vec3(0.5, 0.0, 0.0);
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8lyh0"]
+noise = SubResource("FastNoiseLite_yh66h")
+color_ramp = SubResource("Gradient_6teo4")
 
-// Colores por banda de iluminación
-uniform vec4 highlight_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 mid1_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
-uniform vec4 mid2_color : source_color = vec4(0.5, 0.5, 0.5, 1.0);
-uniform vec4 shadow_color : source_color = vec4(0.3, 0.3, 0.3, 1.0);
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6teo4"]
+albedo_texture = SubResource("NoiseTexture2D_8lyh0")
+billboard_mode = 1
 
-// Umbrales de iluminación
-uniform float highlight_threshold : hint_range(0.0, 1.0) = 0.85;
-uniform float mid1_threshold : hint_range(0.0, 1.0) = 0.6;
-uniform float mid2_threshold : hint_range(0.0, 1.0) = 0.35;
-
-// Suavidad
-uniform float smoothness : hint_range(0.0, 1.0) = 0.1;
-
-// Roughness
-uniform float roughness : hint_range(0.0, 1.0) = 1.0;
-uniform int roughness_channel : hint_range(0, 3) = 0;
-
-void fragment() {
-    vec4 tex_color = texture(albedo_texture, UV);
-    vec3 normal = normalize(NORMAL);
-    vec3 light_dir = normalize(light_direction);
-    float NdotL = max(dot(normal, -light_dir), 0.0);
-
-
-    vec3 toon_color;
-
-    if (smoothness == 0.0) {
-        // Transiciones duras
-        if (NdotL >= highlight_threshold) {
-            toon_color = highlight_color.rgb;
-        } else if (NdotL >= mid1_threshold) {
-            toon_color = mid1_color.rgb;
-        } else if (NdotL >= mid2_threshold) {
-            toon_color = mid2_color.rgb;
-        } else {
-            toon_color = shadow_color.rgb;
-        }
-    } else {
-        // Transiciones suaves con interpolación
-        if (NdotL > highlight_threshold) {
-            toon_color = highlight_color.rgb;
-        } else if (NdotL > mid1_threshold) {
-            float t = smoothstep(mid1_threshold - smoothness, highlight_threshold + smoothness, NdotL);
-            toon_color = mix(mid1_color.rgb, highlight_color.rgb, t);
-        } else if (NdotL > mid2_threshold) {
-            float t = smoothstep(mid2_threshold - smoothness, mid1_threshold + smoothness, NdotL);
-            toon_color = mix(mid2_color.rgb, mid1_color.rgb, t);
-        } else {
-            float t = smoothstep(0.0, mid2_threshold + smoothness, NdotL);
-            toon_color = mix(shadow_color.rgb, mid2_color.rgb, t);
-        }
-    }
-
-   ALBEDO = tex_color.rgb * toon_color * 1.5;
-
-
-    ALPHA = tex_color.a;
-
-    // Roughness con canal seleccionado
-    vec4 rough_tex = texture(roughness_texture, UV);
-    float raw_roughness = roughness;
-    if (roughness_channel == 0) raw_roughness = rough_tex.r * roughness;
-    else if (roughness_channel == 1) raw_roughness = rough_tex.g * roughness;
-    else if (roughness_channel == 2) raw_roughness = rough_tex.b * roughness;
-    else if (roughness_channel == 3) raw_roughness = rough_tex.a * roughness;
-
-    ROUGHNESS = clamp(raw_roughness, 0.2, 0.8);
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6teo4"]
-render_priority = 0
-shader = SubResource("Shader_kogn4")
-shader_parameter/light_direction = Vector3(-2.595, -2.365, -6.2)
-shader_parameter/highlight_color = Color(1, 0.45999998, 0.45999998, 1)
-shader_parameter/mid1_color = Color(0.8, 0.04000001, 0.04000001, 1)
-shader_parameter/mid2_color = Color(0.5, 0.055000007, 0.055000007, 1)
-shader_parameter/shadow_color = Color(0.3, 0, 0, 1)
-shader_parameter/highlight_threshold = 0.7470000354825
-shader_parameter/mid1_threshold = 0.6
-shader_parameter/mid2_threshold = 0.35
-shader_parameter/smoothness = 0.18000000855
-shader_parameter/roughness = 1.0
-shader_parameter/roughness_channel = 0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_oytbf"]
-
-[sub_resource type="Gradient" id="Gradient_oytbf"]
-colors = PackedColorArray(0, 0, 0, 1, 0.65, 0.68500006, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kogn4"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6teo4"]
-noise = SubResource("FastNoiseLite_kogn4")
-color_ramp = SubResource("Gradient_oytbf")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kogn4"]
-albedo_texture = SubResource("NoiseTexture2D_6teo4")
-
-[sub_resource type="Shader" id="Shader_6teo4"]
-code = "shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_back,specular_schlick_ggx, diffuse_toon;
-// Texturas
-uniform sampler2D albedo_texture : source_color;
-uniform sampler2D roughness_texture : source_color;
-
-// Dirección de luz
-uniform vec3 light_direction = vec3(0.5, 0.0, 0.0);
-
-// Colores por banda de iluminación
-uniform vec4 highlight_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 mid1_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
-uniform vec4 mid2_color : source_color = vec4(0.5, 0.5, 0.5, 1.0);
-uniform vec4 shadow_color : source_color = vec4(0.3, 0.3, 0.3, 1.0);
-
-// Umbrales de iluminación
-uniform float highlight_threshold : hint_range(0.0, 1.0) = 0.85;
-uniform float mid1_threshold : hint_range(0.0, 1.0) = 0.6;
-uniform float mid2_threshold : hint_range(0.0, 1.0) = 0.35;
-
-// Suavidad
-uniform float smoothness : hint_range(0.0, 1.0) = 0.1;
-
-// Roughness
-uniform float roughness : hint_range(0.0, 1.0) = 1.0;
-uniform int roughness_channel : hint_range(0, 3) = 0;
-
-void fragment() {
-    vec4 tex_color = texture(albedo_texture, UV);
-    vec3 normal = normalize(NORMAL);
-    vec3 light_dir = normalize(light_direction);
-    float NdotL = max(dot(normal, -light_dir), 0.0);
-
-
-    vec3 toon_color;
-
-    if (smoothness == 0.0) {
-        // Transiciones duras
-        if (NdotL >= highlight_threshold) {
-            toon_color = highlight_color.rgb;
-        } else if (NdotL >= mid1_threshold) {
-            toon_color = mid1_color.rgb;
-        } else if (NdotL >= mid2_threshold) {
-            toon_color = mid2_color.rgb;
-        } else {
-            toon_color = shadow_color.rgb;
-        }
-    } else {
-        // Transiciones suaves con interpolación
-        if (NdotL > highlight_threshold) {
-            toon_color = highlight_color.rgb;
-        } else if (NdotL > mid1_threshold) {
-            float t = smoothstep(mid1_threshold - smoothness, highlight_threshold + smoothness, NdotL);
-            toon_color = mix(mid1_color.rgb, highlight_color.rgb, t);
-        } else if (NdotL > mid2_threshold) {
-            float t = smoothstep(mid2_threshold - smoothness, mid1_threshold + smoothness, NdotL);
-            toon_color = mix(mid2_color.rgb, mid1_color.rgb, t);
-        } else {
-            float t = smoothstep(0.0, mid2_threshold + smoothness, NdotL);
-            toon_color = mix(shadow_color.rgb, mid2_color.rgb, t);
-        }
-    }
-
-   ALBEDO = tex_color.rgb * toon_color * 1.5;
-
-
-    ALPHA = tex_color.a;
-
-    // Roughness con canal seleccionado
-    vec4 rough_tex = texture(roughness_texture, UV);
-    float raw_roughness = roughness;
-    if (roughness_channel == 0) raw_roughness = rough_tex.r * roughness;
-    else if (roughness_channel == 1) raw_roughness = rough_tex.g * roughness;
-    else if (roughness_channel == 2) raw_roughness = rough_tex.b * roughness;
-    else if (roughness_channel == 3) raw_roughness = rough_tex.a * roughness;
-
-    ROUGHNESS = clamp(raw_roughness, 0.2, 0.8);
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh66h"]
-render_priority = 0
-shader = SubResource("Shader_6teo4")
-shader_parameter/light_direction = Vector3(-2.595, -2.365, -6.2)
-shader_parameter/highlight_color = Color(0.559, 1, 0.45999998, 1)
-shader_parameter/mid1_color = Color(0.04000001, 0.8, 0.38200006, 1)
-shader_parameter/mid2_color = Color(0.055000007, 0.5, 0.077249974, 1)
-shader_parameter/shadow_color = Color(0.11500004, 0.3, 0, 1)
-shader_parameter/highlight_threshold = 0.7470000354825
-shader_parameter/mid1_threshold = 0.6
-shader_parameter/mid2_threshold = 0.35
-shader_parameter/smoothness = 0.18000000855
-shader_parameter/roughness = 1.0
-shader_parameter/roughness_channel = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_6teo4"]
-size = Vector3(0.57, 0.425, 0.44)
+[sub_resource type="QuadMesh" id="QuadMesh_yh66h"]
+material = SubResource("StandardMaterial3D_6teo4")
+size = Vector2(1, 2)
 
 [node name="Player" type="Node3D"]
 
@@ -224,7 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "Camera", "VisualRoot")]
 script = ExtResource("1_oytbf")
-AnimationPlayer = NodePath("AnimationPlayer")
+AnimationPlayer = NodePath("../AnimationPlayer")
 Camera = NodePath("../Camera3D")
 VisualRoot = NodePath("../VisualRoot")
 
@@ -234,17 +42,18 @@ shape = SubResource("CapsuleShape3D_oytbf")
 
 [node name="Body" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_oytbf")
-material_overlay = SubResource("ShaderMaterial_6teo4")
-mesh = SubResource("CapsuleMesh_oytbf")
+mesh = SubResource("QuadMesh_yh66h")
 
-[node name="Face" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5013945, 0.43883568)
-material_override = SubResource("StandardMaterial3D_kogn4")
-material_overlay = SubResource("ShaderMaterial_yh66h")
-mesh = SubResource("BoxMesh_6teo4")
+[node name="Facemask" parent="CharacterBody3D" instance=ExtResource("3_6teo4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6005542, 0.71035355)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
+[node name="Pose" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Label3D" type="Label3D" parent="CharacterBody3D/Pose"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3835006, 0)
+pixel_size = 0.05
+billboard = 1
+text = "POSE"
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("character")]
 transform = Transform3D(1, 0, 0, 0, 0.6409273, 0.76760155, 0, -0.76760155, 0.6409273, 0, 25.09787, 4.1001883)
@@ -252,3 +61,6 @@ fov = 38.7
 script = ExtResource("2_kogn4")
 character = NodePath("../CharacterBody3D")
 distanceBehind = 20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CharacterBody3D")

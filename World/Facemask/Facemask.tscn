@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://171xggqqlmkp"]
+
+[ext_resource type="Script" uid="uid://byobv41l0v7ao" path="res://World/Facemask/Facemask.cs" id="1_i477a"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_xw72r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2njjq"]
+albedo_texture = SubResource("CurveTexture_xw72r")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2pkv1"]
+
+[node name="Facemask" type="Node3D" node_paths=PackedStringArray("Label")]
+script = ExtResource("1_i477a")
+Label = NodePath("Label")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_2njjq")
+mesh = SubResource("QuadMesh_2pkv1")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07177156)
+pixel_size = 0.05
+text = "PLACEHOLDER"
