@@ -35,6 +35,3 @@ fov = 38.7
 script = ExtResource("2_kogn4")
 character = NodePath("../CharacterBody3D")
 distanceBehind = 16.11
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../CharacterBody3D")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cppu6uhd6tyay"]
+[gd_scene load_steps=18 format=3 uid="uid://cppu6uhd6tyay"]
 
 [ext_resource type="Script" uid="uid://suse1k2sjq3i" path="res://World/NPC/Npc.cs" id="1_qcj2e"]
 [ext_resource type="Shader" uid="uid://cd5imnb4oxt7" path="res://Resources/Shaders/toon.gdshader" id="2_s5tg6"]
@@ -137,16 +137,23 @@ radius = 4.1655273
 
 [sub_resource type="QuadMesh" id="QuadMesh_whvfb"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_x2yfe"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2yfe"]
 resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_whvfb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_x2yfe")
 radius = 4.185
 height = 0.01
 
-[node name="NPC" type="Node3D" node_paths=PackedStringArray("characterBody3D", "CurrentMask", "TimingCircle", "dancePartnerZone", "loveParticle", "tearsParticle")]
+[node name="NPC" type="Node3D" node_paths=PackedStringArray("characterBody3D", "CurrentMask", "TimingCircle", "actorPose", "dancePartnerZone", "loveParticle", "tearsParticle")]
 script = ExtResource("1_qcj2e")
 characterBody3D = NodePath("NpcController")
 CurrentMask = NodePath("NpcController/Facemask")
 TimingCircle = NodePath("TimingCircle")
+actorPose = NodePath("NpcController/ActorPose")
 dancePartnerZone = NodePath("NpcController/DancePartnerZone")
 loveParticle = NodePath("NpcController/LoveParticle")
 tearsParticle = NodePath("NpcController/TearsParticle")
@@ -190,5 +197,5 @@ mesh = SubResource("QuadMesh_x2yfe")
 mesh = SubResource("QuadMesh_whvfb")
 
 [node name="TimingCircle" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_x2yfe")
+mesh = SubResource("SphereMesh_whvfb")
 skeleton = NodePath("../NpcController/DancePartnerZone")

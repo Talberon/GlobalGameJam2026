@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Masquerade.World.Player;
 using Masquerade.World.Pose;
@@ -30,8 +31,10 @@ public partial class Npc : Node3D
 	[Export] public int TestsRemaining = 3;
 
 	private SphereMesh ZoneMesh => TimingCircle.Mesh as SphereMesh;
+	private const float TimingCircleTransparency = 0.5f;
 
-	[Export] private Player player;
+	private Player? playerPartner;
+	private readonly Color defaultColor = new(.29f, .38f, 1f, TimingCircleTransparency);
 
 	[ExportGroup("Particles")] [Export] private CpuParticles3D loveParticle;
 	[Export] private CpuParticles3D tearsParticle;
@@ -41,7 +44,7 @@ public partial class Npc : Node3D
 		metronome.OnBeat += () =>
 		{
 			targetHeight = onBeatHeight;
-			TestWithCurrentPose(player);
+			TestWithCurrentPose(playerPartner);
 		};
 		metronome.OffBeat += () =>
 		{
@@ -49,12 +52,19 @@ public partial class Npc : Node3D
 			ZoneMesh.Radius = 0;
 			beatTimer = 0f;
 			danceBeatSpeed = lerpSpeed;
+			if (TimingCircle.GetActiveMaterial(0) is StandardMaterial3D material)
+			{
+				material.AlbedoColor = defaultColor;
+			}
+
+			actorPose.CurrentPose = (ActorPose.Poses)(GD.Randi() % Enum.GetValues<ActorPose.Poses>().Length);
 		};
 
 		dancePartnerZone.BodyEntered += (other) =>
 		{
 			if (other is Player player)
 			{
+				playerPartner = player;
 				//TODO: Play good particle (hearts) if we are matched correctly and allowed to trade
 				//TODO: Play bad particle (teardrops) if we are NOT a match
 
@@ -67,6 +77,7 @@ public partial class Npc : Node3D
 		{
 			if (other is Player player)
 			{
+				playerPartner = null;
 				if (player.CurrentDancePartner == this)
 				{
 					player.SetDancePartner(null);
@@ -81,23 +92,33 @@ public partial class Npc : Node3D
 		base._Ready();
 	}
 
-	private void TestWithCurrentPose(Player player)
+	private void TestWithCurrentPose(Player? player)
 	{
-		if (player.CurrentDancePartner != this) return;
+		if (player is null) return;
 
 		if (actorPose.CurrentPose == player.ActorPose.CurrentPose)
 		{
 			TestsRemaining--;
-			//TODO: Play particle/sfx on success
+			if (TimingCircle.GetActiveMaterial(0) is StandardMaterial3D material)
+			{
+				material.AlbedoColor = new Color(.01f, .5f, 0.01f, TimingCircleTransparency);
+				//TODO: Play particle/sfx on success
+			}
+
+			if (TestsRemaining <= 0)
+			{
+				//TODO: Spin this dancer as they trade
+				player.TradeMasksWith(this);
+			}
 		}
 		else
 		{
+			if (TimingCircle.GetActiveMaterial(0) is StandardMaterial3D material)
+			{
+				material.AlbedoColor = new Color(.5f, .01f, 0.01f, TimingCircleTransparency);
+				//TODO: Play particle/sfx on success
+			}
 			//TODO: Play particle/sfx on failure
-		}
-
-		if (TestsRemaining <= 0)
-		{
-			player.TradeMasksWith(this);
 		}
 	}
 

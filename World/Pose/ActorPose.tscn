@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://8uhf1bxrekl0"]
+[gd_scene load_steps=24 format=3 uid="uid://8uhf1bxrekl0"]
 
 [ext_resource type="Script" uid="uid://cc6xulawt1h6b" path="res://World/Pose/ActorPose.cs" id="1_t3moo"]
 [ext_resource type="Texture2D" uid="uid://bf4yjhpxwiqjn" path="res://RawAssets/Dance_Balet.png" id="2_golyu"]
 [ext_resource type="Texture2D" uid="uid://conufdavs8bwd" path="res://RawAssets/Dance_Cossack.png" id="3_7glxv"]
 [ext_resource type="Texture2D" uid="uid://n61gv6klodh5" path="res://RawAssets/Dance_Cheer1.png" id="4_4216y"]
+[ext_resource type="Shader" uid="uid://c5748rykqy43a" path="res://Resources/Shaders/outline.gdshader" id="5_4216y"]
 [ext_resource type="Texture2D" uid="uid://c3xg3yhn2632i" path="res://RawAssets/Dance_Ballroom_Lead.png" id="5_q7nut"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_8iq56"]
@@ -30,7 +31,15 @@ tracks/0/keys = {
 "values": [null]
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7nut"]
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("2_golyu")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 28.386001348335
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gh07g"]
+next_pass = SubResource("ShaderMaterial_q7nut")
 transparency = 1
 albedo_texture = ExtResource("2_golyu")
 billboard_mode = 1
@@ -51,7 +60,15 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_gh07g")]
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gh07g"]
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("5_q7nut")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 28.386001348335
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd5dy"]
+next_pass = SubResource("ShaderMaterial_gh07g")
 transparency = 1
 albedo_texture = ExtResource("5_q7nut")
 billboard_mode = 1
@@ -72,10 +89,17 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_xd5dy")]
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4216y"]
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("3_7glxv")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 28.386001348335
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0ghy"]
+next_pass = SubResource("ShaderMaterial_4216y")
 transparency = 1
 albedo_texture = ExtResource("3_7glxv")
-uv1_offset = Vector3(0, -0.085, 0)
 billboard_mode = 1
 
 [sub_resource type="Animation" id="Animation_8iq56"]
@@ -94,7 +118,15 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_o0ghy")]
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0ghy"]
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("4_4216y")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 28.386001348335
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2a4q"]
+next_pass = SubResource("ShaderMaterial_o0ghy")
 transparency = 1
 albedo_texture = ExtResource("4_4216y")
 billboard_mode = 1
