@@ -28,6 +28,7 @@ shape = SubResource("CapsuleShape3D_oytbf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2690234, 0.03479886)
 
 [node name="ActorPose" parent="CharacterBody3D" instance=ExtResource("3_yh66h")]
+CurrentPose = 3
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("character")]
 transform = Transform3D(1, 0, 0, 0, 0.6409273, 0.76760155, 0, -0.76760155, 0.6409273, 0, 25.09787, 4.1001883)
