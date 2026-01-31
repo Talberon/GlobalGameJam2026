@@ -58,17 +58,17 @@ public partial class Facemask : Node3D
 
 	public bool IsCompatibleWith(MaskTypes maskType) => currentMaskType switch
 	{
-		MaskTypes.Jester => maskType is MaskTypes.Happy or MaskTypes.Sad,
-		MaskTypes.Happy => maskType is MaskTypes.Jester or MaskTypes.Flower,
-		MaskTypes.Flower => maskType is MaskTypes.Happy or MaskTypes.Hummingbird,
-		MaskTypes.Hummingbird => maskType is MaskTypes.Flower or MaskTypes.Crown,
-		MaskTypes.Crown => maskType is MaskTypes.Hummingbird or MaskTypes.Sun,
-		MaskTypes.Sun => maskType is MaskTypes.Crown or MaskTypes.Jester,
-		MaskTypes.Sad => maskType is MaskTypes.Jester or MaskTypes.Donkey,
-		MaskTypes.Donkey => maskType is MaskTypes.Sad or MaskTypes.CheshireCat,
-		MaskTypes.CheshireCat => maskType is MaskTypes.Donkey or MaskTypes.Owl,
-		MaskTypes.Owl => maskType is MaskTypes.CheshireCat or MaskTypes.Moon,
-		MaskTypes.Moon => maskType is MaskTypes.Owl or MaskTypes.Jester,
+		MaskTypes.Jester => maskType is MaskTypes.Sun or MaskTypes.Moon,
+		MaskTypes.Happy => maskType is MaskTypes.Jester,
+		MaskTypes.Flower => maskType is MaskTypes.Happy,
+		MaskTypes.Hummingbird => maskType is MaskTypes.Flower,
+		MaskTypes.Crown => maskType is MaskTypes.Hummingbird,
+		MaskTypes.Sun => maskType is MaskTypes.Crown,
+		MaskTypes.Sad => maskType is MaskTypes.Jester,
+		MaskTypes.Donkey => maskType is MaskTypes.Sad,
+		MaskTypes.CheshireCat => maskType is MaskTypes.Donkey,
+		MaskTypes.Owl => maskType is MaskTypes.CheshireCat,
+		MaskTypes.Moon => maskType is MaskTypes.Owl,
 		_ => throw new ArgumentOutOfRangeException()
 	};
 

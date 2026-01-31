@@ -102,22 +102,27 @@ public partial class Npc : Node3D
 		{
 			if (other is Player player)
 			{
-				playerPartner = null;
-				if (player.CurrentDancePartner == this)
-				{
-					player.SetDancePartner(null);
-				}
-
-				loveParticle.Emitting = false;
-				cryParticle.Emitting = false;
-
-				TimingCircle.Visible = false;
+				DisconnectPartner(player);
 			}
 		};
 
 		TimingCircle.Visible = false;
 		CurrentMask.MaskType = initialMask;
 		base._Ready();
+	}
+
+	private void DisconnectPartner(Player player)
+	{
+		playerPartner = null;
+		if (player.CurrentDancePartner == this)
+		{
+			player.SetDancePartner(null);
+		}
+
+		loveParticle.Emitting = false;
+		cryParticle.Emitting = false;
+
+		TimingCircle.Visible = false;
 	}
 
 	private void TestWithCurrentPose(Player? player)
@@ -137,6 +142,7 @@ public partial class Npc : Node3D
 			{
 				//TODO: Spin this dancer as they trade
 				player.TradeMasksWith(this);
+				DisconnectPartner(player);
 			}
 		}
 		else
