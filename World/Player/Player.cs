@@ -1,22 +1,13 @@
 using Godot;
 using Masquerade.World.Player.StateMachine;
+using Masquerade.World.Pose;
 
 namespace Masquerade.World.Player;
 
 public partial class Player : CharacterBody3D
 {
-	public enum Poses
-	{
-		Cossack,
-		Ballet,
-		Leading,
-		Salutation,
-	}
-
 	public const float WalkSpeed = 10f;
 	public float WalkMomentum = 0f;
-
-	[Export] public AnimationPlayer AnimationPlayer;
 	[Export] private float speed = 7.0f;
 	
 	[Export] public Facemask CurrentMask;
@@ -25,8 +16,7 @@ public partial class Player : CharacterBody3D
 	[Export] public Node3D VisualRoot;
 	[Export] public float RotationSpeed = 10.0f;
 
-	[ExportGroup("Posing")] [Export] public Poses CurrentPose = Poses.Salutation;
-	[Export] private Label3D poseLabel;
+	[Export] public ActorPose ActorPose;
 
 	private Npc? currentDancePartner;
 
@@ -38,7 +28,7 @@ public partial class Player : CharacterBody3D
 	public override void _Ready()
 	{
 		stateMachine = new PlayerStateMachine(this);
-		SetPose(CurrentPose);
+		ActorPose.SetPose(ActorPose.Poses.Salutation);
 		base._Ready();
 	}
 
@@ -60,12 +50,6 @@ public partial class Player : CharacterBody3D
 		currentDancePartner = partner;
 	}
 
-	public void SetPose(Poses pose)
-	{
-		CurrentPose = pose;
-		AnimationPlayer.Play($"Pose-{(int)pose}");
-		poseLabel.Text = pose.ToString();
-	}
 
 	public void TradeMasksWith(Npc npc)
 	{

@@ -21,3 +21,5 @@ mesh = SubResource("QuadMesh_2pkv1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07177156)
 pixel_size = 0.05
 text = "PLACEHOLDER"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

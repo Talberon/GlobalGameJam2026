@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bq37yh8m720tk"]
+[gd_scene load_steps=11 format=3 uid="uid://bq37yh8m720tk"]
 
 [ext_resource type="Script" uid="uid://bfa1axsilaxtj" path="res://World/Player/Player.cs" id="1_oytbf"]
 [ext_resource type="Script" uid="uid://bgk7p80wct2cg" path="res://World/Player/Camera.cs" id="2_kogn4"]
 [ext_resource type="PackedScene" uid="uid://171xggqqlmkp" path="res://World/Facemask/Facemask.tscn" id="3_6teo4"]
+[ext_resource type="PackedScene" uid="uid://8uhf1bxrekl0" path="res://World/Pose/ActorPose.tscn" id="3_yh66h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oytbf"]
 
@@ -30,14 +31,13 @@ size = Vector2(1, 2)
 [node name="VisualRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "CurrentMask", "Camera", "VisualRoot", "poseLabel")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("CurrentMask", "Camera", "VisualRoot", "ActorPose")]
 collision_mask = 3
 script = ExtResource("1_oytbf")
-AnimationPlayer = NodePath("../AnimationPlayer")
 CurrentMask = NodePath("Facemask")
 Camera = NodePath("../Camera3D")
 VisualRoot = NodePath("../VisualRoot")
-poseLabel = NodePath("Pose/PoseLabel")
+ActorPose = NodePath("ActorPose")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -50,13 +50,7 @@ mesh = SubResource("QuadMesh_yh66h")
 [node name="Facemask" parent="CharacterBody3D" instance=ExtResource("3_6teo4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6005542, 0.71035355)
 
-[node name="Pose" type="Node3D" parent="CharacterBody3D"]
-
-[node name="PoseLabel" type="Label3D" parent="CharacterBody3D/Pose"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3835006, 0)
-pixel_size = 0.05
-billboard = 1
-text = "POSE"
+[node name="ActorPose" parent="CharacterBody3D" instance=ExtResource("3_yh66h")]
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("character")]
 transform = Transform3D(1, 0, 0, 0, 0.6409273, 0.76760155, 0, -0.76760155, 0.6409273, 0, 25.09787, 4.1001883)

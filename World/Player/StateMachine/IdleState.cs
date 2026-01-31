@@ -17,7 +17,7 @@ public class IdleState(PlayerStateMachine stateMachine, Player player) : IPlayer
             stateMachine.CurrentState = PlayerStateMachine.States.Walking;
         }
         
-        PosingState.SetPose(player);
+        player.ActorPose.HandlePoseInput();
 
         Vector3 velocity = Vector3.Zero;
         velocity.X = Mathf.MoveToward(player.Velocity.X, 0, Player.WalkSpeed);

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://8uhf1bxrekl0"]
+
+[ext_resource type="Script" uid="uid://cc6xulawt1h6b" path="res://World/Pose/ActorPose.cs" id="1_t3moo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3moo"]
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_mo5y1"]
+material = SubResource("StandardMaterial3D_t3moo")
+
+[node name="ActorPose" type="Node3D" node_paths=PackedStringArray("poseLabel", "AnimationPlayer")]
+script = ExtResource("1_t3moo")
+poseLabel = NodePath("PoseLabel")
+AnimationPlayer = NodePath("AnimationPlayer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4816423, 0)
+mesh = SubResource("QuadMesh_mo5y1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="PoseLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3835006, 0)
+pixel_size = 0.05
+billboard = 1
+text = "POSE"

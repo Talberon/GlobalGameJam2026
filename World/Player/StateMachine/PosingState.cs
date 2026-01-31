@@ -22,27 +22,4 @@ public class PosingState(PlayerStateMachine stateMachine, Player player) : IPlay
         velocity.Z = Mathf.MoveToward(player.Velocity.Z, 0, Player.WalkSpeed);
         player.Velocity = velocity;
     }
-
-    public static void SetPose(Player player)
-    {
-        if (Input.IsActionPressed("pose_up"))
-        {
-            player.SetPose(Player.Poses.Ballet);
-        }
-
-        if (Input.IsActionPressed("pose_down"))
-        {
-            player.SetPose(Player.Poses.Cossack);
-        }
-
-        if (Input.IsActionPressed("pose_left"))
-        {
-            player.SetPose(Player.Poses.Leading);
-        }
-
-        if (Input.IsActionPressed("pose_right"))
-        {
-            player.SetPose(Player.Poses.Salutation);
-        }
-    }
 }
