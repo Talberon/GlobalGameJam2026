@@ -4,7 +4,6 @@ using Godot.Collections;
 
 namespace Masquerade.World.Pose;
 
-[Tool]
 public partial class ActorPose : Node3D
 {
 	public enum Poses

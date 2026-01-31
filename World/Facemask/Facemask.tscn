@@ -1,7 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://171xggqqlmkp"]
+[gd_scene load_steps=37 format=3 uid="uid://171xggqqlmkp"]
 
 [ext_resource type="Script" uid="uid://byobv41l0v7ao" path="res://World/Facemask/Facemask.cs" id="1_i477a"]
 [ext_resource type="Texture2D" uid="uid://1fnt67bxrnw7" path="res://RawAssets/Masks/Mask_Jester.png" id="2_2reff"]
+[ext_resource type="Texture2D" uid="uid://dvkidp24sujos" path="res://RawAssets/Masks/Mask_Happy.png" id="3_kfa37"]
+[ext_resource type="Texture2D" uid="uid://c12vt145dfhwx" path="res://RawAssets/Masks/Mask_Flower.png" id="4_6p3le"]
+[ext_resource type="Texture2D" uid="uid://doidewwr6f70g" path="res://RawAssets/Masks/Mask_Crown.png" id="5_rs768"]
+[ext_resource type="Texture2D" uid="uid://ckt7sebhxb7qg" path="res://RawAssets/Masks/Mask_Sun.png" id="6_g1usq"]
+[ext_resource type="Texture2D" uid="uid://bkl3w0lema38x" path="res://RawAssets/Masks/Mask_Sad.png" id="7_g1usq"]
+[ext_resource type="Texture2D" uid="uid://dnpad5gjidsp6" path="res://RawAssets/Masks/Mask_Donkey.png" id="8_c6ovw"]
+[ext_resource type="Texture2D" uid="uid://xci3icuocw70" path="res://RawAssets/Masks/Mask_Cat.png" id="9_88koo"]
+[ext_resource type="Texture2D" uid="uid://y0daagusncsq" path="res://RawAssets/Masks/Mask_Owl.png" id="9_ioqq6"]
+[ext_resource type="Texture2D" uid="uid://dxh1nbvrqk0o" path="res://RawAssets/Masks/Mask_Moon.png" id="10_klpju"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_2pkv1"]
 
@@ -40,10 +49,220 @@ tracks/0/keys = {
 "values": [null]
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p3le"]
+transparency = 1
+albedo_texture = ExtResource("3_kfa37")
+
+[sub_resource type="Animation" id="Animation_rs768"]
+resource_name = "Happy"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_6p3le")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fggt"]
+transparency = 1
+albedo_texture = ExtResource("4_6p3le")
+
+[sub_resource type="Animation" id="Animation_g1usq"]
+resource_name = "Flower"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_0fggt")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6ovw"]
+transparency = 1
+albedo_texture = ExtResource("4_6p3le")
+
+[sub_resource type="Animation" id="Animation_ioqq6"]
+resource_name = "Hummingbird"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_c6ovw")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klpju"]
+transparency = 1
+albedo_texture = ExtResource("5_rs768")
+
+[sub_resource type="Animation" id="Animation_88koo"]
+resource_name = "Crown"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_klpju")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl0l4"]
+transparency = 1
+albedo_texture = ExtResource("6_g1usq")
+
+[sub_resource type="Animation" id="Animation_0aapc"]
+resource_name = "Sun"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_pl0l4")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioqq6"]
+transparency = 1
+albedo_texture = ExtResource("7_g1usq")
+
+[sub_resource type="Animation" id="Animation_klpju"]
+resource_name = "Sad"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_ioqq6")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlno0"]
+transparency = 1
+albedo_texture = ExtResource("8_c6ovw")
+
+[sub_resource type="Animation" id="Animation_pl0l4"]
+resource_name = "Donkey"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_vlno0")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88koo"]
+transparency = 1
+albedo_texture = ExtResource("9_88koo")
+
+[sub_resource type="Animation" id="Animation_c6ovw"]
+resource_name = "CheshireCat"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_88koo")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0aapc"]
+transparency = 1
+albedo_texture = ExtResource("9_ioqq6")
+
+[sub_resource type="Animation" id="Animation_wc6nv"]
+resource_name = "Owl"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_0aapc")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc6nv"]
+transparency = 1
+albedo_texture = ExtResource("10_klpju")
+
+[sub_resource type="Animation" id="Animation_vlno0"]
+resource_name = "Moon"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_wc6nv")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rs768"]
 _data = {
+&"CheshireCat": SubResource("Animation_c6ovw"),
+&"Crown": SubResource("Animation_88koo"),
+&"Donkey": SubResource("Animation_pl0l4"),
+&"Flower": SubResource("Animation_g1usq"),
+&"Happy": SubResource("Animation_rs768"),
+&"Hummingbird": SubResource("Animation_ioqq6"),
 &"Jester": SubResource("Animation_6p3le"),
-&"RESET": SubResource("Animation_0fggt")
+&"Moon": SubResource("Animation_vlno0"),
+&"Owl": SubResource("Animation_wc6nv"),
+&"RESET": SubResource("Animation_0fggt"),
+&"Sad": SubResource("Animation_klpju"),
+&"Sun": SubResource("Animation_0aapc")
 }
 
 [node name="Facemask" type="Node3D" node_paths=PackedStringArray("Label")]
