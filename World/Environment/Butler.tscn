@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://hj1r1o1ydx85"]
+
+[ext_resource type="Shader" uid="uid://c5748rykqy43a" path="res://Resources/Shaders/outline.gdshader" id="1_wy0os"]
+[ext_resource type="Texture2D" uid="uid://byv8qq3g1f0gn" path="res://RawAssets/Butler_Drink.png" id="2_v80ef"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0qbp"]
+render_priority = 0
+shader = ExtResource("1_wy0os")
+shader_parameter/albedo_texture = ExtResource("2_v80ef")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/spin_rotation = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_p2bpw"]
+material = SubResource("ShaderMaterial_d0qbp")
+
+[node name="Butler" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505507, 0)
+mesh = SubResource("QuadMesh_p2bpw")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=12 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
 [ext_resource type="Texture2D" uid="uid://c2m6xaql8ae0x" path="res://Resources/Checkerboard.png" id="1_q8mcj"]
 [ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
+[ext_resource type="PackedScene" uid="uid://cuevwofnklg7g" path="res://World/Environment/StairsRight.tscn" id="3_46dr0"]
+[ext_resource type="PackedScene" uid="uid://dk8c5ikvuoeh3" path="res://World/Environment/StairsLeft.tscn" id="4_ng0ga"]
 [ext_resource type="PackedScene" uid="uid://dxlfq43dxm2tl" path="res://World/Metronome/Metronome.tscn" id="5_ikc2b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
@@ -14,6 +16,9 @@ uv1_scale = Vector3(5.475, 5.475, 5.475)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pcc8v"]
 size = Vector2(100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_46dr0"]
+size = Vector2(55, 41.74)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pcc8v"]
 data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
@@ -27,6 +32,12 @@ data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0,
 [node name="Floor" type="MeshInstance3D" parent="Room/Floor"]
 material_override = SubResource("StandardMaterial3D_ebwhw")
 mesh = SubResource("PlaneMesh_pcc8v")
+skeleton = NodePath("../..")
+
+[node name="Upper Floor" type="MeshInstance3D" parent="Room/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.7550144, -39.28005)
+material_override = SubResource("StandardMaterial3D_ebwhw")
+mesh = SubResource("PlaneMesh_46dr0")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor"]
@@ -44,69 +55,75 @@ transform = Transform3D(-0.781353, 0, 4.719938, 0, 1.829, 0, -0.781353, 0, -4.71
 [node name="Wall3" parent="Room" instance=ExtResource("1_ebwhw")]
 transform = Transform3D(-0.70710677, 0, 4.270925, 0, 8.755, 0, -0.70710677, 0, -4.270925, -21.0348, 0, -21.213203)
 
+[node name="StairsRight" parent="Room" instance=ExtResource("3_46dr0")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 11.879936, 4.1028686, -9.872357)
+
+[node name="StairsLeft" parent="Room" instance=ExtResource("4_ng0ga")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -11.786135, 4.0584474, -9.892985)
+
 [node name="Actors" type="Node" parent="."]
 
 [node name="Metronome" parent="Actors" instance=ExtResource("5_ikc2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58438325, 3.557118, -2.951208)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4968078, 3.557118, -15.875412)
 
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.855727, -1.9073486e-06, 0.8531847)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8609915, 0.017641068, 1.2016611)
 
-[node name="Belle" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.1735039, 0, 2.4050741)
+[node name="Kafei" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.136902, 0, -2.863099)
 metronome = NodePath("../Metronome")
 
-[node name="Beast" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 16.66791, 0, -0.7666807)
+[node name="Anju" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10.746731, 0, -2.6459208)
 metronome = NodePath("../Metronome")
 
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 15.857889, 1.9073486e-06, 9.912278)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7247474, 1.9073486e-06, -5.6379128)
 metronome = NodePath("../Metronome")
 initialMask = 1
 
 [node name="Flower" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.6531777, 0, 6.459536)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.411482, 0, 6.8300505)
 metronome = NodePath("../Metronome")
 initialMask = 2
 
 [node name="Hummingbird" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.0240912, 0, -5.0000005)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -19.825294, 0, 4.028436)
 metronome = NodePath("../Metronome")
 initialMask = 3
 
 [node name="Crown" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 16.02409, 0, -6.9999995)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 19.642405, 1.405796, 5.92636)
 metronome = NodePath("../Metronome")
 initialMask = 4
 
 [node name="Sun" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 7.7534533, 0, -13.238773)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.54508495, 0, -14.655045)
 metronome = NodePath("../Metronome")
 initialMask = 5
 
 [node name="Sad" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4.3376045, 0, -13.238773)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.34955597, 0, 10.225117)
 metronome = NodePath("../Metronome")
 initialMask = 6
 
 [node name="Donkey" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10.360095, 0, -7.2106247)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.20731, 0, 7.024269)
 metronome = NodePath("../Metronome")
 initialMask = 7
 
 [node name="CheshireCat" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -16.490211, 0, -0.031203747)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.808065, 0, 18.05997)
 metronome = NodePath("../Metronome")
 initialMask = 8
 
 [node name="Owl" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8.130506, 0, 2.5024037)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.825583, 0, 19.103737)
 metronome = NodePath("../Metronome")
 initialMask = 9
 
 [node name="Moon" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -7.0576944, 0, 9.592728)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.015169144, 0, 20.11237)
 metronome = NodePath("../Metronome")
 initialMask = 10
 

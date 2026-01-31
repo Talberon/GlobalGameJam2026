@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuevwofnklg7g"]
+
+[ext_resource type="Texture2D" uid="uid://bxofo767k7282" path="res://RawAssets/Environment/Staircase.png" id="1_tgxa7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3q1ns"]
+transparency = 1
+albedo_texture = ExtResource("1_tgxa7")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0be4o"]
+material = SubResource("StandardMaterial3D_3q1ns")
+size = Vector2(10, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3q1ns"]
+size = Vector3(6.5541077, 8.787659, 14.630859)
+
+[node name="Stairs" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.34791762, 0.9375251, 0, -0.9375251, 0.34791762, 0, 0, 0)
+mesh = SubResource("QuadMesh_0be4o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23576355, -1.342926, -0.68603516)
+shape = SubResource("BoxShape3D_3q1ns")

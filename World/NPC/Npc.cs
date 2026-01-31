@@ -110,7 +110,7 @@ public partial class Npc : Node3D
 
 		TimingCircle.Visible = false;
 		CurrentMask.MaskType = initialMask;
-		actorPose.SpinForSeconds(3f);
+		actorPose.SpinForSeconds(0.5f);
 		base._Ready();
 	}
 

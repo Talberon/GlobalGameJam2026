@@ -90,6 +90,7 @@ anim_speed_max = 4.0
 
 [node name="TearsParticle" type="CPUParticles3D" parent="NpcController/Visuals"]
 transform = Transform3D(-0.82870567, 0, 0.55968475, 0, 1, 0, -0.55968475, 0, -0.82870567, 0, 2.3205276, 0)
+emitting = false
 amount = 20
 mesh = SubResource("QuadMesh_f5ag4")
 particle_flag_align_y = true

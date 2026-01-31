@@ -55,6 +55,7 @@ public partial class Player : CharacterBody3D
     {
         //TODO: Restrict which masks can be traded		
 
+        ActorPose.SpinForSeconds(2d);
         (CurrentMask.MaskType, npc.CurrentMask.MaskType) = (npc.CurrentMask.MaskType, CurrentMask.MaskType);
         //TODO: Play some effect
     }
