@@ -30,10 +30,11 @@ size = Vector2(1, 2)
 [node name="VisualRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "Camera", "VisualRoot", "poseLabel")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "CurrentMask", "Camera", "VisualRoot", "poseLabel")]
 collision_mask = 3
 script = ExtResource("1_oytbf")
 AnimationPlayer = NodePath("../AnimationPlayer")
+CurrentMask = NodePath("Facemask")
 Camera = NodePath("../Camera3D")
 VisualRoot = NodePath("../VisualRoot")
 poseLabel = NodePath("Pose/PoseLabel")

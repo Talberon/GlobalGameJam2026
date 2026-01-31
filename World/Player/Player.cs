@@ -28,7 +28,7 @@ public partial class Player : CharacterBody3D
 	[ExportGroup("Posing")] [Export] public Poses CurrentPose = Poses.Salutation;
 	[Export] private Label3D poseLabel;
 
-	private Npc currentDancePartner;
+	private Npc? currentDancePartner;
 
 	public float TargetFov = 39f;
 
@@ -46,9 +46,9 @@ public partial class Player : CharacterBody3D
 	{
 		stateMachine.PhysicsProcess(delta);
 
-		if (Input.IsActionJustPressed("debug_trade"))
+		if (currentDancePartner is not null && Input.IsActionJustPressed("debug_trade"))
 		{
-			GD.Print($"Trading with {currentDancePartner.CurrentMask.Label.Text}");
+			GD.Print($"Trading with {currentDancePartner?.CurrentMask.Label.Text}");
 			TradeMasksWith(currentDancePartner);
 		}
 		
@@ -69,9 +69,9 @@ public partial class Player : CharacterBody3D
 
 	public void TradeMasksWith(Npc npc)
 	{
-		var myMask = CurrentMask;
-		CurrentMask = npc.CurrentMask;
-		npc.CurrentMask = myMask;
+		Facemask.MaskTypes currentMask = CurrentMask.MaskType;
+		CurrentMask.SetMaskType(npc.CurrentMask.MaskType);
+		npc.CurrentMask.SetMaskType(currentMask);
 		//TODO: Play some effect
 	}
 
