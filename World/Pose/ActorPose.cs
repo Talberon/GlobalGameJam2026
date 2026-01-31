@@ -32,10 +32,39 @@ public partial class ActorPose : Node3D
 	[Export] private Label3D poseLabel;
 	[Export] public AnimationPlayer AnimationPlayer;
 
+	[Export] private MeshInstance3D mesh;
+
 	public override void _Ready()
 	{
 		CurrentPose = currentPose;
 		base._Ready();
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		if (spinDuration <= 0)
+		{
+			mesh.Rotation = mesh.Rotation with { Y = 0 };
+		}
+		else
+		{
+			//Spin the mesh around 
+			mesh.Rotation = mesh.Rotation with { Y = mesh.Rotation.Y + (float)delta * 30f };
+			spinDuration -= delta;
+		}
+
+		if (mesh.GetActiveMaterial(0).GetNextPass() is ShaderMaterial shaderMat)
+		{
+			shaderMat.SetShaderParameter("spin_rotation", mesh.Rotation);
+		}
+
+		if (Input.IsActionJustPressed("debug_trade"))
+		{
+			GD.Print("Debug: Spin for seconds");
+			SpinForSeconds(2d);
+		}
+
+		base._PhysicsProcess(delta);
 	}
 
 	private string AnimationForPose(Poses pose) => pose switch
@@ -68,6 +97,17 @@ public partial class ActorPose : Node3D
 		if (Input.IsActionPressed("pose_right"))
 		{
 			CurrentPose = Poses.Leading;
+		}
+	}
+
+	private double spinDuration = 0d;
+
+	public void SpinForSeconds(double duration)
+	{
+		spinDuration = duration;
+		if (mesh.GetActiveMaterial(0) is StandardMaterial3D material)
+		{
+			material.SetBillboardMode(BaseMaterial3D.BillboardModeEnum.Disabled);
 		}
 	}
 }

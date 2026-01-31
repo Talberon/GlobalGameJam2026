@@ -46,6 +46,8 @@ public partial class Npc : Node3D
 	[ExportGroup("Particles")] [Export] private CpuParticles3D loveParticle;
 	[Export] private CpuParticles3D cryParticle;
 
+	private bool HasTraded = false;
+
 	public override void _Ready()
 	{
 		originalPos = visuals.Position;
@@ -108,6 +110,7 @@ public partial class Npc : Node3D
 
 		TimingCircle.Visible = false;
 		CurrentMask.MaskType = initialMask;
+		actorPose.SpinForSeconds(3f);
 		base._Ready();
 	}
 
@@ -128,6 +131,7 @@ public partial class Npc : Node3D
 	private void TestWithCurrentPose(Player? player)
 	{
 		if (player is null) return;
+		if (HasTraded) return;
 
 		if (actorPose.CurrentPose == player.ActorPose.CurrentPose)
 		{
@@ -142,6 +146,9 @@ public partial class Npc : Node3D
 			{
 				//TODO: Spin this dancer as they trade
 				player.TradeMasksWith(this);
+				HasTraded = true;
+				actorPose.SpinForSeconds(0.7f);
+				loveParticle.Emitting = true;
 				DisconnectPartner(player);
 			}
 		}
