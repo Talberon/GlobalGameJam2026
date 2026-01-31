@@ -1,22 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=8 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
+[ext_resource type="Texture2D" uid="uid://c2m6xaql8ae0x" path="res://Resources/Checkerboard.png" id="1_q8mcj"]
 [ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
 
-[sub_resource type="Gradient" id="Gradient_pcc8v"]
-offsets = PackedFloat32Array(0.5084746, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8i4wv"]
-frequency = 0.2329
-fractal_type = 3
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2gwy"]
-noise = SubResource("FastNoiseLite_8i4wv")
-color_ramp = SubResource("Gradient_pcc8v")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
-albedo_texture = SubResource("NoiseTexture2D_h2gwy")
+albedo_texture = ExtResource("1_q8mcj")
+metallic = 1.0
+roughness = 0.85
+uv1_scale = Vector3(5.475, 5.475, 5.475)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pcc8v"]
 size = Vector2(100, 100)
@@ -39,16 +32,16 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_pcc8v")
 
 [node name="Wall" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(0.70710677, 0, 4.270925, 0, 1.655, 0, -0.7071068, 0, 4.270925, -27.213203, 0, 21.213203)
+transform = Transform3D(0.781353, 0, 4.719938, 0, 1.829, 0, -0.781353, 0, 4.719938, -21.0348, 0, 21.213203)
 
 [node name="Wall4" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(0.70710677, 0, 4.270925, 0, 1.655, 0, -0.7071068, 0, 4.270925, 15.213203, 0, -21.213203)
+transform = Transform3D(0.70710677, 0, 4.270925, 0, 8.755, 0, -0.70710677, 0, 4.270925, 21.391607, 0, -21.213203)
 
 [node name="Wall2" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(-0.7071069, 0, 4.270925, 0, 1.655, 0, -0.7071067, 0, -4.2709246, 15.213203, 0, 21.213203)
+transform = Transform3D(-0.781353, 0, 4.719938, 0, 1.829, 0, -0.781353, 0, -4.719938, 21.391607, 0, 21.213203)
 
 [node name="Wall3" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(-0.7071069, 0, 4.270925, 0, 1.655, 0, -0.7071067, 0, -4.2709246, -27.213203, 0, -21.213203)
+transform = Transform3D(-0.70710677, 0, 4.270925, 0, 8.755, 0, -0.70710677, 0, -4.270925, -21.0348, 0, -21.213203)
 
 [node name="Actors" type="Node" parent="."]
 
@@ -66,5 +59,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
 [node name="Npc4" parent="Actors" instance=ExtResource("2_ebwhw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 9)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="Lights" type="Node" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+light_color = Color(1, 0.901, 0.73, 1)
+light_energy = 13.371
+omni_range = 50.637
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 10, 0)
+light_color = Color(1, 0.901, 0.73, 1)
+light_energy = 13.371
+omni_range = 50.637
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 10, 0)
+light_color = Color(1, 0.901, 0.73, 1)
+light_energy = 13.371
+omni_range = 50.637
