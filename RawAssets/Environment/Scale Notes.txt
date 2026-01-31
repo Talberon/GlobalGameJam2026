@@ -1,0 +1,2 @@
+Staircase -> 0.25% scale of dance poses
+Pillar -> 0.5% scale of dance poses
