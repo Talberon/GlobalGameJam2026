@@ -6,6 +6,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2njjq"]
 albedo_texture = SubResource("CurveTexture_xw72r")
+billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_2pkv1"]
 

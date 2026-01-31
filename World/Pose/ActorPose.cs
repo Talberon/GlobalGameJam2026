@@ -4,6 +4,7 @@ using Godot.Collections;
 
 namespace Masquerade.World.Pose;
 
+[Tool]
 public partial class ActorPose : Node3D
 {
 	public enum Poses
@@ -15,21 +16,27 @@ public partial class ActorPose : Node3D
 	}
 
 
-	[ExportGroup("Posing")] [Export] public Poses CurrentPose = Poses.Salutation;
+	[ExportGroup("Posing")]
+	[Export]
+	public Poses CurrentPose
+	{
+		get { return currentPose; }
+		set
+		{
+			currentPose = value;
+			AnimationPlayer.Play(AnimationForPose(currentPose));
+			poseLabel.Text = value.ToString();
+		}
+	}
+
+	private Poses currentPose = Poses.Salutation;
 	[Export] private Label3D poseLabel;
 	[Export] public AnimationPlayer AnimationPlayer;
 
 	public override void _Ready()
 	{
-		SetPose(CurrentPose);
+		CurrentPose = currentPose;
 		base._Ready();
-	}
-
-	public void SetPose(Poses pose)
-	{
-		CurrentPose = pose;
-		AnimationPlayer.Play(AnimationForPose(CurrentPose));
-		poseLabel.Text = pose.ToString();
 	}
 
 	private string AnimationForPose(Poses pose) => pose switch
@@ -46,22 +53,22 @@ public partial class ActorPose : Node3D
 	{
 		if (Input.IsActionPressed("pose_up"))
 		{
-			SetPose(Poses.Salutation);
+			CurrentPose = (Poses.Salutation);
 		}
 
 		if (Input.IsActionPressed("pose_down"))
 		{
-			SetPose(Poses.Cossack);
+			CurrentPose = Poses.Cossack;
 		}
 
 		if (Input.IsActionPressed("pose_left"))
 		{
-			SetPose(Poses.Ballet);
+			CurrentPose = Poses.Ballet;
 		}
 
 		if (Input.IsActionPressed("pose_right"))
 		{
-			SetPose(Poses.Leading);
+			CurrentPose = Poses.Leading;
 		}
 	}
 }

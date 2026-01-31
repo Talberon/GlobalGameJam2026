@@ -126,6 +126,7 @@ _data = {
 
 [node name="ActorPose" type="Node3D" node_paths=PackedStringArray("poseLabel", "AnimationPlayer")]
 script = ExtResource("1_t3moo")
+CurrentPose = 0
 poseLabel = NodePath("PoseLabel")
 AnimationPlayer = NodePath("AnimationPlayer")
 
@@ -139,7 +140,7 @@ libraries = {
 }
 
 [node name="PoseLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3835006, 0)
-pixel_size = 0.05
+pixel_size = 0.02
 billboard = 1
+no_depth_test = true
 text = "POSE"

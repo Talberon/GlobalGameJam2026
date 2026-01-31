@@ -14,7 +14,7 @@ public partial class Player : CharacterBody3D
 
 	[ExportGroup("Camera")] [Export] public Camera3D Camera;
 	[Export] public Node3D VisualRoot;
-	[Export] public float RotationSpeed = 10.0f;
+	[Export] public float RotationSpeed = 0.0f;
 
 	[Export] public ActorPose ActorPose;
 
@@ -28,7 +28,7 @@ public partial class Player : CharacterBody3D
 	public override void _Ready()
 	{
 		stateMachine = new PlayerStateMachine(this);
-		ActorPose.SetPose(ActorPose.Poses.Salutation);
+		ActorPose.CurrentPose = ActorPose.Poses.Salutation;
 		base._Ready();
 	}
 
