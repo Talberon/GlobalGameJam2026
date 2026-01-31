@@ -24,6 +24,8 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
             return;
         }
 
+        PosingState.SetPose(player);
+
         player.WalkMomentum = Mathf.MoveToward(player.WalkMomentum, 1, MomentumSpeed);
         MoveAndFaceDirection(player, delta, player.WalkMomentum);
 

@@ -30,11 +30,12 @@ size = Vector2(1, 2)
 [node name="VisualRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "Camera", "VisualRoot")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "Camera", "VisualRoot", "poseLabel")]
 script = ExtResource("1_oytbf")
 AnimationPlayer = NodePath("../AnimationPlayer")
 Camera = NodePath("../Camera3D")
 VisualRoot = NodePath("../VisualRoot")
+poseLabel = NodePath("Pose/PoseLabel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -49,7 +50,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6005542, 0.71035355)
 
 [node name="Pose" type="Node3D" parent="CharacterBody3D"]
 
-[node name="Label3D" type="Label3D" parent="CharacterBody3D/Pose"]
+[node name="PoseLabel" type="Label3D" parent="CharacterBody3D/Pose"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3835006, 0)
 pixel_size = 0.05
 billboard = 1

@@ -9,6 +9,7 @@ public class PlayerStateMachine
     {
         Idle,
         Walking,
+        Posing,
         //TODO: Poses
     }
 
@@ -31,6 +32,7 @@ public class PlayerStateMachine
     {
         states.Add(States.Idle, new IdleState(this, player));
         states.Add(States.Walking, new WalkingState(this, player));
+        states.Add(States.Posing, new PosingState(this, player));
     }
 
     public void PhysicsProcess(double delta) => states[CurrentState].Update(delta);
