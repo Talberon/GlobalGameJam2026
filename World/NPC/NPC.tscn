@@ -135,39 +135,41 @@ radius = 4.1655273
 radius = 4.185
 height = 0.01
 
-[node name="Npc" type="CharacterBody3D" node_paths=PackedStringArray("CurrentMask", "TimingCircle", "dancePartnerZone")]
+[node name="NPC" type="Node3D" node_paths=PackedStringArray("characterBody3D", "CurrentMask", "TimingCircle", "dancePartnerZone")]
 script = ExtResource("1_qcj2e")
-CurrentMask = NodePath("Facemask")
+characterBody3D = NodePath("NpcController")
+CurrentMask = NodePath("NpcController/Facemask")
 TimingCircle = NodePath("TimingCircle")
-offBeatHeight = 2.0
-dancePartnerZone = NodePath("DancePartnerZone")
+dancePartnerZone = NodePath("NpcController/DancePartnerZone")
 
-[node name="Body" type="MeshInstance3D" parent="."]
+[node name="NpcController" type="CharacterBody3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="NpcController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_qcj2e")
 material_overlay = SubResource("ShaderMaterial_io1c3")
 mesh = SubResource("CapsuleMesh_qcj2e")
 
-[node name="Hat" type="MeshInstance3D" parent="."]
+[node name="Hat" type="MeshInstance3D" parent="NpcController"]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 2.0037954, 0.09087652)
 material_override = SubResource("StandardMaterial3D_s5tg6")
 material_overlay = SubResource("ShaderMaterial_x2yfe")
 mesh = SubResource("PrismMesh_qcj2e")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NpcController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qcj2e")
 
-[node name="Facemask" parent="." instance=ExtResource("3_io1c3")]
+[node name="Facemask" parent="NpcController" instance=ExtResource("3_io1c3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 1.4940553, -0.6003199)
 
-[node name="DancePartnerZone" type="Area3D" parent="."]
+[node name="DancePartnerZone" type="Area3D" parent="NpcController"]
 collision_layer = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DancePartnerZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NpcController/DancePartnerZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_io1c3")
 
 [node name="TimingCircle" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_io1c3")
-skeleton = NodePath("../DancePartnerZone")
+skeleton = NodePath("../NpcController/DancePartnerZone")

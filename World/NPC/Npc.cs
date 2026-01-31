@@ -1,11 +1,13 @@
 using Godot;
 using Masquerade.World.Player;
 
-public partial class Npc : CharacterBody3D
+public partial class Npc : Node3D
 {
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 
+	[Export] private CharacterBody3D characterBody3D;
+	
 	[Export] private Metronome metronome;
 	[Export] private Facemask.MaskTypes initialMask = Facemask.MaskTypes.Jester;
 	[Export] public Facemask CurrentMask;
@@ -18,6 +20,7 @@ public partial class Npc : CharacterBody3D
 	[Export] private float onBeatHeight = 0f;
 	[Export] private float offBeatHeight = 1f;
 	[Export] private float lerpSpeed = 10f;
+	private float danceBeatSpeed = 10f;
 
 	[Export] private Area3D dancePartnerZone;
 
@@ -25,12 +28,18 @@ public partial class Npc : CharacterBody3D
 
 	public override void _Ready()
 	{
-		metronome.OnBeat += () => { targetHeight = onBeatHeight; };
+		metronome.OnBeat += () =>
+		{
+			targetHeight = onBeatHeight;
+			danceBeatSpeed = 50f;
+
+		};
 		metronome.OffBeat += () =>
 		{
 			targetHeight = offBeatHeight;
 			ZoneMesh.Radius = 0;
 			beatTimer = 0f;
+			danceBeatSpeed = lerpSpeed;
 		};
 
 		dancePartnerZone.BodyEntered += (other) =>
@@ -51,10 +60,10 @@ public partial class Npc : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 velocity = Velocity;
+		Vector3 velocity = characterBody3D.Velocity;
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		if (Input.IsActionJustPressed("ui_accept") && characterBody3D.IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
 		}
@@ -70,25 +79,21 @@ public partial class Npc : CharacterBody3D
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+			velocity.X = Mathf.MoveToward(characterBody3D.Velocity.X, 0, Speed);
+			velocity.Z = Mathf.MoveToward(characterBody3D.Velocity.Z, 0, Speed);
 		}
 
-		Velocity = velocity;
+		characterBody3D.Velocity = velocity;
 
 		//Adjust npc height
-		float nextHeight = Mathf.Lerp(Position.Y, targetHeight, (float)delta * lerpSpeed);
-		Position = Position with { Y = nextHeight };
+		float nextHeight = Mathf.Lerp(characterBody3D.Position.Y, targetHeight, (float)delta * danceBeatSpeed);
+		characterBody3D.Position = characterBody3D.Position with { Y = nextHeight };
 
-
+		//Adjust beat indicator
 		float beatDuration = metronome.BeatDelaySeconds;
 		beatTimer = Mathf.Min(beatTimer + (float)delta, beatDuration);
-
 		float t = beatTimer / beatDuration;
-
 		float easedT = t * t;
-		
-		//Adjust beat indicator
 		ZoneMesh.Radius = Mathf.Lerp(0, maxRadius, easedT);
 	}
 
