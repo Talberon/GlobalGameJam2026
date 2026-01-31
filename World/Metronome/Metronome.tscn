@@ -25,6 +25,7 @@ height = 3.0
 
 [node name="Metronome" type="Node3D" node_paths=PackedStringArray("mesh")]
 script = ExtResource("1_kdw5b")
+beatsPerMinute = 80
 mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
