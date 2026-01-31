@@ -76,6 +76,39 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.2
 metronome = NodePath("../Metronome")
 initialMask = 5
 
+[node name="Sad" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.361695, 0, -13.238773)
+metronome = NodePath("../Metronome")
+initialMask = 6
+
+[node name="Donkey" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -18.384186, 0, -7.2106247)
+metronome = NodePath("../Metronome")
+initialMask = 7
+
+[node name="CheshireCat" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24.514303, 0, -0.031203747)
+metronome = NodePath("../Metronome")
+initialMask = 8
+
+[node name="Owl" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -16.154596, 0, 2.5024037)
+metronome = NodePath("../Metronome")
+initialMask = 9
+
+[node name="Moon" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -15.081785, 0, 9.592728)
+metronome = NodePath("../Metronome")
+initialMask = 10
+
+[node name="Belle" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.197595, 0, 2.4050741)
+metronome = NodePath("../Metronome")
+
+[node name="Beast" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.643819, 0, -0.7666807)
+metronome = NodePath("../Metronome")
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]

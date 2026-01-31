@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cppu6uhd6tyay"]
+[gd_scene load_steps=15 format=3 uid="uid://cppu6uhd6tyay"]
 
 [ext_resource type="Script" uid="uid://suse1k2sjq3i" path="res://World/NPC/Npc.cs" id="1_qcj2e"]
 [ext_resource type="Shader" uid="uid://cd5imnb4oxt7" path="res://Resources/Shaders/toon.gdshader" id="2_s5tg6"]
 [ext_resource type="PackedScene" uid="uid://171xggqqlmkp" path="res://World/Facemask/Facemask.tscn" id="3_io1c3"]
+[ext_resource type="PackedScene" uid="uid://8uhf1bxrekl0" path="res://World/Pose/ActorPose.tscn" id="4_x2yfe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcj2e"]
 albedo_color = Color(0.27, 0.107999995, 0.107999995, 1)
@@ -146,12 +147,14 @@ dancePartnerZone = NodePath("NpcController/DancePartnerZone")
 
 [node name="Body" type="MeshInstance3D" parent="NpcController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_qcj2e")
 material_overlay = SubResource("ShaderMaterial_io1c3")
 mesh = SubResource("CapsuleMesh_qcj2e")
 
 [node name="Hat" type="MeshInstance3D" parent="NpcController"]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 2.0037954, 0.09087652)
+visible = false
 material_override = SubResource("StandardMaterial3D_s5tg6")
 material_overlay = SubResource("ShaderMaterial_x2yfe")
 mesh = SubResource("PrismMesh_qcj2e")
@@ -161,7 +164,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qcj2e")
 
 [node name="Facemask" parent="NpcController" instance=ExtResource("3_io1c3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 1.4940553, -0.6003199)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.4940553, -0.14420313)
 
 [node name="DancePartnerZone" type="Area3D" parent="NpcController"]
 collision_layer = 3
@@ -169,6 +172,8 @@ collision_layer = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NpcController/DancePartnerZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_io1c3")
+
+[node name="ActorPose" parent="NpcController" instance=ExtResource("4_x2yfe")]
 
 [node name="TimingCircle" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_io1c3")
