@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bq37yh8m720tk"]
 
-[ext_resource type="Script" uid="uid://c71sdf7q2lf3q" path="res://World/Player/Player.gd" id="1_oytbf"]
+[ext_resource type="Script" uid="uid://bfa1axsilaxtj" path="res://World/Player/Player.cs" id="1_oytbf"]
 
 [node name="Player" type="Node3D"]
 
