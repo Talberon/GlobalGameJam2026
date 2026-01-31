@@ -30,9 +30,9 @@ size = Vector3(0.57, 0.425, 0.44)
 [node name="VisualRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("animationPlayer", "Camera", "VisualRoot")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "Camera", "VisualRoot")]
 script = ExtResource("1_oytbf")
-animationPlayer = NodePath("AnimationPlayer")
+AnimationPlayer = NodePath("AnimationPlayer")
 Camera = NodePath("../Camera3D")
 VisualRoot = NodePath("../VisualRoot")
 
@@ -57,4 +57,3 @@ transform = Transform3D(1, 0, 0, 0, 0.42041832, 0.9073304, 0, -0.9073304, 0.4204
 fov = 38.7
 script = ExtResource("2_kogn4")
 character = NodePath("../CharacterBody3D")
-distanceBehind = 11.0

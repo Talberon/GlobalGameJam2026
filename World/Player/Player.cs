@@ -1,53 +1,40 @@
 using Godot;
-using System;
+using Masquerade.World.Player.StateMachine;
+
+namespace Masquerade.World.Player;
 
 public partial class Player : CharacterBody3D
 {
-	[Export] private AnimationPlayer animationPlayer;
-	[Export] private float speed = 5.0f;
+	public const float WalkSpeed = 10f;
+	public float WalkMomentum = 0f;
+	
+	[Export] public AnimationPlayer AnimationPlayer;
+	[Export] private float speed = 7.0f;
 	
 	[ExportGroup("Camera")]
 	[Export] public Camera3D Camera;
 	[Export] public Node3D VisualRoot;
 	[Export] public float RotationSpeed = 10.0f;
+	
+	public float TargetFov = 39f;
+
+	private PlayerStateMachine stateMachine;
 
 	public override void _Ready()
 	{
+		stateMachine = new PlayerStateMachine(this);
 		base._Ready();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 velocity = Velocity;
-
-		// Add the gravity.
-		if (!IsOnFloor())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		if (direction != Vector3.Zero)
-		{
-			velocity.X = direction.X * speed;
-			velocity.Z = direction.Z * speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, speed);
-		}
-
-		Velocity = velocity;
+		stateMachine.PhysicsProcess(delta);
 		MoveAndSlide();
 	}
 	
 	public Vector3 GetMoveDirection()
 	{
-		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		Vector3 forward = Camera.GlobalTransform.Basis.Z.Normalized();
 		Vector3 right = Camera.GlobalTransform.Basis.X.Normalized();
 

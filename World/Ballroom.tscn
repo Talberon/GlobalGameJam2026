@@ -39,16 +39,16 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_pcc8v")
 
 [node name="Wall" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(1, 0, 0, 0, 1.655, 0, 0, 0, 6.04, -36, 0, 0)
+transform = Transform3D(0.70710677, 0, 4.270925, 0, 1.655, 0, -0.7071068, 0, 4.270925, -27.213203, 0, 21.213203)
 
 [node name="Wall4" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(1, 0, 0, 0, 1.655, 0, 0, 0, 6.04, 24, 0, 0)
+transform = Transform3D(0.70710677, 0, 4.270925, 0, 1.655, 0, -0.7071068, 0, 4.270925, 15.213203, 0, -21.213203)
 
 [node name="Wall2" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(-4.371139e-08, 0, 6.04, 0, 1.655, 0, -1.0000001, 0, -2.6401682e-07, -6, 0, 30)
+transform = Transform3D(-0.7071069, 0, 4.270925, 0, 1.655, 0, -0.7071067, 0, -4.2709246, 15.213203, 0, 21.213203)
 
 [node name="Wall3" parent="Room" instance=ExtResource("1_ebwhw")]
-transform = Transform3D(-4.371139e-08, 0, 6.04, 0, 1.655, 0, -1.0000001, 0, -2.6401682e-07, -6, 0, -30)
+transform = Transform3D(-0.7071069, 0, 4.270925, 0, 1.655, 0, -0.7071067, 0, -4.2709246, -27.213203, 0, -21.213203)
 
 [node name="Actors" type="Node" parent="."]
 

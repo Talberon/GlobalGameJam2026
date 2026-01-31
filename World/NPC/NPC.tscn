@@ -1,6 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://cppu6uhd6tyay"]
+[gd_scene load_steps=7 format=3 uid="uid://cppu6uhd6tyay"]
 
 [ext_resource type="Script" uid="uid://suse1k2sjq3i" path="res://World/NPC/Npc.cs" id="1_qcj2e"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcj2e"]
+albedo_color = Color(0.27, 0.107999995, 0.107999995, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qcj2e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5tg6"]
+albedo_color = Color(0.3124267, 0.32, 0.092800006, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_qcj2e"]
+size = Vector3(1, 0.675, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qcj2e"]
+
 [node name="Npc" type="CharacterBody3D"]
 script = ExtResource("1_qcj2e")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_qcj2e")
+mesh = SubResource("CapsuleMesh_qcj2e")
+
+[node name="Hat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 2.0037954, 0.09087652)
+material_override = SubResource("StandardMaterial3D_s5tg6")
+mesh = SubResource("PrismMesh_qcj2e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_qcj2e")
