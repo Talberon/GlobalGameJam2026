@@ -7,14 +7,14 @@
 [ext_resource type="Shader" uid="uid://c5748rykqy43a" path="res://Resources/Shaders/outline.gdshader" id="5_4216y"]
 [ext_resource type="Texture2D" uid="uid://c3xg3yhn2632i" path="res://RawAssets/Dance_Ballroom_Lead.png" id="5_q7nut"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_8iq56"]
+[sub_resource type="ImageTexture" id="ImageTexture_4216y"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3moo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7nut"]
 cull_mode = 2
-albedo_texture = SubResource("ImageTexture_8iq56")
+albedo_texture = SubResource("ImageTexture_4216y")
 
-[sub_resource type="QuadMesh" id="QuadMesh_mo5y1"]
-material = SubResource("StandardMaterial3D_t3moo")
+[sub_resource type="QuadMesh" id="QuadMesh_gh07g"]
+material = SubResource("StandardMaterial3D_q7nut")
 size = Vector2(3, 3)
 
 [sub_resource type="Animation" id="Animation_o0ghy"]
@@ -145,7 +145,7 @@ mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4816422, 0)
-mesh = SubResource("QuadMesh_mo5y1")
+mesh = SubResource("QuadMesh_gh07g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

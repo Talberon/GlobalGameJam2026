@@ -49,7 +49,6 @@ TimingCircle = NodePath("TimingCircle")
 actorPose = NodePath("NpcController/Visuals/ActorPose")
 visuals = NodePath("NpcController/Visuals")
 shakeNoise = SubResource("FastNoiseLite_whvfb")
-maxShakeIntensity = 1.5
 dancePartnerZone = NodePath("NpcController/DancePartnerZone")
 loveParticle = NodePath("NpcController/Visuals/LoveParticle")
 cryParticle = NodePath("NpcController/Visuals/TearsParticle")
@@ -70,7 +69,7 @@ shape = SubResource("CylinderShape3D_x2yfe")
 [node name="Visuals" type="Node3D" parent="NpcController"]
 
 [node name="Facemask" parent="NpcController/Visuals" instance=ExtResource("3_io1c3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.4940553, -0.030861467)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.3267353, -0.030861467)
 
 [node name="ActorPose" parent="NpcController/Visuals" instance=ExtResource("4_x2yfe")]
 
