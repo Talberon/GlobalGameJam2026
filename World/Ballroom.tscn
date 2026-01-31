@@ -50,9 +50,10 @@ transform = Transform3D(-0.70710677, 0, 4.270925, 0, 8.755, 0, -0.70710677, 0, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58438325, 3.557118, -2.951208)
 
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.855727, -1.9073486e-06, 0.8531847)
 
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 13.02409, 0, 8)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 15.857889, 1.9073486e-06, 9.912278)
 metronome = NodePath("../Metronome")
 initialMask = 1
 

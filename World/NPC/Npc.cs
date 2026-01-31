@@ -28,10 +28,7 @@ public partial class Npc : Node3D
 
 	public override void _Ready()
 	{
-		metronome.OnBeat += () =>
-		{
-			targetHeight = onBeatHeight;
-		};
+		metronome.OnBeat += () => { targetHeight = onBeatHeight; };
 		metronome.OffBeat += () =>
 		{
 			targetHeight = offBeatHeight;
@@ -49,16 +46,23 @@ public partial class Npc : Node3D
 
 				GD.Print($"New Partner: {CurrentMask.Label.Text}");
 				player.SetDancePartner(this);
+				TimingCircle.Visible = true;
 			}
 		};
 		dancePartnerZone.BodyExited += (other) =>
 		{
-			if (other is Player player && player.CurrentDancePartner == this)
+			if (other is Player player)
 			{
-				player.SetDancePartner(null);
+				if (player.CurrentDancePartner == this)
+				{
+					player.SetDancePartner(null);
+				}
+
+				TimingCircle.Visible = false;
 			}
 		};
 
+		TimingCircle.Visible = false;
 		CurrentMask.MaskType = initialMask;
 		base._Ready();
 	}
@@ -90,21 +94,17 @@ public partial class Npc : Node3D
 
 		characterBody3D.Velocity = velocity;
 
-		//Adjust npc height
-		float nextHeight = Mathf.Lerp(characterBody3D.Position.Y, targetHeight, (float)delta * danceBeatSpeed);
-		characterBody3D.Position = characterBody3D.Position with { Y = nextHeight };
-
 		//Adjust beat indicator
 		float beatDuration = metronome.BeatDelaySeconds;
 		beatTimer = Mathf.Min(beatTimer + (float)delta, beatDuration);
 		float t = beatTimer / beatDuration;
 		float easedT = t * t;
 		ZoneMesh.Radius = Mathf.Lerp(0, maxRadius, easedT);
-		
-		
+
+
 		// Stomp
 		float arc = Mathf.Sin(t * Mathf.Pi);
-		float stompArc = Mathf.Pow(arc, 0.5f); 
+		float stompArc = Mathf.Pow(arc, 0.5f);
 		float currentY = Mathf.Lerp(onBeatHeight, offBeatHeight, stompArc);
 		characterBody3D.Position = characterBody3D.Position with { Y = currentY };
 	}
