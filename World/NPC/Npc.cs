@@ -16,6 +16,7 @@ public partial class Npc : Node3D
 	[Export] public MeshInstance3D TimingCircle;
 
 	[Export] private ActorPose actorPose;
+	[Export] private Node3D visuals;
 
 	private float targetHeight = 0;
 	[Export] private float maxRadius = 4.185f;
@@ -25,6 +26,12 @@ public partial class Npc : Node3D
 	[Export] private float offBeatHeight = 1f;
 	[Export] private float lerpSpeed = 10f;
 	private float danceBeatSpeed = 10f;
+
+	private Vector3 originalPos;
+	[Export] private FastNoiseLite shakeNoise;
+	[Export] private float maxShakeIntensity = 1.5f;
+	public float shakeIntensity = 0f;
+	public float shakeSpeed = 100f;
 
 	[Export] private Area3D dancePartnerZone;
 
@@ -37,10 +44,18 @@ public partial class Npc : Node3D
 	private readonly Color defaultColor = new(.29f, .38f, 1f, TimingCircleTransparency);
 
 	[ExportGroup("Particles")] [Export] private CpuParticles3D loveParticle;
-	[Export] private CpuParticles3D tearsParticle;
+	[Export] private CpuParticles3D cryParticle;
 
 	public override void _Ready()
 	{
+		originalPos = visuals.Position;
+		shakeNoise.Seed = (int)GD.Randi();
+		shakeNoise.Frequency = 0.5f;
+		shakeNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin;
+
+		loveParticle.Emitting = false;
+		cryParticle.Emitting = false;
+
 		metronome.OnBeat += () =>
 		{
 			targetHeight = onBeatHeight;
@@ -64,13 +79,23 @@ public partial class Npc : Node3D
 		{
 			if (other is Player player)
 			{
-				playerPartner = player;
-				//TODO: Play good particle (hearts) if we are matched correctly and allowed to trade
-				//TODO: Play bad particle (teardrops) if we are NOT a match
+				if (CurrentMask.IsCompatibleWith(player.CurrentMask.MaskType))
+				{
+					GD.Print($"New Partner: {CurrentMask.Label.Text}");
 
-				GD.Print($"New Partner: {CurrentMask.Label.Text}");
-				player.SetDancePartner(this);
-				TimingCircle.Visible = true;
+					// Play good particle (hearts) if we are matched correctly and allowed to trade
+					loveParticle.Emitting = true;
+
+					playerPartner = player;
+					player.SetDancePartner(this);
+					TimingCircle.Visible = true;
+				}
+				else
+				{
+					// Play bad particle (teardrops) if we are NOT a match
+					cryParticle.Emitting = true;
+					shakeIntensity = maxShakeIntensity;
+				}
 			}
 		};
 		dancePartnerZone.BodyExited += (other) =>
@@ -82,6 +107,9 @@ public partial class Npc : Node3D
 				{
 					player.SetDancePartner(null);
 				}
+
+				loveParticle.Emitting = false;
+				cryParticle.Emitting = false;
 
 				TimingCircle.Visible = false;
 			}
@@ -162,5 +190,20 @@ public partial class Npc : Node3D
 		float stompArc = Mathf.Pow(arc, 1f);
 		float currentY = Mathf.Lerp(onBeatHeight, offBeatHeight, stompArc);
 		characterBody3D.Position = characterBody3D.Position with { Y = currentY };
+
+		if (shakeIntensity > 0)
+		{
+			float time = Time.GetTicksMsec() * shakeSpeed * 0.01f;
+			float shakeX = shakeNoise.GetNoise2D(time, 0);
+			float shakeY = shakeNoise.GetNoise2D(0, time);
+
+			visuals.Position += new Vector3(shakeX * shakeIntensity, shakeY * shakeIntensity, 0);
+
+			shakeIntensity = Mathf.MoveToward(shakeIntensity, 0, (float)delta * 5f);
+		}
+		else if (characterBody3D.Position != originalPos)
+		{
+			visuals.Position = originalPos;
+		}
 	}
 }
