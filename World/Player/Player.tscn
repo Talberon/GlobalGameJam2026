@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bq37yh8m720tk"]
+[gd_scene load_steps=11 format=3 uid="uid://bq37yh8m720tk"]
 
 [ext_resource type="Script" uid="uid://bfa1axsilaxtj" path="res://World/Player/Player.cs" id="1_oytbf"]
+[ext_resource type="Script" uid="uid://bgk7p80wct2cg" path="res://World/Player/Camera.cs" id="2_kogn4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oytbf"]
 
@@ -26,9 +27,14 @@ size = Vector3(0.57, 0.425, 0.44)
 
 [node name="Player" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("animationPlayer")]
+[node name="VisualRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("animationPlayer", "Camera", "VisualRoot")]
 script = ExtResource("1_oytbf")
 animationPlayer = NodePath("AnimationPlayer")
+Camera = NodePath("../Camera3D")
+VisualRoot = NodePath("../VisualRoot")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -40,8 +46,15 @@ material_override = SubResource("StandardMaterial3D_oytbf")
 mesh = SubResource("CapsuleMesh_oytbf")
 
 [node name="Face" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5013945, 0.40589815)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5013945, -0.35934025)
 material_override = SubResource("StandardMaterial3D_kogn4")
 mesh = SubResource("BoxMesh_6teo4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("character")]
+transform = Transform3D(1, 0, 0, 0, 0.42041832, 0.9073304, 0, -0.9073304, 0.42041832, 0, 25.09787, 4.1001883)
+fov = 38.7
+script = ExtResource("2_kogn4")
+character = NodePath("../CharacterBody3D")
+distanceBehind = 11.0

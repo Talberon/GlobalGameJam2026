@@ -1,8 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdmgvcvrfn6tc"]
+[gd_scene load_steps=10 format=3 uid="uid://c53pt3lfvquff"]
+
+[ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
+[ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
+[ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
 
 [sub_resource type="Gradient" id="Gradient_pcc8v"]
+offsets = PackedFloat32Array(0.5084746, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8i4wv"]
+frequency = 0.2329
+fractal_type = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2gwy"]
 noise = SubResource("FastNoiseLite_8i4wv")
@@ -12,12 +19,52 @@ color_ramp = SubResource("Gradient_pcc8v")
 albedo_texture = SubResource("NoiseTexture2D_h2gwy")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pcc8v"]
-size = Vector2(50, 50)
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pcc8v"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
 
 [node name="Ballroom" type="Node3D"]
 
 [node name="Room" type="Node" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room"]
+[node name="Floor" type="StaticBody3D" parent="Room"]
+
+[node name="Floor" type="MeshInstance3D" parent="Room/Floor"]
 material_override = SubResource("StandardMaterial3D_ebwhw")
 mesh = SubResource("PlaneMesh_pcc8v")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor"]
+shape = SubResource("ConcavePolygonShape3D_pcc8v")
+
+[node name="Wall" parent="Room" instance=ExtResource("1_ebwhw")]
+transform = Transform3D(1, 0, 0, 0, 1.655, 0, 0, 0, 6.04, -36, 0, 0)
+
+[node name="Wall4" parent="Room" instance=ExtResource("1_ebwhw")]
+transform = Transform3D(1, 0, 0, 0, 1.655, 0, 0, 0, 6.04, 24, 0, 0)
+
+[node name="Wall2" parent="Room" instance=ExtResource("1_ebwhw")]
+transform = Transform3D(-4.371139e-08, 0, 6.04, 0, 1.655, 0, -1.0000001, 0, -2.6401682e-07, -6, 0, 30)
+
+[node name="Wall3" parent="Room" instance=ExtResource("1_ebwhw")]
+transform = Transform3D(-4.371139e-08, 0, 6.04, 0, 1.655, 0, -1.0000001, 0, -2.6401682e-07, -6, 0, -30)
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
+
+[node name="Npc" parent="Actors" instance=ExtResource("2_ebwhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
+
+[node name="Npc2" parent="Actors" instance=ExtResource("2_ebwhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="Npc3" parent="Actors" instance=ExtResource("2_ebwhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+
+[node name="Npc4" parent="Actors" instance=ExtResource("2_ebwhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 9)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)

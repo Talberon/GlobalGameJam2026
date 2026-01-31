@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://3apnd3yfdqr5"]
+
+[sub_resource type="Gradient" id="Gradient_iy2x4"]
+colors = PackedColorArray(0.59, 0.54043996, 0.4248, 1, 1, 0.8862745, 0.827451, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_56nii"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jxmsk"]
+noise = SubResource("FastNoiseLite_56nii")
+color_ramp = SubResource("Gradient_iy2x4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3lxq"]
+albedo_texture = SubResource("NoiseTexture2D_jxmsk")
+
+[sub_resource type="BoxMesh" id="BoxMesh_iy2x4"]
+size = Vector3(0.1, 5, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_iy2x4"]
+data = PackedVector3Array(-0.049999997, 2.5, 5, 0.049999997, 2.5, 5, -0.049999997, -2.5, 5, 0.049999997, 2.5, 5, 0.049999997, -2.5, 5, -0.049999997, -2.5, 5, 0.049999997, 2.5, -5, -0.049999997, 2.5, -5, 0.049999997, -2.5, -5, -0.049999997, 2.5, -5, -0.049999997, -2.5, -5, 0.049999997, -2.5, -5, 0.049999997, 2.5, 5, 0.049999997, 2.5, -5, 0.049999997, -2.5, 5, 0.049999997, 2.5, -5, 0.049999997, -2.5, -5, 0.049999997, -2.5, 5, -0.049999997, 2.5, -5, -0.049999997, 2.5, 5, -0.049999997, -2.5, -5, -0.049999997, 2.5, 5, -0.049999997, -2.5, 5, -0.049999997, -2.5, -5, 0.049999997, 2.5, 5, -0.049999997, 2.5, 5, 0.049999997, 2.5, -5, -0.049999997, 2.5, 5, -0.049999997, 2.5, -5, 0.049999997, 2.5, -5, -0.049999997, -2.5, 5, 0.049999997, -2.5, 5, -0.049999997, -2.5, -5, 0.049999997, -2.5, 5, 0.049999997, -2.5, -5, -0.049999997, -2.5, -5)
+
+[node name="Wall" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5011683, 0)
+material_override = SubResource("StandardMaterial3D_v3lxq")
+mesh = SubResource("BoxMesh_iy2x4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5011683, 0)
+shape = SubResource("ConcavePolygonShape3D_iy2x4")
