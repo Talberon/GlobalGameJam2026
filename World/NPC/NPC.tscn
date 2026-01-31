@@ -164,7 +164,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qcj2e")
 
 [node name="Facemask" parent="NpcController" instance=ExtResource("3_io1c3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.4940553, -0.14420313)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.4940553, -0.030861467)
 
 [node name="DancePartnerZone" type="Area3D" parent="NpcController"]
 collision_layer = 3

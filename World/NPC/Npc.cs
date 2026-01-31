@@ -31,7 +31,6 @@ public partial class Npc : Node3D
 		metronome.OnBeat += () =>
 		{
 			targetHeight = onBeatHeight;
-			danceBeatSpeed = 50f;
 		};
 		metronome.OffBeat += () =>
 		{
@@ -101,5 +100,12 @@ public partial class Npc : Node3D
 		float t = beatTimer / beatDuration;
 		float easedT = t * t;
 		ZoneMesh.Radius = Mathf.Lerp(0, maxRadius, easedT);
+		
+		
+		// Stomp
+		float arc = Mathf.Sin(t * Mathf.Pi);
+		float stompArc = Mathf.Pow(arc, 0.5f); 
+		float currentY = Mathf.Lerp(onBeatHeight, offBeatHeight, stompArc);
+		characterBody3D.Position = characterBody3D.Position with { Y = currentY };
 	}
 }
