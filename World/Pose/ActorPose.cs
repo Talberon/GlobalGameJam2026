@@ -49,13 +49,13 @@ public partial class ActorPose : Node3D
 		else
 		{
 			//Spin the mesh around 
-			mesh.Rotation = mesh.Rotation with { Y = mesh.Rotation.Y + (float)delta * 30f };
+			mesh.Rotation = mesh.Rotation with { Y = mesh.Rotation.Y + (float)delta * 10f };
 			spinDuration -= delta;
 		}
 
-		if (mesh.GetActiveMaterial(0).GetNextPass() is ShaderMaterial shaderMat)
+		if (mesh.GetActiveMaterial(0) is ShaderMaterial shaderMat)
 		{
-			shaderMat.SetShaderParameter("spin_rotation", mesh.Rotation);
+			shaderMat.SetShaderParameter("spin_rotation", mesh.Rotation.Y);
 		}
 
 		if (Input.IsActionJustPressed("debug_trade"))
