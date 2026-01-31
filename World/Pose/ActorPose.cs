@@ -1,4 +1,6 @@
+using System;
 using Godot;
+using Godot.Collections;
 
 namespace Masquerade.World.Pose;
 
@@ -11,27 +13,40 @@ public partial class ActorPose : Node3D
 		Leading,
 		Salutation,
 	}
-	
 
-	[ExportGroup("Posing")] 
-	[Export] public Poses CurrentPose = Poses.Salutation;
+
+	[ExportGroup("Posing")] [Export] public Poses CurrentPose = Poses.Salutation;
 	[Export] private Label3D poseLabel;
-	
 	[Export] public AnimationPlayer AnimationPlayer;
-	
+
+	public override void _Ready()
+	{
+		SetPose(CurrentPose);
+		base._Ready();
+	}
+
 	public void SetPose(Poses pose)
 	{
 		CurrentPose = pose;
-		AnimationPlayer.Play($"Pose-{(int)pose}");
+		AnimationPlayer.Play(AnimationForPose(CurrentPose));
 		poseLabel.Text = pose.ToString();
 	}
-	
+
+	private string AnimationForPose(Poses pose) => pose switch
+	{
+		Poses.Cossack => "cossack",
+		Poses.Ballet => "ballet",
+		Poses.Leading => "ballroom_lead",
+		Poses.Salutation => "salutation",
+		_ => throw new ArgumentOutOfRangeException(nameof(pose), pose, null)
+	};
+
 
 	public void HandlePoseInput()
 	{
 		if (Input.IsActionPressed("pose_up"))
 		{
-			SetPose(Poses.Ballet);
+			SetPose(Poses.Salutation);
 		}
 
 		if (Input.IsActionPressed("pose_down"))
@@ -41,12 +56,12 @@ public partial class ActorPose : Node3D
 
 		if (Input.IsActionPressed("pose_left"))
 		{
-			SetPose(Poses.Leading);
+			SetPose(Poses.Ballet);
 		}
 
 		if (Input.IsActionPressed("pose_right"))
 		{
-			SetPose(Poses.Salutation);
+			SetPose(Poses.Leading);
 		}
 	}
 }

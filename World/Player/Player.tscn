@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq37yh8m720tk"]
+[gd_scene load_steps=6 format=3 uid="uid://bq37yh8m720tk"]
 
 [ext_resource type="Script" uid="uid://bfa1axsilaxtj" path="res://World/Player/Player.cs" id="1_oytbf"]
 [ext_resource type="Script" uid="uid://bgk7p80wct2cg" path="res://World/Player/Camera.cs" id="2_kogn4"]
@@ -6,25 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://8uhf1bxrekl0" path="res://World/Pose/ActorPose.tscn" id="3_yh66h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oytbf"]
-
-[sub_resource type="Gradient" id="Gradient_6teo4"]
-offsets = PackedFloat32Array(0, 0.5466667)
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.75, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_yh66h"]
-frequency = 0.0155
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8lyh0"]
-noise = SubResource("FastNoiseLite_yh66h")
-color_ramp = SubResource("Gradient_6teo4")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6teo4"]
-albedo_texture = SubResource("NoiseTexture2D_8lyh0")
-billboard_mode = 1
-
-[sub_resource type="QuadMesh" id="QuadMesh_yh66h"]
-material = SubResource("StandardMaterial3D_6teo4")
-size = Vector2(1, 2)
 
 [node name="Player" type="Node3D"]
 
@@ -42,10 +23,6 @@ ActorPose = NodePath("ActorPose")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_oytbf")
-
-[node name="Body" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("QuadMesh_yh66h")
 
 [node name="Facemask" parent="CharacterBody3D" instance=ExtResource("3_6teo4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6005542, 0.71035355)
