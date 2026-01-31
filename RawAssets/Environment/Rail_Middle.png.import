@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cefsgdh8xpajr"
-path="res://.godot/imported/pillar.png-be8cf4db30ffd4508e1aa658c9da37f1.ctex"
+uid="uid://qrknevvt4vpt"
+path="res://.godot/imported/Rail_Middle.png-14287d4c66412d0d9f528d301bcdfa4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://RawAssets/pillar.png"
-dest_files=["res://.godot/imported/pillar.png-be8cf4db30ffd4508e1aa658c9da37f1.ctex"]
+source_file="res://RawAssets/Environment/Rail_Middle.png"
+dest_files=["res://.godot/imported/Rail_Middle.png-14287d4c66412d0d9f528d301bcdfa4c.ctex"]
 
 [params]
 
