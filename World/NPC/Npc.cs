@@ -1,5 +1,6 @@
 using Godot;
 using Masquerade.World.Player;
+using Masquerade.World.Pose;
 
 public partial class Npc : Node3D
 {
@@ -13,6 +14,8 @@ public partial class Npc : Node3D
 	[Export] public Facemask CurrentMask;
 	[Export] public MeshInstance3D TimingCircle;
 
+	[Export] private ActorPose actorPose;
+
 	private float targetHeight = 0;
 	[Export] private float maxRadius = 4.185f;
 	private float beatTimer = 0;
@@ -24,11 +27,22 @@ public partial class Npc : Node3D
 
 	[Export] private Area3D dancePartnerZone;
 
+	[Export] public int TestsRemaining = 3;
+
 	private SphereMesh ZoneMesh => TimingCircle.Mesh as SphereMesh;
+
+	[Export] private Player player;
+
+	[ExportGroup("Particles")] [Export] private CpuParticles3D loveParticle;
+	[Export] private CpuParticles3D tearsParticle;
 
 	public override void _Ready()
 	{
-		metronome.OnBeat += () => { targetHeight = onBeatHeight; };
+		metronome.OnBeat += () =>
+		{
+			targetHeight = onBeatHeight;
+			TestWithCurrentPose(player);
+		};
 		metronome.OffBeat += () =>
 		{
 			targetHeight = offBeatHeight;
@@ -65,6 +79,26 @@ public partial class Npc : Node3D
 		TimingCircle.Visible = false;
 		CurrentMask.MaskType = initialMask;
 		base._Ready();
+	}
+
+	private void TestWithCurrentPose(Player player)
+	{
+		if (player.CurrentDancePartner != this) return;
+
+		if (actorPose.CurrentPose == player.ActorPose.CurrentPose)
+		{
+			TestsRemaining--;
+			//TODO: Play particle/sfx on success
+		}
+		else
+		{
+			//TODO: Play particle/sfx on failure
+		}
+
+		if (TestsRemaining <= 0)
+		{
+			player.TradeMasksWith(this);
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
