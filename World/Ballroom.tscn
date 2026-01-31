@@ -54,18 +54,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58438325, 3.557118, -2.951
 [node name="Npc" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.999999, 0, 8)
 metronome = NodePath("../Metronome")
+initialMask = 1
 
 [node name="Npc2" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4.0000005, 0, 7.9999995)
 metronome = NodePath("../Metronome")
+initialMask = 2
 
 [node name="Npc3" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4.9999995, 0, -5.0000005)
 metronome = NodePath("../Metronome")
+initialMask = 3
 
 [node name="Npc4" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8, 0, -6.9999995)
 metronome = NodePath("../Metronome")
+initialMask = 4
+
+[node name="Npc5" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.2706375, 0, -13.238773)
+metronome = NodePath("../Metronome")
+initialMask = 5
 
 [node name="Lights" type="Node" parent="."]
 

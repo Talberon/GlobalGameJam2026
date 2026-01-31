@@ -18,6 +18,8 @@ public partial class Player : CharacterBody3D
 
 	[Export] public AnimationPlayer AnimationPlayer;
 	[Export] private float speed = 7.0f;
+	
+	[Export] public Facemask CurrentMask;
 
 	[ExportGroup("Camera")] [Export] public Camera3D Camera;
 	[Export] public Node3D VisualRoot;
@@ -25,6 +27,8 @@ public partial class Player : CharacterBody3D
 
 	[ExportGroup("Posing")] [Export] public Poses CurrentPose = Poses.Salutation;
 	[Export] private Label3D poseLabel;
+
+	private Npc currentDancePartner;
 
 	public float TargetFov = 39f;
 
@@ -41,7 +45,19 @@ public partial class Player : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		stateMachine.PhysicsProcess(delta);
+
+		if (Input.IsActionJustPressed("debug_trade"))
+		{
+			GD.Print($"Trading with {currentDancePartner.CurrentMask.Label.Text}");
+			TradeMasksWith(currentDancePartner);
+		}
+		
 		MoveAndSlide();
+	}
+
+	public void SetDancePartner(Npc partner)
+	{
+		currentDancePartner = partner;
 	}
 
 	public void SetPose(Poses pose)
@@ -49,6 +65,14 @@ public partial class Player : CharacterBody3D
 		CurrentPose = pose;
 		AnimationPlayer.Play($"Pose-{(int)pose}");
 		poseLabel.Text = pose.ToString();
+	}
+
+	public void TradeMasksWith(Npc npc)
+	{
+		var myMask = CurrentMask;
+		CurrentMask = npc.CurrentMask;
+		npc.CurrentMask = myMask;
+		//TODO: Play some effect
 	}
 
 	public Vector3 GetMoveDirection()

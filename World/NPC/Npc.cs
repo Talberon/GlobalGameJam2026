@@ -1,4 +1,5 @@
 using Godot;
+using Masquerade.World.Player;
 
 public partial class Npc : CharacterBody3D
 {
@@ -6,19 +7,32 @@ public partial class Npc : CharacterBody3D
     public const float JumpVelocity = 4.5f;
 
     [Export] private Metronome metronome;
-    [Export] public Facemask Facemask;
+    [Export] private Facemask.MaskTypes initialMask = Facemask.MaskTypes.Jester;
+    [Export] public Facemask CurrentMask;
 
     private float targetHeight = 0;
 
     [Export] private float onBeatHeight = 0f;
     [Export] private float offBeatHeight = 1f;
-    [Export] private float lerpSpeed =10f;
+    [Export] private float lerpSpeed = 10f;
+
+    [Export] private Area3D dancePartnerZone;
 
     public override void _Ready()
     {
         metronome.OnBeat += () => { targetHeight = onBeatHeight; };
         metronome.OffBeat += () => { targetHeight = offBeatHeight; };
-        
+
+        dancePartnerZone.BodyEntered += (other) =>
+        {
+            if (other is Player player)
+            {
+                GD.Print($"New Partner: {CurrentMask.Label.Text}");
+                player.SetDancePartner(this);
+            }
+        };
+
+        CurrentMask.SetMaskType(initialMask);
         base._Ready();
     }
 

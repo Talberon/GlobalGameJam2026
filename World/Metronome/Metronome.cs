@@ -38,7 +38,6 @@ public partial class Metronome : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		//TODO: Squash and change colour on the beat and off the beat
 		nextBeat -= delta;
 		if (nextBeat <= 0)
 		{

@@ -31,6 +31,7 @@ size = Vector2(1, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("AnimationPlayer", "Camera", "VisualRoot", "poseLabel")]
+collision_mask = 3
 script = ExtResource("1_oytbf")
 AnimationPlayer = NodePath("../AnimationPlayer")
 Camera = NodePath("../Camera3D")

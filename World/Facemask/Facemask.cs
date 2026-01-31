@@ -26,6 +26,12 @@ public partial class Facemask : Node3D
 	[Export] public Label3D Label;
 	[Export] public MaskTypes MaskType = MaskTypes.Jester;
 
+	public void SetMaskType(MaskTypes type)
+	{
+		MaskType = type;
+		Label.Text = type.ToString();
+	}
+
 	public override void _Ready()
 	{
 		Label.Text = MaskType.ToString();
