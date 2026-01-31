@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdmgvcvrfn6tc"]
+
+[sub_resource type="Gradient" id="Gradient_pcc8v"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8i4wv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2gwy"]
+noise = SubResource("FastNoiseLite_8i4wv")
+color_ramp = SubResource("Gradient_pcc8v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
+albedo_texture = SubResource("NoiseTexture2D_h2gwy")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pcc8v"]
+size = Vector2(50, 50)
+
+[node name="Ballroom" type="Node3D"]
+
+[node name="Room" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room"]
+material_override = SubResource("StandardMaterial3D_ebwhw")
+mesh = SubResource("PlaneMesh_pcc8v")

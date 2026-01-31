@@ -1,8 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq37yh8m720tk"]
+[gd_scene load_steps=10 format=3 uid="uid://bq37yh8m720tk"]
 
 [ext_resource type="Script" uid="uid://bfa1axsilaxtj" path="res://World/Player/Player.cs" id="1_oytbf"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oytbf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oytbf"]
+albedo_color = Color(0.47000003, 0.64666677, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oytbf"]
+
+[sub_resource type="Gradient" id="Gradient_oytbf"]
+colors = PackedColorArray(0, 0, 0, 1, 0.65, 0.68500006, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kogn4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6teo4"]
+noise = SubResource("FastNoiseLite_kogn4")
+color_ramp = SubResource("Gradient_oytbf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kogn4"]
+albedo_texture = SubResource("NoiseTexture2D_6teo4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6teo4"]
+size = Vector3(0.57, 0.425, 0.44)
+
 [node name="Player" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("1_oytbf")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_oytbf")
+
+[node name="Body" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_oytbf")
+mesh = SubResource("CapsuleMesh_oytbf")
+
+[node name="Face" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5013945, 0.40589815)
+material_override = SubResource("StandardMaterial3D_kogn4")
+mesh = SubResource("BoxMesh_6teo4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
