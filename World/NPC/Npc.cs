@@ -3,70 +3,93 @@ using Masquerade.World.Player;
 
 public partial class Npc : CharacterBody3D
 {
-    public const float Speed = 5.0f;
-    public const float JumpVelocity = 4.5f;
+	public const float Speed = 5.0f;
+	public const float JumpVelocity = 4.5f;
 
-    [Export] private Metronome metronome;
-    [Export] private Facemask.MaskTypes initialMask = Facemask.MaskTypes.Jester;
-    [Export] public Facemask CurrentMask;
+	[Export] private Metronome metronome;
+	[Export] private Facemask.MaskTypes initialMask = Facemask.MaskTypes.Jester;
+	[Export] public Facemask CurrentMask;
+	[Export] public MeshInstance3D TimingCircle;
 
-    private float targetHeight = 0;
+	private float targetHeight = 0;
+	[Export] private float maxRadius = 4.185f;
+	private float beatTimer = 0;
 
-    [Export] private float onBeatHeight = 0f;
-    [Export] private float offBeatHeight = 1f;
-    [Export] private float lerpSpeed = 10f;
+	[Export] private float onBeatHeight = 0f;
+	[Export] private float offBeatHeight = 1f;
+	[Export] private float lerpSpeed = 10f;
 
-    [Export] private Area3D dancePartnerZone;
+	[Export] private Area3D dancePartnerZone;
 
-    public override void _Ready()
-    {
-        metronome.OnBeat += () => { targetHeight = onBeatHeight; };
-        metronome.OffBeat += () => { targetHeight = offBeatHeight; };
+	private SphereMesh ZoneMesh => TimingCircle.Mesh as SphereMesh;
 
-        dancePartnerZone.BodyEntered += (other) =>
-        {
-            if (other is Player player)
-            {
-                //TODO: Play good particle (hearts) if we are matched correctly and allowed to trade
-                //TODO: Play bad particle (teardrops) if we are NOT a match
-                
-                GD.Print($"New Partner: {CurrentMask.Label.Text}");
-                player.SetDancePartner(this);
-            }
-        };
+	public override void _Ready()
+	{
+		metronome.OnBeat += () => { targetHeight = onBeatHeight; };
+		metronome.OffBeat += () =>
+		{
+			targetHeight = offBeatHeight;
+			ZoneMesh.Radius = 0;
+			beatTimer = 0f;
+		};
 
-        CurrentMask.SetMaskType(initialMask);
-        base._Ready();
-    }
+		dancePartnerZone.BodyEntered += (other) =>
+		{
+			if (other is Player player)
+			{
+				//TODO: Play good particle (hearts) if we are matched correctly and allowed to trade
+				//TODO: Play bad particle (teardrops) if we are NOT a match
 
-    public override void _PhysicsProcess(double delta)
-    {
-        Vector3 velocity = Velocity;
+				GD.Print($"New Partner: {CurrentMask.Label.Text}");
+				player.SetDancePartner(this);
+			}
+		};
 
-        // Handle Jump.
-        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-        {
-            velocity.Y = JumpVelocity;
-        }
+		CurrentMask.SetMaskType(initialMask);
+		base._Ready();
+	}
 
-        // Get the input direction and handle the movement/deceleration.
-        // As good practice, you should replace UI actions with custom gameplay actions.
-        Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-        Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-        if (direction != Vector3.Zero)
-        {
-            velocity.X = direction.X * Speed;
-            velocity.Z = direction.Z * Speed;
-        }
-        else
-        {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-            velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
-        }
+	public override void _PhysicsProcess(double delta)
+	{
+		Vector3 velocity = Velocity;
 
-        Velocity = velocity;
+		// Handle Jump.
+		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		{
+			velocity.Y = JumpVelocity;
+		}
 
-        float nextHeight = Mathf.Lerp(Position.Y, targetHeight, (float)delta * lerpSpeed);
-        Position = Position with { Y = nextHeight };
-    }
+		// Get the input direction and handle the movement/deceleration.
+		// As good practice, you should replace UI actions with custom gameplay actions.
+		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		if (direction != Vector3.Zero)
+		{
+			velocity.X = direction.X * Speed;
+			velocity.Z = direction.Z * Speed;
+		}
+		else
+		{
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+		}
+
+		Velocity = velocity;
+
+		//Adjust npc height
+		float nextHeight = Mathf.Lerp(Position.Y, targetHeight, (float)delta * lerpSpeed);
+		Position = Position with { Y = nextHeight };
+
+
+		float beatDuration = metronome.BeatDelaySeconds;
+		beatTimer = Mathf.Min(beatTimer + (float)delta, beatDuration);
+
+		float t = beatTimer / beatDuration;
+
+		float easedT = t * t;
+		
+		//Adjust beat indicator
+		ZoneMesh.Radius = Mathf.Lerp(0, maxRadius, easedT);
+	}
+
 }

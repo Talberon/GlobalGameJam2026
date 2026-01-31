@@ -7,7 +7,7 @@ public partial class Metronome : Node3D
 	[Export] private Color beatColor = Colors.Green;
 	[Export] private int beatsPerMinute = 100;
 
-	private float beatDelaySeconds;
+	public float BeatDelaySeconds { get; private set; }
 	
 	[Export] private MeshInstance3D mesh;
 
@@ -29,10 +29,10 @@ public partial class Metronome : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		beatDelaySeconds = 60f / beatsPerMinute;
+		BeatDelaySeconds = 60f / beatsPerMinute;
 		shaderMat = (ShaderMaterial)mesh.GetActiveMaterial(0);
 		SetColorTones(shaderMat, restColor);
-		nextBeat = beatDelaySeconds;
+		nextBeat = BeatDelaySeconds;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,7 +62,7 @@ public partial class Metronome : Node3D
 				OffBeat();
 			}
 
-			nextBeat += beatDelaySeconds;
+			nextBeat += BeatDelaySeconds;
 			onBeat = !onBeat;
 		}
 	}

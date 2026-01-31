@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cppu6uhd6tyay"]
+[gd_scene load_steps=14 format=3 uid="uid://cppu6uhd6tyay"]
 
 [ext_resource type="Script" uid="uid://suse1k2sjq3i" path="res://World/NPC/Npc.cs" id="1_qcj2e"]
 [ext_resource type="Shader" uid="uid://cd5imnb4oxt7" path="res://Resources/Shaders/toon.gdshader" id="2_s5tg6"]
@@ -131,9 +131,14 @@ size = Vector3(1, 0.675, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_io1c3"]
 radius = 4.1655273
 
-[node name="Npc" type="CharacterBody3D" node_paths=PackedStringArray("CurrentMask", "dancePartnerZone")]
+[sub_resource type="SphereMesh" id="SphereMesh_io1c3"]
+radius = 4.185
+height = 0.01
+
+[node name="Npc" type="CharacterBody3D" node_paths=PackedStringArray("CurrentMask", "TimingCircle", "dancePartnerZone")]
 script = ExtResource("1_qcj2e")
 CurrentMask = NodePath("Facemask")
+TimingCircle = NodePath("TimingCircle")
 offBeatHeight = 2.0
 dancePartnerZone = NodePath("DancePartnerZone")
 
@@ -162,3 +167,7 @@ collision_layer = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DancePartnerZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_io1c3")
+
+[node name="TimingCircle" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_io1c3")
+skeleton = NodePath("../DancePartnerZone")
