@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://171xggqqlmkp"]
+[gd_scene load_steps=38 format=3 uid="uid://171xggqqlmkp"]
 
 [ext_resource type="Script" uid="uid://byobv41l0v7ao" path="res://World/Facemask/Facemask.cs" id="1_i477a"]
 [ext_resource type="Texture2D" uid="uid://1fnt67bxrnw7" path="res://RawAssets/Masks/Mask_Jester.png" id="2_2reff"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://doidewwr6f70g" path="res://RawAssets/Masks/Mask_Crown.png" id="5_rs768"]
 [ext_resource type="Texture2D" uid="uid://ckt7sebhxb7qg" path="res://RawAssets/Masks/Mask_Sun.png" id="6_g1usq"]
 [ext_resource type="Texture2D" uid="uid://bkl3w0lema38x" path="res://RawAssets/Masks/Mask_Sad.png" id="7_g1usq"]
+[ext_resource type="Texture2D" uid="uid://cg3wvkjv2ci7n" path="res://RawAssets/Masks/Mask_Hummingbird.png" id="7_pl0l4"]
 [ext_resource type="Texture2D" uid="uid://dnpad5gjidsp6" path="res://RawAssets/Masks/Mask_Donkey.png" id="8_c6ovw"]
 [ext_resource type="Texture2D" uid="uid://xci3icuocw70" path="res://RawAssets/Masks/Mask_Cat.png" id="9_88koo"]
 [ext_resource type="Texture2D" uid="uid://y0daagusncsq" path="res://RawAssets/Masks/Mask_Owl.png" id="9_ioqq6"]
@@ -14,12 +15,12 @@
 
 [sub_resource type="QuadMesh" id="QuadMesh_2pkv1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfa37"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88koo"]
 transparency = 1
-albedo_texture = ExtResource("2_2reff")
+albedo_texture = ExtResource("9_88koo")
 
-[sub_resource type="Animation" id="Animation_6p3le"]
-resource_name = "Jester"
+[sub_resource type="Animation" id="Animation_c6ovw"]
+resource_name = "CheshireCat"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -31,82 +32,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("StandardMaterial3D_kfa37")]
-}
-
-[sub_resource type="Animation" id="Animation_0fggt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p3le"]
-transparency = 1
-albedo_texture = ExtResource("3_kfa37")
-
-[sub_resource type="Animation" id="Animation_rs768"]
-resource_name = "Happy"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_6p3le")]
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fggt"]
-transparency = 1
-albedo_texture = ExtResource("4_6p3le")
-
-[sub_resource type="Animation" id="Animation_g1usq"]
-resource_name = "Flower"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_0fggt")]
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6ovw"]
-transparency = 1
-albedo_texture = ExtResource("4_6p3le")
-
-[sub_resource type="Animation" id="Animation_ioqq6"]
-resource_name = "Hummingbird"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_c6ovw")]
+"values": [SubResource("StandardMaterial3D_88koo")]
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klpju"]
@@ -129,46 +55,6 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_klpju")]
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl0l4"]
-transparency = 1
-albedo_texture = ExtResource("6_g1usq")
-
-[sub_resource type="Animation" id="Animation_0aapc"]
-resource_name = "Sun"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_pl0l4")]
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioqq6"]
-transparency = 1
-albedo_texture = ExtResource("7_g1usq")
-
-[sub_resource type="Animation" id="Animation_klpju"]
-resource_name = "Sad"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_ioqq6")]
-}
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlno0"]
 transparency = 1
 albedo_texture = ExtResource("8_c6ovw")
@@ -189,12 +75,12 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_vlno0")]
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88koo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fggt"]
 transparency = 1
-albedo_texture = ExtResource("9_88koo")
+albedo_texture = ExtResource("4_6p3le")
 
-[sub_resource type="Animation" id="Animation_c6ovw"]
-resource_name = "CheshireCat"
+[sub_resource type="Animation" id="Animation_g1usq"]
+resource_name = "Flower"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -206,7 +92,87 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("StandardMaterial3D_88koo")]
+"values": [SubResource("StandardMaterial3D_0fggt")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p3le"]
+transparency = 1
+albedo_texture = ExtResource("3_kfa37")
+
+[sub_resource type="Animation" id="Animation_rs768"]
+resource_name = "Happy"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_6p3le")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwtb3"]
+transparency = 1
+albedo_texture = ExtResource("7_pl0l4")
+
+[sub_resource type="Animation" id="Animation_ioqq6"]
+resource_name = "Hummingbird"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_lwtb3")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfa37"]
+transparency = 1
+albedo_texture = ExtResource("2_2reff")
+
+[sub_resource type="Animation" id="Animation_6p3le"]
+resource_name = "Jester"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_kfa37")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc6nv"]
+transparency = 1
+albedo_texture = ExtResource("10_klpju")
+
+[sub_resource type="Animation" id="Animation_vlno0"]
+resource_name = "Moon"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_wc6nv")]
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0aapc"]
@@ -229,12 +195,27 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_0aapc")]
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc6nv"]
-transparency = 1
-albedo_texture = ExtResource("10_klpju")
+[sub_resource type="Animation" id="Animation_0fggt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
 
-[sub_resource type="Animation" id="Animation_vlno0"]
-resource_name = "Moon"
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioqq6"]
+transparency = 1
+albedo_texture = ExtResource("7_g1usq")
+
+[sub_resource type="Animation" id="Animation_klpju"]
+resource_name = "Sad"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -246,7 +227,27 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("StandardMaterial3D_wc6nv")]
+"values": [SubResource("StandardMaterial3D_ioqq6")]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl0l4"]
+transparency = 1
+albedo_texture = ExtResource("6_g1usq")
+
+[sub_resource type="Animation" id="Animation_0aapc"]
+resource_name = "Sun"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_pl0l4")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rs768"]
