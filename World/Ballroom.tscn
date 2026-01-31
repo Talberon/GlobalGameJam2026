@@ -52,6 +52,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58438325, 3.557118, -2.951
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.855727, -1.9073486e-06, 0.8531847)
 
+[node name="Belle" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.1735039, 0, 2.4050741)
+metronome = NodePath("../Metronome")
+
+[node name="Beast" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 16.66791, 0, -0.7666807)
+metronome = NodePath("../Metronome")
+
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 15.857889, 1.9073486e-06, 9.912278)
 metronome = NodePath("../Metronome")
@@ -101,14 +109,6 @@ initialMask = 9
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -7.0576944, 0, 9.592728)
 metronome = NodePath("../Metronome")
 initialMask = 10
-
-[node name="Belle" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.1735039, 0, 2.4050741)
-metronome = NodePath("../Metronome")
-
-[node name="Beast" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 16.66791, 0, -0.7666807)
-metronome = NodePath("../Metronome")
 
 [node name="Lights" type="Node" parent="."]
 

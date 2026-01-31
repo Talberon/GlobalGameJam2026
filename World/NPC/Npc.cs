@@ -104,7 +104,7 @@ public partial class Npc : Node3D
 
 		// Stomp
 		float arc = Mathf.Sin(t * Mathf.Pi);
-		float stompArc = Mathf.Pow(arc, 0.5f);
+		float stompArc = Mathf.Pow(arc, 1f);
 		float currentY = Mathf.Lerp(onBeatHeight, offBeatHeight, stompArc);
 		characterBody3D.Position = characterBody3D.Position with { Y = currentY };
 	}
