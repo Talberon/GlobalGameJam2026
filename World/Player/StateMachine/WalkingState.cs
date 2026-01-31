@@ -9,9 +9,6 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
 
     public void OnEnter()
     {
-        player.AnimationPlayer.Play("Walk");
-        const float runningAnimationSpeed = 0.12f;
-        player.AnimationPlayer.SpeedScale = Player.WalkSpeed * runningAnimationSpeed;
     }
 
     public void Update(double delta)
@@ -28,10 +25,6 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
 
         player.WalkMomentum = Mathf.MoveToward(player.WalkMomentum, 1, MomentumSpeed);
         MoveAndFaceDirection(player, delta, player.WalkMomentum);
-
-        player.AnimationPlayer.Play("Walk");
-        const float runningAnimationSpeed = 0.12f;
-        player.AnimationPlayer.SpeedScale = Player.WalkSpeed * runningAnimationSpeed;
     }
 
     public static void MoveAndFaceDirection(Player player, double delta, float multiplier = 1.0f)
@@ -59,7 +52,12 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
         player.Velocity = velocity;
     }
 
-    public static void FaceDirection(Player player, double delta, Vector3 direction, float rotationRate)
+    public static void FaceDirection(
+        Player player,
+        double delta,
+        Vector3 direction,
+        float rotationRate
+    )
     {
         if (direction.Length() > 0.1f)
         {

@@ -7,8 +7,6 @@ public class IdleState(PlayerStateMachine stateMachine, Player player) : IPlayer
     
     public void OnEnter()
     {
-        player.AnimationPlayer.Play("Idle");
-        player.AnimationPlayer.SpeedScale = 1;
     }
 
     public void Update(double delta)

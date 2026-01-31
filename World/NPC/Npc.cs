@@ -27,6 +27,9 @@ public partial class Npc : CharacterBody3D
         {
             if (other is Player player)
             {
+                //TODO: Play good particle (hearts) if we are matched correctly and allowed to trade
+                //TODO: Play bad particle (teardrops) if we are NOT a match
+                
                 GD.Print($"New Partner: {CurrentMask.Label.Text}");
                 player.SetDancePartner(this);
             }

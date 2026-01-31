@@ -69,6 +69,8 @@ public partial class Player : CharacterBody3D
 
 	public void TradeMasksWith(Npc npc)
 	{
+		//TODO: Restrict which masks can be traded		
+		
 		Facemask.MaskTypes currentMask = CurrentMask.MaskType;
 		CurrentMask.SetMaskType(npc.CurrentMask.MaskType);
 		npc.CurrentMask.SetMaskType(currentMask);
