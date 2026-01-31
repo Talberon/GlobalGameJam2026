@@ -7,18 +7,20 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oytbf"]
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("CharacterBody3D", "CurrentMask", "Camera", "VisualRoot", "ActorPose")]
+script = ExtResource("1_oytbf")
+CharacterBody3D = NodePath("CharacterBody3D")
+CurrentMask = NodePath("CharacterBody3D/Facemask")
+Camera = NodePath("Camera3D")
+VisualRoot = NodePath("VisualRoot")
+RotationSpeed = 1.0
+ActorPose = NodePath("CharacterBody3D/ActorPose")
 
 [node name="VisualRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("CurrentMask", "Camera", "VisualRoot", "ActorPose")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 collision_mask = 3
-script = ExtResource("1_oytbf")
-CurrentMask = NodePath("Facemask")
-Camera = NodePath("../Camera3D")
-VisualRoot = NodePath("../VisualRoot")
-ActorPose = NodePath("ActorPose")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

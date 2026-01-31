@@ -30,7 +30,7 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
     public static void MoveAndFaceDirection(Player player, double delta, float multiplier = 1.0f)
     {
         Vector3 direction = player.GetMoveDirection();
-        Vector3 velocity = player.Velocity;
+        Vector3 velocity = player.CharacterBody3D.Velocity;
 
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
@@ -41,15 +41,15 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
         }
         else
         {
-            velocity.X = Mathf.MoveToward(player.Velocity.X, 0, Player.WalkSpeed * multiplier);
-            velocity.Z = Mathf.MoveToward(player.Velocity.Z, 0, Player.WalkSpeed * multiplier);
+            velocity.X = Mathf.MoveToward(player.CharacterBody3D.Velocity.X, 0, Player.WalkSpeed * multiplier);
+            velocity.Z = Mathf.MoveToward(player.CharacterBody3D.Velocity.Z, 0, Player.WalkSpeed * multiplier);
         }
 
 
         FaceDirection(player, delta, direction, player.RotationSpeed);
 
         player.TargetFov = WalkingFov;
-        player.Velocity = velocity;
+        player.CharacterBody3D.Velocity = velocity;
     }
 
     public static void FaceDirection(
@@ -65,7 +65,7 @@ public class WalkingState(PlayerStateMachine stateMachine, Player player) : IPla
 
             float currentAngle = player.Rotation.Y;
             float newAngle = (float)Mathf.LerpAngle(currentAngle, targetAngle, delta * rotationRate);
-            player.Rotation = new Vector3(0, newAngle, 0);
+            player.CharacterBody3D.Rotation = new Vector3(0, newAngle, 0);
         }
     }
 

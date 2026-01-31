@@ -79,7 +79,7 @@ public partial class Npc : Node3D
 
 		dancePartnerZone.BodyEntered += (other) =>
 		{
-			if (other is Player player)
+			if (other.GetParent() is Player player)
 			{
 				if (CurrentMask.IsCompatibleWith(player.CurrentMask.MaskType))
 				{
@@ -102,7 +102,7 @@ public partial class Npc : Node3D
 		};
 		dancePartnerZone.BodyExited += (other) =>
 		{
-			if (other is Player player)
+			if (other.GetParent() is Player player)
 			{
 				DisconnectPartner(player);
 			}

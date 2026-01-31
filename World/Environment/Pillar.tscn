@@ -9,10 +9,10 @@ billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_elwl3"]
 material = SubResource("StandardMaterial3D_lpbgv")
-size = Vector2(1, 2)
+size = Vector2(4, 8)
 
 [node name="Pillar" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0025709, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.859981, 0)
 mesh = SubResource("QuadMesh_elwl3")

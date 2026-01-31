@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=21 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cuevwofnklg7g" path="res://World/Environment/StairsRight.tscn" id="3_46dr0"]
 [ext_resource type="PackedScene" uid="uid://dk8c5ikvuoeh3" path="res://World/Environment/StairsLeft.tscn" id="4_ng0ga"]
 [ext_resource type="PackedScene" uid="uid://dxlfq43dxm2tl" path="res://World/Metronome/Metronome.tscn" id="5_ikc2b"]
+[ext_resource type="PackedScene" uid="uid://wj3c8qyar6e5" path="res://World/Environment/Chair.tscn" id="5_omqc4"]
+[ext_resource type="PackedScene" uid="uid://bjo7o3osahxgj" path="res://World/Environment/Pillar.tscn" id="6_i5md5"]
+[ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
 albedo_texture = ExtResource("1_q8mcj")
@@ -22,6 +25,36 @@ size = Vector2(55, 41.74)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pcc8v"]
 data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5md5"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nyel"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bxd6k"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6nyel")
+radius = 4.185
+height = 0.01
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nhhcf"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bda4g"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ybp73"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_bda4g")
+radius = 4.185
+height = 0.01
 
 [node name="Ballroom" type="Node3D"]
 
@@ -61,6 +94,36 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 11.879936, 
 [node name="StairsLeft" parent="Room" instance=ExtResource("4_ng0ga")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -11.786135, 4.0584474, -9.892985)
 
+[node name="Chair" parent="Room" instance=ExtResource("5_omqc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7651076, -9.536743e-07, -8.883778)
+
+[node name="Pillar" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.590592, 0, -22.457203)
+
+[node name="Pillar2" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.692924, 0, -22.457203)
+
+[node name="Pillar3" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.590592, 0, -12.457203)
+
+[node name="Pillar4" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.692924, 0, -12.457203)
+
+[node name="Pillar5" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.590591, 0, 2.542797)
+
+[node name="Pillar7" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.958565, 0, -5.1545672)
+
+[node name="Pillar8" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.697655, 0, -5.1545672)
+
+[node name="Pillar6" parent="Room" instance=ExtResource("6_i5md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.692924, 0, 2.542797)
+
+[node name="Butler" parent="Room" instance=ExtResource("7_6nyel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6748304, 0, -9.094896)
+
 [node name="Actors" type="Node" parent="."]
 
 [node name="Metronome" parent="Actors" instance=ExtResource("5_ikc2b")]
@@ -69,13 +132,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4968078, 3.557118, -15.8754
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8609915, 0.017641068, 1.2016611)
 
-[node name="Kafei" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+[node name="Romeo" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.136902, 0, -2.863099)
 metronome = NodePath("../Metronome")
 
-[node name="Anju" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+[node name="CollisionShape3D" parent="Actors/Romeo/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_i5md5")
+
+[node name="Facemask" parent="Actors/Romeo/NpcController/Visuals" index="0"]
+IsRomeo = true
+
+[node name="TimingCircle" parent="Actors/Romeo" index="1"]
+mesh = SubResource("SphereMesh_bxd6k")
+
+[node name="Juliette" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10.746731, 0, -2.6459208)
 metronome = NodePath("../Metronome")
+
+[node name="CollisionShape3D" parent="Actors/Juliette/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_nhhcf")
+
+[node name="Facemask" parent="Actors/Juliette/NpcController/Visuals" index="0"]
+IsJuliette = true
+
+[node name="TimingCircle" parent="Actors/Juliette" index="1"]
+mesh = SubResource("SphereMesh_ybp73")
 
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7247474, 1.9073486e-06, -5.6379128)
@@ -151,3 +232,6 @@ omni_range = 50.637
 transform = Transform3D(1, 0, 0, 0, 0.9765748, 0.21517852, 0, -0.21517852, 0.9765748, 0, 18, 0)
 light_color = Color(1, 0.9533333, 0.44, 1)
 light_energy = 0.66
+
+[editable path="Actors/Romeo"]
+[editable path="Actors/Juliette"]
