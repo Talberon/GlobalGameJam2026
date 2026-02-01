@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Metronome : Node3D
 {
@@ -7,8 +6,15 @@ public partial class Metronome : Node3D
 	[Export] private Color beatColor = Colors.Green;
 	[Export] private int beatsPerMinute = 100;
 
+	[ExportGroup("Music")] [Export] private AudioStreamPlayer upNote;
+	[Export] private AudioStreamPlayer downNote;
+	[Export] private AudioStreamPlayer melody;
+	private const int melodyBeats = 32;
+	[Export] private int gapBeatsBetweenMelody = 8;
+	private int beatsToNextMelodyPlay;
+
 	public float BeatDelaySeconds { get; private set; }
-	
+
 	[Export] private MeshInstance3D mesh;
 
 	[ExportGroup("Squash")] [Export] private float beatScaleY = 1f;
@@ -18,9 +24,10 @@ public partial class Metronome : Node3D
 
 	private ShaderMaterial shaderMat;
 
-	private bool onBeat;
+	private bool onBeat = true;
 
 	public delegate void TriggerOnBeat();
+
 	public delegate void TriggerOffBeat();
 
 	public TriggerOnBeat OnBeat = () => { };
@@ -33,6 +40,7 @@ public partial class Metronome : Node3D
 		shaderMat = (ShaderMaterial)mesh.GetActiveMaterial(0);
 		SetColorTones(shaderMat, restColor);
 		nextBeat = BeatDelaySeconds;
+		beatsToNextMelodyPlay = gapBeatsBetweenMelody + 1;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,6 +49,13 @@ public partial class Metronome : Node3D
 		nextBeat -= delta;
 		if (nextBeat <= 0)
 		{
+			beatsToNextMelodyPlay--;
+			if (beatsToNextMelodyPlay == 0)
+			{
+				melody.Play();
+				beatsToNextMelodyPlay = melodyBeats + gapBeatsBetweenMelody;
+			}
+
 			if (onBeat)
 			{
 				SetColorTones(shaderMat, beatColor);
@@ -49,6 +64,7 @@ public partial class Metronome : Node3D
 					Y = beatScaleY
 				};
 				GD.Print("BEAT!");
+				upNote.Play();
 				OnBeat();
 			}
 			else
@@ -60,6 +76,7 @@ public partial class Metronome : Node3D
 				};
 				GD.Print("OFF BEAT!");
 				OffBeat();
+				downNote.Play();
 			}
 
 			nextBeat += BeatDelaySeconds;

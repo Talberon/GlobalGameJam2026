@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvqg22bdwpwmg"]
+
+[ext_resource type="Script" uid="uid://bq2hjg760kie8" path="res://World/System/SoundManager.cs" id="1_7iu5p"]
+[ext_resource type="AudioStream" uid="uid://b67q28r6b50ou" path="res://RawAssets/Sound/Music/BallroomDance.wav" id="2_wyfmy"]
+[ext_resource type="AudioStream" uid="uid://c2k6y5gh0xigg" path="res://RawAssets/Sound/Music/MelodyOnly.wav" id="3_056qm"]
+[ext_resource type="AudioStream" uid="uid://cjlcv3870m3oi" path="res://RawAssets/Sound/Music/UpNote.wav" id="4_hkar2"]
+[ext_resource type="AudioStream" uid="uid://cfjbmmg8j7wed" path="res://RawAssets/Sound/Music/DownNote.wav" id="5_4d318"]
+[ext_resource type="AudioStream" uid="uid://dq6nfn0hfvpjg" path="res://RawAssets/Sound/Music/Success.wav" id="6_rguuf"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_7iu5p")
+
+[node name="BGMMultiplex" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wyfmy")
+
+[node name="BGMMelodyOnly" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_056qm")
+
+[node name="FXUpNote" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hkar2")
+
+[node name="FXDownNote" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4d318")
+
+[node name="FXSuccess" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_rguuf")
