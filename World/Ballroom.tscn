@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=30 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dp32kufd0nen5" path="res://World/Environment/Landscape.tscn" id="2_bda4g"]
 [ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://cuevwofnklg7g" path="res://World/Environment/StairsRight.tscn" id="3_46dr0"]
+[ext_resource type="PackedScene" uid="uid://eqa75vxxbw06" path="res://World/NPC/CutsceneActor.tscn" id="4_ebevd"]
 [ext_resource type="PackedScene" uid="uid://dk8c5ikvuoeh3" path="res://World/Environment/StairsLeft.tscn" id="4_ng0ga"]
 [ext_resource type="PackedScene" uid="uid://dxlfq43dxm2tl" path="res://World/Metronome/Metronome.tscn" id="5_ikc2b"]
 [ext_resource type="PackedScene" uid="uid://wj3c8qyar6e5" path="res://World/Environment/Chair.tscn" id="5_omqc4"]
@@ -127,12 +128,36 @@ transform = Transform3D(1, 0, 0, 0, 0.9765748, 0.21517852, 0, -0.21517852, 0.976
 light_color = Color(1, 0.9533333, 0.44, 1)
 light_energy = 0.66
 
+[node name="Ending Scene" type="Node" parent="."]
+
+[node name="Background" type="Node" parent="Ending Scene"]
+
+[node name="Landscape" parent="Ending Scene/Background" instance=ExtResource("2_bda4g")]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 256.25128, -2770.263)
+
+[node name="Final Camera" type="Camera3D" parent="Ending Scene"]
+transform = Transform3D(1, 0, 0, 0, 0.9903988, -0.13823973, 0, 0.13823973, 0.9903988, 0.103180945, 9.143001, -48.01456)
+fov = 35.0
+
+[node name="JulietActor" parent="Ending Scene" instance=ExtResource("4_ebevd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3473592, 7.3176923, -56.566418)
+
+[node name="Facemask" parent="Ending Scene/JulietActor/Visuals" index="0"]
+MaskType = 10
+
+[node name="ActorPose" parent="Ending Scene/JulietActor/Visuals" index="1"]
+CurrentPose = 2
+
+[node name="RomeoActor" parent="Ending Scene" instance=ExtResource("4_ebevd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6526408, 7.3176923, -56.566418)
+
+[node name="Facemask" parent="Ending Scene/RomeoActor/Visuals" index="0"]
+MaskType = 5
+
+[node name="ActorPose" parent="Ending Scene/RomeoActor/Visuals" index="1"]
+CurrentPose = 1
+
 [node name="Room" type="Node" parent="."]
-
-[node name="Background" type="Node" parent="Room"]
-
-[node name="Landscape" parent="Room/Background" instance=ExtResource("2_bda4g")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 910.6042, -2406.6223)
 
 [node name="Building" type="Node" parent="Room"]
 
@@ -157,6 +182,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.0041012764, 20.856665)
 
 [node name="RailMiddle3" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.0041012764, 20.856665)
+
+[node name="RailMiddle4" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.0041012764, -20.143337)
+
+[node name="RailMiddle5" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.0041012764, -20.143337)
+
+[node name="RailMiddle6" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.0041012764, -20.143337)
 
 [node name="RailEndLeft" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("5_ybp73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.117341, 0, 20.878277)
@@ -434,6 +468,9 @@ transform = Transform3D(0.7553276, 0, 0.6553474, 0, 1, 0, -0.6553474, 0, 0.75532
 transform = Transform3D(0.7553276, 0, 0.6553474, 0, 1, 0, -0.6553474, 0, 0.7553276, 0.3064058, -1.9073486e-06, -22.660803)
 
 [node name="Bystander99" parent="Room/Crowds" instance=ExtResource("8_6nyel")]
+transform = Transform3D(0.7553276, 0, 0.6553474, 0, 1, 0, -0.6553474, 0, 0.7553276, -1.0766119, -1.9073486e-06, -22.301556)
+
+[node name="Bystander109" parent="Room/Crowds" instance=ExtResource("8_6nyel")]
 transform = Transform3D(0.7553276, 0, 0.6553474, 0, 1, 0, -0.6553474, 0, 0.7553276, -1.0766119, -1.9073486e-06, -22.301556)
 
 [node name="Bystander100" parent="Room/Crowds" instance=ExtResource("8_6nyel")]
@@ -735,6 +772,8 @@ metronome = NodePath("../../Metronome")
 initialMask = 10
 
 [editable path="SoundManager"]
+[editable path="Ending Scene/JulietActor"]
+[editable path="Ending Scene/RomeoActor"]
 [editable path="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo"]
 [editable path="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet"]
 [editable path="Actors/Player"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://eqa75vxxbw06"]
+
+[ext_resource type="PackedScene" uid="uid://171xggqqlmkp" path="res://World/Facemask/Facemask.tscn" id="1_odivh"]
+[ext_resource type="PackedScene" uid="uid://8uhf1bxrekl0" path="res://World/Pose/ActorPose.tscn" id="2_y8a30"]
+[ext_resource type="Texture2D" uid="uid://tdrxiukc6cqx" path="res://RawAssets/Icons/Heart.png" id="3_kngg4"]
+[ext_resource type="Texture2D" uid="uid://ba7qihjeqoxoa" path="res://RawAssets/Icons/Tear.png" id="4_7pxux"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bs1r"]
+transparency = 1
+albedo_texture = ExtResource("3_kngg4")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_qgjs6"]
+material = SubResource("StandardMaterial3D_7bs1r")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emcw4"]
+transparency = 1
+albedo_texture = ExtResource("4_7pxux")
+
+[sub_resource type="QuadMesh" id="QuadMesh_acv24"]
+material = SubResource("StandardMaterial3D_emcw4")
+size = Vector2(2, 2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_odivh"]
+
+[node name="CutsceneActor" type="Node3D"]
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Facemask" parent="Visuals" instance=ExtResource("1_odivh")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.3267353, -0.030861467)
+
+[node name="ActorPose" parent="Visuals" instance=ExtResource("2_y8a30")]
+
+[node name="LoveParticle" type="CPUParticles3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.534363, 0)
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 0.8
+mesh = SubResource("QuadMesh_qgjs6")
+direction = Vector3(1, 1, 5.175)
+spread = 172.35
+gravity = Vector3(0, 3, 0)
+initial_velocity_min = 3.15
+initial_velocity_max = 3.15
+anim_speed_min = 1.0
+anim_speed_max = 4.0
+
+[node name="TearsParticle" type="CPUParticles3D" parent="Visuals"]
+transform = Transform3D(-0.82870567, 0, 0.55968475, 0, 1, 0, -0.55968475, 0, -0.82870567, 0, 2.3205276, 0)
+emitting = false
+amount = 20
+mesh = SubResource("QuadMesh_acv24")
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector3(0, -5, 0)
+initial_velocity_min = 5.1
+initial_velocity_max = 5.1
+anim_speed_min = 4.54
+anim_speed_max = 6.14
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_odivh")
