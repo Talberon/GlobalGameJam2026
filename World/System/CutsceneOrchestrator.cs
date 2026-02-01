@@ -5,6 +5,7 @@ public partial class CutsceneOrchestrator : Node3D
 {
 	[ExportGroup("Camera Config")] [Export]
 	public Camera3D CutsceneCamera;
+	[Export] public Camera3D FinalCamera;
 
 	[Export] public Camera3D PlayerCamera;
 
@@ -19,10 +20,14 @@ public partial class CutsceneOrchestrator : Node3D
 
 	[Export] public Path3D WestStairsPath;
 	[Export] public Path3D EastStairsPath;
+	[Export] public Path3D FinalScenePath;
 
 	[Export] public Node3D Upstairs;
 
 	private Node3D? followWithCamera;
+
+	private bool RomeoDelivered;
+	private bool JulietDelivered;
 
 	public override void _Ready()
 	{
@@ -115,6 +120,12 @@ public partial class CutsceneOrchestrator : Node3D
 
 		PlayerCamera.MakeCurrent();
 		followWithCamera = null;
+		RomeoDelivered = true;
+		
+		if (JulietDelivered)
+		{
+			PlayEndingCutscene();
+		}
 	}
 
 	public async void PlayMoonRisesInWestCutscene()
@@ -138,11 +149,23 @@ public partial class CutsceneOrchestrator : Node3D
 
 		PlayerCamera.MakeCurrent();
 		followWithCamera = null;
+		JulietDelivered = true;
+
+		if (RomeoDelivered)
+		{
+			PlayEndingCutscene();
+		}
 	}
 
-	public void PlayEndingCutscene()
+	public async void PlayEndingCutscene()
 	{
-		//TODO Use Tweens to move camera and end the game
+		GD.Print("Playing final cutscene");
+		// 1. Setup: Match the cutscene camera to the player's current view so the transition is seamless
+		FinalCamera.MakeCurrent(); // Take over the screen
+		Tween tween = CreateTween();
+		MakeActorFollowPath(tween, FinalScenePath, 10);
+		
+		await ToSignal(tween, Tween.SignalName.Finished);
 	}
 
 	private void ReturnCameraToPlayer(Tween tween)

@@ -20,10 +20,10 @@
 
 [sub_resource type="Curve3D" id="Curve3D_ebevd"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.046704173, 8.861832, -47.962814, 0, 0, 0, 0, 0, 0, -0.29320526, 8.835545, -53.673412, 0, 0, 0, 0, 0, 0, -0.11911917, 10.56523, -55.837593),
-"tilts": PackedFloat32Array(0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.046704173, 8.861832, -30.345814, 0, 0, 0, 0, 0, 0, 0.30950856, 9.581466, -73.11368),
+"tilts": PackedFloat32Array(0, 0)
 }
-point_count = 3
+point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
 albedo_texture = ExtResource("1_q8mcj")
@@ -94,8 +94,9 @@ melody = NodePath("../SoundManager/BGMMelodyOnly")
 
 [node name="SoundManager" parent="." instance=ExtResource("1_sokdh")]
 
-[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "WestStairsPath", "EastStairsPath", "Upstairs") instance=ExtResource("1_bxd6k")]
+[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "FinalCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "WestStairsPath", "EastStairsPath", "FinalScenePath", "Upstairs") instance=ExtResource("1_bxd6k")]
 CutsceneCamera = NodePath("../Cutscene Camera")
+FinalCamera = NodePath("../Ending Scene/FinalCameraPath/PathFollow3D/Final Camera")
 PlayerCamera = NodePath("../Actors/Player/Camera3D")
 Romeo = NodePath("../Actors/Pathfinding/East Staircase/PathFollow3D/Romeo")
 Juliet = NodePath("../Actors/Pathfinding/West Staircase/PathFollow3D/Juliet")
@@ -104,6 +105,7 @@ Luna = NodePath("../Actors/Moon")
 Player = NodePath("../Actors/Player")
 WestStairsPath = NodePath("../Actors/Pathfinding/West Staircase")
 EastStairsPath = NodePath("../Actors/Pathfinding/East Staircase")
+FinalScenePath = NodePath("../Ending Scene/FinalCameraPath")
 Upstairs = NodePath("../Room/UpstairsPointOfInterest")
 
 [node name="Cutscene Camera" type="Camera3D" parent="."]
@@ -140,7 +142,7 @@ light_energy = 0.66
 [node name="Background" type="Node" parent="Ending Scene"]
 
 [node name="Landscape" parent="Ending Scene/Background" instance=ExtResource("2_bda4g")]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 256.25128, -2770.263)
+transform = Transform3D(12.62, 0, 0, 0, 12.62, 0, 0, 0, 12.62, 0, 228.826, -2439.42)
 
 [node name="JulietActor" parent="Ending Scene" instance=ExtResource("4_ebevd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3473592, 7.3176923, -56.566418)
@@ -160,16 +162,17 @@ MaskType = 5
 [node name="ActorPose" parent="Ending Scene/RomeoActor/Visuals" index="1"]
 CurrentPose = 1
 
-[node name="Path3D" type="Path3D" parent="Ending Scene"]
+[node name="FinalCameraPath" type="Path3D" parent="Ending Scene"]
 curve = SubResource("Curve3D_ebevd")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/Path3D"]
-transform = Transform3D(0.99821687, -0.00027302158, 0.059415787, -1.4551681e-11, 0.99997795, 0.0045949514, -0.059416443, -0.0045868577, 0.9982059, 0.046704173, 8.861832, -47.962814)
+[node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
+transform = Transform3D(0.99989134, -0.00010920583, -0.00614373, 5.827126e-06, 0.9998461, -0.0168233, 0.0061443355, 0.016823256, 0.9998087, 0.18493924, 9.240359, -52.841705)
+progress = 22.499493
 
-[node name="Final Camera" type="Camera3D" parent="Ending Scene/Path3D"]
-transform = Transform3D(1, 0, 0, 0, 0.9903988, -0.13823973, 0, 0.13823973, 0.9903988, 0.103180945, 9.143001, -48.01456)
+[node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
+transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
 current = true
-fov = 35.0
+fov = 20.3
 
 [node name="Room" type="Node" parent="."]
 

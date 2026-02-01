@@ -184,8 +184,11 @@ _data = {
 &"sun": SubResource("Animation_u3pq5")
 }
 
-[node name="Landscape" type="Node3D"]
+[node name="Landscape" type="Node3D" node_paths=PackedStringArray("preEclipse", "postEclipse", "sunAnimation")]
 script = ExtResource("1_xtsio")
+preEclipse = NodePath("Pre-Eclipse")
+postEclipse = NodePath("Post-Eclipse")
+sunAnimation = NodePath("Post-Eclipse/AnimationPlayer")
 
 [node name="Pre-Eclipse" type="Node3D" parent="."]
 
@@ -195,39 +198,39 @@ mesh = SubResource("QuadMesh_x24ev")
 skeleton = NodePath("../..")
 
 [node name="Sun" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.984158, -12.723141, 0.79615974)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.984158, -12.723141, 10.709124)
 mesh = SubResource("QuadMesh_gvqpu")
 skeleton = NodePath("../..")
 
 [node name="Moon" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.256584, -10.270466, 3.6171951)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.256584, -10.270466, 13.530159)
 extra_cull_margin = 2935.83
 ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_2lytn")
 skeleton = NodePath("../..")
 
 [node name="Rear Mountains" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.456314)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24.112183)
 mesh = SubResource("QuadMesh_fqjap")
 skeleton = NodePath("../..")
 
 [node name="Fog" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.199743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 53.15725)
 mesh = SubResource("QuadMesh_i5xp2")
 skeleton = NodePath("../..")
 
 [node name="Front Mountains" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.323856)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 74.901855)
 mesh = SubResource("QuadMesh_q2q1a")
 skeleton = NodePath("../..")
 
 [node name="Left Fog" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.08258, 0, 20.451756)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.08258, 0, 107.39726)
 mesh = SubResource("QuadMesh_bcfo6")
 skeleton = NodePath("../..")
 
 [node name="Right Fog" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.344889, 0, 25.228588)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.344889, 0, 112.1741)
 mesh = SubResource("QuadMesh_xtsio")
 skeleton = NodePath("../..")
 
