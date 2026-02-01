@@ -188,7 +188,7 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.99988997, -0.00010337751, -0.0061437297, -7.2752954e-12, 0.9998461, -0.016823297, 0.0061442284, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
+transform = Transform3D(0.99988985, -0.00010337751, -0.0061437297, -7.2752945e-12, 0.9998461, -0.016823297, 0.006144228, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
@@ -744,9 +744,10 @@ curve = SubResource("Curve3D_nhhcf")
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/East Staircase"]
 transform = Transform3D(0.96883845, -0.106203265, -0.223759, -7.4505646e-09, 0.90339804, -0.42878398, 0.24768484, 0.41542232, 0.87525064, 11.318624, 0.71019316, -0.6555269)
 
-[node name="Romeo" parent="Actors/Pathfinding/East Staircase/PathFollow3D" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+[node name="Romeo" parent="Actors/Pathfinding/East Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 metronome = NodePath("../../../../../Metronome")
+cutscene = NodePath("../../../../../CutsceneOrchestrator")
 
 [node name="CollisionShape3D" parent="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo/NpcController/DancePartnerZone" index="0"]
 shape = SubResource("CylinderShape3D_i5md5")
@@ -763,9 +764,10 @@ curve = SubResource("Curve3D_bda4g")
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/West Staircase"]
 transform = Transform3D(0.99901706, 0.021767478, 0.03779426, -2.7938802e-09, 0.86647546, -0.49910292, -0.04361442, 0.4985983, 0.86570233, -12.884984, 0.95069695, -3.9296803)
 
-[node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+[node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 metronome = NodePath("../../../../../Metronome")
+cutscene = NodePath("../../../../../CutsceneOrchestrator")
 
 [node name="CollisionShape3D" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet/NpcController/DancePartnerZone" index="0"]
 shape = SubResource("CylinderShape3D_nhhcf")
@@ -777,10 +779,10 @@ IsJuliette = true
 mesh = SubResource("SphereMesh_ybp73")
 
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8609915, 0.017641068, 1.2016611)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8609915, 0.017641068, 2.4469647)
 
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7247474, 1.9073486e-06, -5.6379128)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7247474, 1.9073486e-06, -3.6620243)
 metronome = NodePath("../../Metronome")
 initialMask = 1
 
@@ -800,7 +802,7 @@ metronome = NodePath("../../Metronome")
 initialMask = 4
 
 [node name="Sun" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.54508495, 0, -14.655045)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.54508495, 0, -12.771884)
 metronome = NodePath("../../Metronome")
 initialMask = 5
 
@@ -815,12 +817,12 @@ metronome = NodePath("../../Metronome")
 initialMask = 7
 
 [node name="CheshireCat" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.808065, 0, 18.05997)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.371801, 0, 16.69321)
 metronome = NodePath("../../Metronome")
 initialMask = 8
 
 [node name="Owl" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.825583, 0, 19.103737)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.955349, 9.536743e-07, 17.07959)
 metronome = NodePath("../../Metronome")
 initialMask = 9
 

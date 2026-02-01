@@ -158,10 +158,12 @@ public partial class Npc : Node3D
 
 				if (CurrentMask.IsJuliette)
 				{
+					GD.Print("Play Moon cutscene after trade");
 					cutscene.PlayMoonRisesInWestCutscene();
 				}
 				else if (CurrentMask.IsRomeo)
 				{
+					GD.Print("Play Sun cutscene after trade");
 					cutscene.PlaySunRisesInEastCutscene();
 				}
 			}
