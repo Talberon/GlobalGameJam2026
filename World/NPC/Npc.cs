@@ -85,7 +85,7 @@ public partial class Npc : Node3D
 		{
 			if (other.GetParent() is Player player)
 			{
-				if (CurrentMask.IsCompatibleWith(player.CurrentMask.MaskType))
+				if (!HasTraded && CurrentMask.IsCompatibleWith(player.CurrentMask.MaskType))
 				{
 					GD.Print($"New Partner: {CurrentMask.Label.Text}");
 
