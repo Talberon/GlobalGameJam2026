@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Godot;
 using Masquerade.World.Player;
 
@@ -5,6 +6,7 @@ public partial class CutsceneOrchestrator : Node3D
 {
 	[ExportGroup("Camera Config")] [Export]
 	public Camera3D CutsceneCamera;
+
 	[Export] public Camera3D FinalCamera;
 
 	[Export] public Camera3D PlayerCamera;
@@ -17,6 +19,12 @@ public partial class CutsceneOrchestrator : Node3D
 	[Export] public Npc Sol;
 	[Export] public Npc Luna;
 	[Export] public Player Player;
+
+	[ExportGroup("EclipseItems")] [Export] public MeshInstance3D Sun;
+	[Export] public MeshInstance3D Moon;
+	[Export] public Node3D EclipseTarget;
+	[Export] public Landscape LandscapeScene;
+	[Export] public SpotLight3D EclipseSpotlight;
 
 	[Export] public Path3D WestStairsPath;
 	[Export] public Path3D EastStairsPath;
@@ -41,7 +49,7 @@ public partial class CutsceneOrchestrator : Node3D
 		{
 			GetTree().ReloadCurrentScene();
 		}
-		
+
 		//Debug cutscenes
 		if (Input.IsActionJustPressed("debug_cutscene1"))
 		{
@@ -98,7 +106,7 @@ public partial class CutsceneOrchestrator : Node3D
 	}
 
 	private const float StairsSceneDurationSecs = 8f;
-	
+
 	public async void PlaySunRisesInEastCutscene()
 	{
 		// 1. Setup: Match the cutscene camera to the player's current view so the transition is seamless
@@ -113,7 +121,7 @@ public partial class CutsceneOrchestrator : Node3D
 
 		MakeActorFollowPath(tween, EastStairsPath, StairsSceneDurationSecs);
 		followWithCamera = Romeo;
-		
+
 		ReturnCameraToPlayer(tween);
 
 		await ToSignal(tween, Tween.SignalName.Finished);
@@ -121,7 +129,7 @@ public partial class CutsceneOrchestrator : Node3D
 		PlayerCamera.MakeCurrent();
 		followWithCamera = null;
 		RomeoDelivered = true;
-		
+
 		if (JulietDelivered)
 		{
 			PlayEndingCutscene();
@@ -142,7 +150,7 @@ public partial class CutsceneOrchestrator : Node3D
 
 		MakeActorFollowPath(tween, WestStairsPath, StairsSceneDurationSecs);
 		followWithCamera = Juliet;
-		
+
 		ReturnCameraToPlayer(tween);
 
 		await ToSignal(tween, Tween.SignalName.Finished);
@@ -160,12 +168,58 @@ public partial class CutsceneOrchestrator : Node3D
 	public async void PlayEndingCutscene()
 	{
 		GD.Print("Playing final cutscene");
-		// 1. Setup: Match the cutscene camera to the player's current view so the transition is seamless
-		FinalCamera.MakeCurrent(); // Take over the screen
-		Tween tween = CreateTween();
-		MakeActorFollowPath(tween, FinalScenePath, 10);
-		
-		await ToSignal(tween, Tween.SignalName.Finished);
+	
+		FinalCamera.MakeCurrent(); 
+	
+		// Create a tween for the movement of Romeo/Juliet on the Final Path
+		Tween pathTween = CreateTween();
+		MakeActorFollowPath(pathTween, FinalScenePath, 10);
+
+		await PlayEclipseAnimation();
+
+		// Wait for the path movement to finish (or the eclipse, since both are 10s)
+		await ToSignal(pathTween, Tween.SignalName.Finished);
+	
+		GD.Print("The Eclipse is Complete.");
+	}
+
+	private async Task PlayEclipseAnimation()
+	{
+		// 1. Position the light to face the camera
+		// We place it at the EclipseTarget but make it look at the camera
+		EclipseSpotlight.GlobalPosition = EclipseTarget.GlobalPosition;
+		EclipseSpotlight.LookAt(FinalCamera.GlobalPosition);
+		EclipseSpotlight.LightEnergy = 0f;
+		EclipseSpotlight.Visible = true;
+
+		Tween eclipseTween = CreateTween().SetParallel(true);
+		eclipseTween.SetTrans(Tween.TransitionType.Quart);
+		eclipseTween.SetEase(Tween.EaseType.InOut);
+
+		Vector3 sunTarget = new Vector3(EclipseTarget.GlobalPosition.X, EclipseTarget.GlobalPosition.Y, Sun.GlobalPosition.Z);
+		Vector3 moonTarget = new Vector3(EclipseTarget.GlobalPosition.X, EclipseTarget.GlobalPosition.Y, Moon.GlobalPosition.Z);
+
+		// 2. Tween celestial bodies
+		eclipseTween.TweenProperty(Sun, "global_position", sunTarget, 10.0f);
+		eclipseTween.TweenProperty(Moon, "global_position", moonTarget, 10.0f);
+
+		// 3. Tween the Light to "Flood" levels
+		// Normal light is 1.0; 100.0+ will start blowing out the HDR buffer
+		eclipseTween.TweenProperty(EclipseSpotlight, "light_energy", 120.0f, 10.0f);
+	
+		// If using Volumetric Fog, this makes the air itself turn white
+		eclipseTween.TweenProperty(EclipseSpotlight, "light_volumetric_fog_energy", 50.0f, 10.0f);
+
+		await ToSignal(eclipseTween, Tween.SignalName.Finished);
+	
+		// Switch the scene assets
+		LandscapeScene.EnableEclipseScene();
+
+		// 4. Fade the light back out so we can see the new scene
+		Tween fadeOut = CreateTween();
+		fadeOut.TweenProperty(EclipseSpotlight, "light_energy", 0f, 2.0f);
+		await ToSignal(fadeOut, Tween.SignalName.Finished);
+		EclipseSpotlight.Visible = false;
 	}
 
 	private void ReturnCameraToPlayer(Tween tween)

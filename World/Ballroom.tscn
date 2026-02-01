@@ -94,7 +94,7 @@ melody = NodePath("../SoundManager/BGMMelodyOnly")
 
 [node name="SoundManager" parent="." instance=ExtResource("1_sokdh")]
 
-[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "FinalCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "WestStairsPath", "EastStairsPath", "FinalScenePath", "Upstairs") instance=ExtResource("1_bxd6k")]
+[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "FinalCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "Sun", "Moon", "EclipseTarget", "LandscapeScene", "EclipseSpotlight", "WestStairsPath", "EastStairsPath", "FinalScenePath", "Upstairs") instance=ExtResource("1_bxd6k")]
 CutsceneCamera = NodePath("../Cutscene Camera")
 FinalCamera = NodePath("../Ending Scene/FinalCameraPath/PathFollow3D/Final Camera")
 PlayerCamera = NodePath("../Actors/Player/Camera3D")
@@ -103,6 +103,11 @@ Juliet = NodePath("../Actors/Pathfinding/West Staircase/PathFollow3D/Juliet")
 Sol = NodePath("../Actors/Sun")
 Luna = NodePath("../Actors/Moon")
 Player = NodePath("../Actors/Player")
+Sun = NodePath("../Ending Scene/Background/Landscape/Pre-Eclipse/Sun")
+Moon = NodePath("../Ending Scene/Background/Landscape/Pre-Eclipse/Moon")
+EclipseTarget = NodePath("../Ending Scene/Background/Landscape/Pre-Eclipse/EclipseTarget")
+LandscapeScene = NodePath("../Ending Scene/Background/Landscape")
+EclipseSpotlight = NodePath("../Ending Scene/FinalCameraPath/PathFollow3D/Final Camera/SpotLight3D")
 WestStairsPath = NodePath("../Actors/Pathfinding/West Staircase")
 EastStairsPath = NodePath("../Actors/Pathfinding/East Staircase")
 FinalScenePath = NodePath("../Ending Scene/FinalCameraPath")
@@ -142,7 +147,7 @@ light_energy = 0.66
 [node name="Background" type="Node" parent="Ending Scene"]
 
 [node name="Landscape" parent="Ending Scene/Background" instance=ExtResource("2_bda4g")]
-transform = Transform3D(12.62, 0, 0, 0, 12.62, 0, 0, 0, 12.62, 0, 228.826, -2439.42)
+transform = Transform3D(12.62, 0, 0, 0, 12.62, 0, 0, 0, 12.62, 0, 155.44774, -2439.42)
 
 [node name="JulietActor" parent="Ending Scene" instance=ExtResource("4_ebevd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3473592, 7.3176923, -56.566418)
@@ -166,13 +171,20 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.99989134, -0.00010920583, -0.00614373, 5.827126e-06, 0.9998461, -0.0168233, 0.0061443355, 0.016823256, 0.9998087, 0.18493924, 9.240359, -52.841705)
-progress = 22.499493
+transform = Transform3D(0.9998906, -0.00010337751, -0.0061437297, -7.2753e-12, 0.9998461, -0.016823297, 0.0061442326, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
 current = true
 fov = 20.3
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Ending Scene/FinalCameraPath/PathFollow3D/Final Camera"]
+transform = Transform3D(-1, 0, 8.707866e-08, 5.820766e-11, 1, 0, -8.754432e-08, 7.450581e-09, -1.0000001, -0.0371131, -0.4175048, -6.025112)
+light_color = Color(1, 1, 0.5411765, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 16.0
+spot_range = 12.509869
+spot_angle = 45.320297
 
 [node name="Room" type="Node" parent="."]
 
@@ -798,6 +810,7 @@ metronome = NodePath("../../Metronome")
 initialMask = 10
 
 [editable path="SoundManager"]
+[editable path="Ending Scene/Background/Landscape"]
 [editable path="Ending Scene/JulietActor"]
 [editable path="Ending Scene/RomeoActor"]
 [editable path="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo"]
