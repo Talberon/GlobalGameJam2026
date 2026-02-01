@@ -8,28 +8,30 @@ public partial class CutsceneOrchestrator : Node3D
 
 	[Export] public Npc Juliet;
 	
-	//TODO: West Stairs
-	//TODO: East Stairs
+	[Export] public Node3D WestStairs;
+	[Export] public Node3D EastStairs;
+	
+	[Export] public Node3D Upstairs;
 	//TODO: Balcony
 
 	public void PlayIdentifyTargetsCutscene()
 	{
-		//TODO
+		//TODO Use Tweens to move camera and then release to character camera
 	}
 
 	public void PlaySunRisesInEastCutscene()
 	{
-		//TODO
+		//TODO Use Tweens to move camera and then release to character camera
 	}
 
 	public void PlayMoonRisesInWestCutscene()
 	{
-		//TODO
+		//TODO Use Tweens to move camera and then release to character camera
 	}
 
 	public void PlayEndingCutscene()
 	{
-		//TODO
+		//TODO Use Tweens to move camera and end the game
 	}
 	
 }

@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://coq1o1j7gmnal"]
+[gd_scene load_steps=2 format=3 uid="uid://coq1o1j7gmnal"]
+
+[ext_resource type="Script" uid="uid://bdq4n7vl27int" path="res://World/System/CutsceneOrchestrator.cs" id="1_855sf"]
 
 [node name="CutsceneOrchestrator" type="Node3D"]
+script = ExtResource("1_855sf")
