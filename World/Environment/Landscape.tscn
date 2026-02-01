@@ -187,6 +187,7 @@ _data = {
 
 [sub_resource type="SystemFont" id="SystemFont_nijub"]
 font_names = PackedStringArray("Gabriola")
+subpixel_positioning = 0
 
 [node name="Landscape" type="Node3D" node_paths=PackedStringArray("preEclipse", "postEclipse", "sunAnimation")]
 script = ExtResource("1_nijub")
@@ -297,3 +298,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.415817, 116.38408)
 text = "Vis-a-vis"
 font = SubResource("SystemFont_nijub")
 font_size = 1500
+
+[node name="Label3D3" type="Label3D" parent="Post-Eclipse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.113008, 116.38408)
+modulate = Color(1, 1, 1, 0.43529412)
+text = "Press Select/Backspace to Restart"
+font = SubResource("SystemFont_nijub")
+font_size = 200
