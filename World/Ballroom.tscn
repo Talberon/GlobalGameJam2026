@@ -61,16 +61,21 @@ height = 0.01
 
 [node name="Ballroom" type="Node3D"]
 
-[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "Romeo", "Juliet", "WestStairs", "EastStairs", "Upstairs") instance=ExtResource("1_bxd6k")]
+[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "WestStairs", "EastStairs", "Upstairs") instance=ExtResource("1_bxd6k")]
 CutsceneCamera = NodePath("../Cutscene Camera")
+PlayerCamera = NodePath("../Actors/Player/Camera3D")
 Romeo = NodePath("../Actors/Romeo")
-Juliet = NodePath("../Actors/Juliette")
+Juliet = NodePath("../Actors/Juliet")
+Sol = NodePath("../Actors/Sun")
+Luna = NodePath("../Actors/Moon")
+Player = NodePath("../Actors/Player")
 WestStairs = NodePath("../Room/Building/StairsLeft")
 EastStairs = NodePath("../Room/Building/StairsRight")
 Upstairs = NodePath("../Room/UpstairsPointOfInterest")
 
 [node name="Cutscene Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6617699, 0.749707, 0, -0.749707, 0.6617699, 0, 7.255889, 0.27455568)
+fov = 38.0
 
 [node name="Lights" type="Node" parent="."]
 
@@ -605,17 +610,17 @@ IsRomeo = true
 [node name="TimingCircle" parent="Actors/Romeo" index="1"]
 mesh = SubResource("SphereMesh_bxd6k")
 
-[node name="Juliette" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+[node name="Juliet" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10.746731, 0, -2.6459208)
 metronome = NodePath("../Metronome")
 
-[node name="CollisionShape3D" parent="Actors/Juliette/NpcController/DancePartnerZone" index="0"]
+[node name="CollisionShape3D" parent="Actors/Juliet/NpcController/DancePartnerZone" index="0"]
 shape = SubResource("CylinderShape3D_nhhcf")
 
-[node name="Facemask" parent="Actors/Juliette/NpcController/Visuals" index="0"]
+[node name="Facemask" parent="Actors/Juliet/NpcController/Visuals" index="0"]
 IsJuliette = true
 
-[node name="TimingCircle" parent="Actors/Juliette" index="1"]
+[node name="TimingCircle" parent="Actors/Juliet" index="1"]
 mesh = SubResource("SphereMesh_ybp73")
 
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
@@ -668,5 +673,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.01
 metronome = NodePath("../Metronome")
 initialMask = 10
 
+[editable path="Actors/Player"]
 [editable path="Actors/Romeo"]
-[editable path="Actors/Juliette"]
+[editable path="Actors/Juliet"]
