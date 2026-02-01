@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=31 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
@@ -17,6 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
 [ext_resource type="PackedScene" uid="uid://r6p3uoiflyvn" path="res://World/Environment/Wall.tscn" id="7_bda4g"]
 [ext_resource type="PackedScene" uid="uid://baov2i62sarhd" path="res://World/Environment/Bystander.tscn" id="8_6nyel"]
+
+[sub_resource type="Curve3D" id="Curve3D_ebevd"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.046704173, 8.861832, -47.962814, 0, 0, 0, 0, 0, 0, -0.29320526, 8.835545, -53.673412, 0, 0, 0, 0, 0, 0, -0.11911917, 10.56523, -55.837593),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
 albedo_texture = ExtResource("1_q8mcj")
@@ -135,10 +142,6 @@ light_energy = 0.66
 [node name="Landscape" parent="Ending Scene/Background" instance=ExtResource("2_bda4g")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 256.25128, -2770.263)
 
-[node name="Final Camera" type="Camera3D" parent="Ending Scene"]
-transform = Transform3D(1, 0, 0, 0, 0.9903988, -0.13823973, 0, 0.13823973, 0.9903988, 0.103180945, 9.143001, -48.01456)
-fov = 35.0
-
 [node name="JulietActor" parent="Ending Scene" instance=ExtResource("4_ebevd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3473592, 7.3176923, -56.566418)
 
@@ -156,6 +159,17 @@ MaskType = 5
 
 [node name="ActorPose" parent="Ending Scene/RomeoActor/Visuals" index="1"]
 CurrentPose = 1
+
+[node name="Path3D" type="Path3D" parent="Ending Scene"]
+curve = SubResource("Curve3D_ebevd")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/Path3D"]
+transform = Transform3D(0.99821687, -0.00027302158, 0.059415787, -1.4551681e-11, 0.99997795, 0.0045949514, -0.059416443, -0.0045868577, 0.9982059, 0.046704173, 8.861832, -47.962814)
+
+[node name="Final Camera" type="Camera3D" parent="Ending Scene/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9903988, -0.13823973, 0, 0.13823973, 0.9903988, 0.103180945, 9.143001, -48.01456)
+current = true
+fov = 35.0
 
 [node name="Room" type="Node" parent="."]
 
@@ -235,6 +249,15 @@ transform = Transform3D(0.7071069, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710
 
 [node name="Wall11" parent="Room/Building/New Walls" instance=ExtResource("7_bda4g")]
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0.05961418, 7.457073, -26.28577)
+
+[node name="Wall15" parent="Room/Building/New Walls" instance=ExtResource("7_bda4g")]
+transform = Transform3D(1, 0, 2.9802322e-08, 2.6054018e-15, -1, -8.742278e-08, 2.9802322e-08, 8.742278e-08, -1, 0.05961418, 22.457073, -26.28577)
+
+[node name="Wall16" parent="Room/Building/New Walls" instance=ExtResource("7_bda4g")]
+transform = Transform3D(1, 7.642742e-15, -1.4504323e-07, -1.2434498e-14, 1, 0, 1.4504323e-07, 6.6814974e-22, 1, 0.05961418, 22.457073, -26.28577)
+
+[node name="Wall14" parent="Room/Building/New Walls" instance=ExtResource("7_bda4g")]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0.05961418, 0.058408022, -26.28577)
 
 [node name="Furniture" type="Node" parent="Room"]
 
