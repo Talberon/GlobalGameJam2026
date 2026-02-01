@@ -1,19 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://u65pmycxt5v6"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yl6v5"]
-load_path = "res://.godot/imported/Chair_Normal.png-2ac4011edfb4e27cbeaa8f5b810ce069.s3tc.ctex"
+[ext_resource type="Texture2D" uid="uid://dhdlar7xi4jen" path="res://RawAssets/Environment/Table.png" id="1_p8liq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8liq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufgb8"]
 transparency = 1
-albedo_texture = SubResource("CompressedTexture2D_yl6v5")
+albedo_texture = ExtResource("1_p8liq")
 billboard_mode = 1
 
-[sub_resource type="QuadMesh" id="QuadMesh_ufgb8"]
-material = SubResource("StandardMaterial3D_p8liq")
-size = Vector2(2, 3)
+[sub_resource type="QuadMesh" id="QuadMesh_jxonl"]
+material = SubResource("StandardMaterial3D_ufgb8")
+size = Vector2(5, 3)
 
 [node name="Table" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3211112, 0)
-mesh = SubResource("QuadMesh_ufgb8")
+mesh = SubResource("QuadMesh_jxonl")
