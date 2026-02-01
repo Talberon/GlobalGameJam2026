@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://baov2i62sarhd"]
+
+[ext_resource type="Texture2D" uid="uid://bjd720i2e1tdw" path="res://RawAssets/Dance_Idle.png" id="1_8igx4"]
+[ext_resource type="Shader" uid="uid://c5748rykqy43a" path="res://Resources/Shaders/outline.gdshader" id="1_243ne"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bas1"]
+render_priority = 0
+shader = ExtResource("1_243ne")
+shader_parameter/albedo_texture = ExtResource("1_8igx4")
+shader_parameter/outline_color = Color(0.24170664, 0.21120001, 0.44, 1)
+shader_parameter/width = 6.2510002969225
+shader_parameter/spin_rotation = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_0bas1"]
+material = SubResource("ShaderMaterial_0bas1")
+size = Vector2(3, 3)
+
+[node name="Bystander" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4748753, 0)
+mesh = SubResource("QuadMesh_0bas1")

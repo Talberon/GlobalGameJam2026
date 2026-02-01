@@ -148,7 +148,7 @@ public partial class Npc : Node3D
 				player.TradeMasksWith(this);
 				HasTraded = true;
 				actorPose.SpinForSeconds(0.7f);
-				loveParticle.Emitting = true;
+				// loveParticle.Emitting = true; FIXME: This is broken
 				DisconnectPartner(player);
 			}
 		}
