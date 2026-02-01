@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://wj3c8qyar6e5"]
 
-[ext_resource type="Texture2D" uid="uid://by1arh1evwlsu" path="res://RawAssets/Environment/Chair.png" id="1_ui7fh"]
+[ext_resource type="Texture2D" uid="uid://r6nkn6agpwx2" path="res://RawAssets/Environment/Chair_Normal.png" id="1_ui7fh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqxc5"]
 transparency = 1
@@ -9,10 +9,10 @@ billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_cbtjs"]
 material = SubResource("StandardMaterial3D_rqxc5")
-size = Vector2(2, 4)
+size = Vector2(2, 3)
 
 [node name="Chair" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9639144, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3211112, 0)
 mesh = SubResource("QuadMesh_cbtjs")
