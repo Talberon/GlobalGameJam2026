@@ -122,11 +122,11 @@ public partial class CutsceneOrchestrator : Node3D
 		MakeActorFollowPath(tween, EastStairsPath, StairsSceneDurationSecs);
 		followWithCamera = Romeo;
 
-		ReturnCameraToPlayer(tween);
+		if (!JulietDelivered) ReturnCameraToPlayer(tween);
 
 		await ToSignal(tween, Tween.SignalName.Finished);
 
-		PlayerCamera.MakeCurrent();
+		if (!JulietDelivered) PlayerCamera.MakeCurrent();
 		followWithCamera = null;
 		RomeoDelivered = true;
 
@@ -151,11 +151,11 @@ public partial class CutsceneOrchestrator : Node3D
 		MakeActorFollowPath(tween, WestStairsPath, StairsSceneDurationSecs);
 		followWithCamera = Juliet;
 
-		ReturnCameraToPlayer(tween);
+		if (!RomeoDelivered) ReturnCameraToPlayer(tween);
 
 		await ToSignal(tween, Tween.SignalName.Finished);
 
-		PlayerCamera.MakeCurrent();
+		if (!RomeoDelivered) PlayerCamera.MakeCurrent();
 		followWithCamera = null;
 		JulietDelivered = true;
 
@@ -168,7 +168,9 @@ public partial class CutsceneOrchestrator : Node3D
 	public async void PlayEndingCutscene()
 	{
 		GD.Print("Playing final cutscene");
-	
+
+		Romeo.Visible = false;
+		Juliet.Visible = false;
 		FinalCamera.MakeCurrent(); 
 	
 		// Create a tween for the movement of Romeo/Juliet on the Final Path
