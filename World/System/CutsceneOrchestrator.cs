@@ -40,7 +40,7 @@ public partial class CutsceneOrchestrator : Node3D
 	public override void _Ready()
 	{
 		//TODO: Re-enable me when game is done
-		PlayIdentifyTargetsCutscene();
+		// PlayIdentifyTargetsCutscene();
 	}
 
 	public override void _Process(double delta)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cppu6uhd6tyay"]
+[gd_scene load_steps=18 format=3 uid="uid://cppu6uhd6tyay"]
 
 [ext_resource type="Script" uid="uid://suse1k2sjq3i" path="res://World/NPC/Npc.cs" id="1_qcj2e"]
 [ext_resource type="PackedScene" uid="uid://171xggqqlmkp" path="res://World/Facemask/Facemask.tscn" id="3_io1c3"]
 [ext_resource type="PackedScene" uid="uid://8uhf1bxrekl0" path="res://World/Pose/ActorPose.tscn" id="4_x2yfe"]
 [ext_resource type="Texture2D" uid="uid://tdrxiukc6cqx" path="res://RawAssets/Icons/Heart.png" id="5_whvfb"]
 [ext_resource type="Texture2D" uid="uid://ba7qihjeqoxoa" path="res://RawAssets/Icons/Tear.png" id="6_7bs1r"]
+[ext_resource type="Texture2D" uid="uid://mynbl4egvy2h" path="res://RawAssets/Icons/Sparkle.png" id="6_emcw4"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_whvfb"]
 
@@ -30,6 +31,13 @@ albedo_texture = ExtResource("6_7bs1r")
 material = SubResource("StandardMaterial3D_emcw4")
 size = Vector2(2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5ag4"]
+transparency = 1
+albedo_texture = ExtResource("6_emcw4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_60f0y"]
+material = SubResource("StandardMaterial3D_f5ag4")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2yfe"]
 resource_local_to_scene = true
 transparency = 1
@@ -41,7 +49,7 @@ material = SubResource("StandardMaterial3D_x2yfe")
 radius = 4.185
 height = 0.01
 
-[node name="NPC" type="Node3D" node_paths=PackedStringArray("characterBody3D", "CurrentMask", "TimingCircle", "actorPose", "visuals", "dancePartnerZone", "loveParticle", "cryParticle")]
+[node name="NPC" type="Node3D" node_paths=PackedStringArray("characterBody3D", "CurrentMask", "TimingCircle", "actorPose", "visuals", "dancePartnerZone", "loveParticle", "cryParticle", "sparkleParticle")]
 script = ExtResource("1_qcj2e")
 characterBody3D = NodePath("NpcController")
 CurrentMask = NodePath("NpcController/Visuals/Facemask")
@@ -52,6 +60,7 @@ shakeNoise = SubResource("FastNoiseLite_whvfb")
 dancePartnerZone = NodePath("NpcController/DancePartnerZone")
 loveParticle = NodePath("NpcController/Visuals/LoveParticle")
 cryParticle = NodePath("NpcController/Visuals/TearsParticle")
+sparkleParticle = NodePath("NpcController/Visuals/SparkleParticle")
 
 [node name="NpcController" type="CharacterBody3D" parent="."]
 
@@ -100,6 +109,20 @@ initial_velocity_min = 5.1
 initial_velocity_max = 5.1
 anim_speed_min = 4.54
 anim_speed_max = 6.14
+
+[node name="SparkleParticle" type="CPUParticles3D" parent="NpcController/Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.487305, 0.75491285)
+emitting = false
+amount = 15
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_60f0y")
+spread = 180.0
+gravity = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+anim_speed_min = 18.15
+anim_speed_max = 18.15
 
 [node name="TimingCircle" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_whvfb")

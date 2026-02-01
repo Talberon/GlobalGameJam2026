@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
-[ext_resource type="Texture2D" uid="uid://c2m6xaql8ae0x" path="res://Resources/Checkerboard.png" id="1_q8mcj"]
 [ext_resource type="PackedScene" uid="uid://bvqg22bdwpwmg" path="res://World/System/SoundManager.tscn" id="1_sokdh"]
 [ext_resource type="PackedScene" uid="uid://dp32kufd0nen5" path="res://World/Environment/Landscape.tscn" id="2_bda4g"]
 [ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
@@ -14,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bg27cpg11t0c1" path="res://World/Environment/RailEnd.tscn" id="5_ybp73"]
 [ext_resource type="PackedScene" uid="uid://bjo7o3osahxgj" path="res://World/Environment/Pillar.tscn" id="6_i5md5"]
 [ext_resource type="PackedScene" uid="uid://rq62offowt15" path="res://World/Environment/RailMiddle.tscn" id="6_nhhcf"]
+[ext_resource type="Texture2D" uid="uid://tfa2chwxpr8b" path="res://RawAssets/Environment/Checkerboard.png" id="6_y826o"]
 [ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
 [ext_resource type="PackedScene" uid="uid://r6p3uoiflyvn" path="res://World/Environment/Wall.tscn" id="7_bda4g"]
 [ext_resource type="PackedScene" uid="uid://baov2i62sarhd" path="res://World/Environment/Bystander.tscn" id="8_6nyel"]
@@ -32,7 +32,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebwhw"]
-albedo_texture = ExtResource("1_q8mcj")
+albedo_texture = ExtResource("6_y826o")
 metallic = 1.0
 roughness = 0.85
 uv1_scale = Vector3(5.475, 5.475, 5.475)
@@ -267,7 +267,7 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.9998894, -0.00010337751, -0.0061437297, -7.275291e-12, 0.9998461, -0.016823297, 0.006144225, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
+transform = Transform3D(0.9998892, -0.00010337751, -0.0061437297, -7.2752897e-12, 0.9998461, -0.016823297, 0.0061442237, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
@@ -844,7 +844,7 @@ mesh = SubResource("SphereMesh_bxd6k")
 curve = SubResource("Curve3D_bda4g")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/West Staircase"]
-transform = Transform3D(0.99995947, 4.7877055e-08, 5.061173e-05, 3.5525697e-15, 0.99990773, -0.00094599294, -5.0611336e-05, 0.00094593666, 0.9999672, -12.884984, 0.95069695, -3.9296803)
+transform = Transform3D(0.99995947, 4.7877045e-08, 5.0611718e-05, 3.5525697e-15, 0.99990755, -0.00094599277, -5.0611336e-05, 0.0009459365, 0.99996704, -12.884984, 0.95069695, -3.9296803)
 
 [node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)

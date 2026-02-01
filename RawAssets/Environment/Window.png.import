@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbu7qy8qscdvw"
-path="res://.godot/imported/Chair_Moon.png-f6b76a6bb2c41164a9365a74407d4dad.ctex"
+uid="uid://8iqmovu4leec"
+path="res://.godot/imported/Window.png-b44cd677e73b473c68357e6f66a27059.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://RawAssets/Environment/Chair_Moon.png"
-dest_files=["res://.godot/imported/Chair_Moon.png-f6b76a6bb2c41164a9365a74407d4dad.ctex"]
+source_file="res://RawAssets/Environment/Window.png"
+dest_files=["res://.godot/imported/Window.png-b44cd677e73b473c68357e6f66a27059.ctex"]
 
 [params]
 

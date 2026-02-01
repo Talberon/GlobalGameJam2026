@@ -47,6 +47,7 @@ public partial class Npc : Node3D
 
 	[ExportGroup("Particles")] [Export] private CpuParticles3D loveParticle;
 	[Export] private CpuParticles3D cryParticle;
+	[Export] private CpuParticles3D sparkleParticle;
 
 	private bool HasTraded = false;
 
@@ -150,11 +151,12 @@ public partial class Npc : Node3D
 			{
 				player.TradeMasksWith(this);
 				HasTraded = true;
-				const double fiveHours = 60f * 60f * 5f;
-				GD.Print("Traded mask with player. Spin for 5 hours");
+				const double fiveHours = 1f;
+				GD.Print("Traded mask with player. Spin!");
 				actorPose.SpinForSeconds(fiveHours);
 				// loveParticle.Emitting = true; FIXME: This is broken
 				DisconnectPartner(player);
+				sparkleParticle.Emitting = true;
 
 				if (CurrentMask.IsJuliette)
 				{
