@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://eqa75vxxbw06"]
+[gd_scene load_steps=10 format=3 uid="uid://eqa75vxxbw06"]
 
 [ext_resource type="PackedScene" uid="uid://171xggqqlmkp" path="res://World/Facemask/Facemask.tscn" id="1_odivh"]
-[ext_resource type="Script" uid="uid://dky32bsp6o0j2" path="res://World/NPC/CutsceneActor.cs" id="1_y8a30"]
 [ext_resource type="PackedScene" uid="uid://8uhf1bxrekl0" path="res://World/Pose/ActorPose.tscn" id="2_y8a30"]
 [ext_resource type="Texture2D" uid="uid://tdrxiukc6cqx" path="res://RawAssets/Icons/Heart.png" id="3_kngg4"]
 [ext_resource type="Texture2D" uid="uid://ba7qihjeqoxoa" path="res://RawAssets/Icons/Tear.png" id="4_7pxux"]
@@ -25,12 +24,11 @@ size = Vector2(2, 2)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_odivh"]
 
 [node name="CutsceneActor" type="Node3D"]
-script = ExtResource("1_y8a30")
 
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="Facemask" parent="Visuals" instance=ExtResource("1_odivh")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0087528825, 2.3267353, -0.030861467)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0087528825, 2.3267353, 0.337051)
 
 [node name="ActorPose" parent="Visuals" instance=ExtResource("2_y8a30")]
 

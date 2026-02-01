@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dp32kufd0nen5"]
+[gd_scene load_steps=55 format=3 uid="uid://dp32kufd0nen5"]
 
 [ext_resource type="Script" uid="uid://ct5yw2dqbx5wg" path="res://World/Environment/Landscape.cs" id="1_nijub"]
 [ext_resource type="Texture2D" uid="uid://c48q7j7xny3x3" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Background1.png" id="1_p02ta"]
@@ -185,6 +185,9 @@ _data = {
 &"sun": SubResource("Animation_u3pq5")
 }
 
+[sub_resource type="SystemFont" id="SystemFont_nijub"]
+font_names = PackedStringArray("Gabriola")
+
 [node name="Landscape" type="Node3D" node_paths=PackedStringArray("preEclipse", "postEclipse", "sunAnimation")]
 script = ExtResource("1_nijub")
 preEclipse = NodePath("Pre-Eclipse")
@@ -282,3 +285,15 @@ libraries = {
 &"": SubResource("AnimationLibrary_83b5i")
 }
 autoplay = "sun"
+
+[node name="Label3D" type="Label3D" parent="Post-Eclipse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0008156, 116.38408)
+text = "The End"
+font = SubResource("SystemFont_nijub")
+font_size = 500
+
+[node name="Label3D2" type="Label3D" parent="Post-Eclipse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.415817, 116.38408)
+text = "Vis-a-vis"
+font = SubResource("SystemFont_nijub")
+font_size = 1500
