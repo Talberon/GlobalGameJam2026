@@ -32,6 +32,11 @@ public partial class CutsceneOrchestrator : Node3D
 
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionJustPressed("reset"))
+		{
+			GetTree().ReloadCurrentScene();
+		}
+		
 		//Debug cutscenes
 		if (Input.IsActionJustPressed("debug_cutscene1"))
 		{
