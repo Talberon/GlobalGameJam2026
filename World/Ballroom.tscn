@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=33 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
 [ext_resource type="PackedScene" uid="uid://r6p3uoiflyvn" path="res://World/Environment/Wall.tscn" id="7_bda4g"]
 [ext_resource type="PackedScene" uid="uid://baov2i62sarhd" path="res://World/Environment/Bystander.tscn" id="8_6nyel"]
+[ext_resource type="PackedScene" uid="uid://b6jfc65b6pnmh" path="res://World/Environment/Door.tscn" id="12_y826o"]
 
 [sub_resource type="Environment" id="Environment_ebevd"]
 volumetric_fog_enabled = true
@@ -69,7 +70,7 @@ height = 0.01
 
 [sub_resource type="Curve3D" id="Curve3D_bda4g"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.884984, 0.95069695, -3.9296803, 0, 0, 0, 0, 0, 0, -12.885, 0.951, -4.25, 0, 0, 0, 0, 0, 0, -13.176235, 4.796898, -10.600981, 0, 0, 0, 0, 0, 0, -14.235123, 7.4839096, -18.257, 0, 0, 0, 0, 0, 0, -12.746698, 7.3659587, -21.107061, 0, 0, 0, 0, 0, 0, -0.68795896, 7.466032, -21.840988, 0, 0, 0, 0, 0, 0, -0.14949131, 7.637969, -32.399094),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.884984, 0.95069695, -3.9296803, 0, 0, 0, 0, 0, 0, -12.885, 0.951, -4.25, 0, 0, 0, 0, 0, 0, -13.176235, 4.796898, -10.600981, 0, 0, 0, 0, 0, 0, -14.235123, 7.4839096, -18.257, 0, 0, 0, 0, 0, 0, -12.746698, 7.3659587, -21.107061, 0, 0, 0, 0, 0, 0, -2.0566, 7.466032, -21.840988, 0, 0, 0, 0, 0, 0, -1.9345479, 7.637969, -32.399094),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 7
@@ -190,7 +191,7 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.9998898, -0.00010337751, -0.0061437297, -7.275294e-12, 0.9998461, -0.016823297, 0.0061442275, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
+transform = Transform3D(0.9998895, -0.00010337751, -0.0061437297, -7.275292e-12, 0.9998461, -0.016823297, 0.0061442256, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
@@ -295,6 +296,9 @@ transform = Transform3D(1, 7.642742e-15, -1.4504323e-07, -1.2434498e-14, 1, 0, 1
 
 [node name="Wall14" parent="Room/Building/New Walls" instance=ExtResource("7_bda4g")]
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0.05961418, 0.058408022, -26.28577)
+
+[node name="Door" parent="Room/Building" instance=ExtResource("12_y826o")]
+transform = Transform3D(1.785, 0, 0, 0, 1.785, 0, 0, 0, 1.785, 0, 7.632716, -26.048798)
 
 [node name="Furniture" type="Node" parent="Room"]
 
@@ -764,7 +768,7 @@ mesh = SubResource("SphereMesh_bxd6k")
 curve = SubResource("Curve3D_bda4g")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/West Staircase"]
-transform = Transform3D(0.99995947, 4.7877336e-08, 5.0612023e-05, 3.5525697e-15, 0.9999136, -0.0009459985, -5.0611336e-05, 0.0009459422, 0.99997306, -12.884984, 0.95069695, -3.9296803)
+transform = Transform3D(0.99995947, 4.7877066e-08, 5.061174e-05, 3.5525697e-15, 0.999908, -0.0009459932, -5.0611336e-05, 0.0009459369, 0.99996746, -12.884984, 0.95069695, -3.9296803)
 
 [node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)

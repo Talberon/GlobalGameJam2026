@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6jfc65b6pnmh"]
+
+[ext_resource type="Texture2D" uid="uid://bwj8vc1rl1ixk" path="res://RawAssets/Environment/Door_Right.png" id="1_si8hl"]
+[ext_resource type="Texture2D" uid="uid://cgn0la5mujhe6" path="res://RawAssets/Environment/Door_Left.png" id="2_8t7j8"]
+[ext_resource type="Texture2D" uid="uid://ce36lsbx5vg2q" path="res://RawAssets/Environment/Door_Decoration.png" id="3_8t7j8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t7j8"]
+transparency = 1
+albedo_texture = ExtResource("2_8t7j8")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3xi3c"]
+material = SubResource("StandardMaterial3D_8t7j8")
+size = Vector2(2, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0dim"]
+transparency = 1
+albedo_texture = ExtResource("1_si8hl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7polc"]
+material = SubResource("StandardMaterial3D_v0dim")
+size = Vector2(2, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbqeb"]
+transparency = 1
+albedo_texture = ExtResource("3_8t7j8")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7kflp"]
+material = SubResource("StandardMaterial3D_gbqeb")
+size = Vector2(4, 1)
+
+[node name="Door" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.3211112, 0)
+mesh = SubResource("QuadMesh_3xi3c")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.3211112, 0)
+mesh = SubResource("QuadMesh_7polc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008315563, 3.2980988, -2.3841858e-07)
+mesh = SubResource("QuadMesh_7kflp")
