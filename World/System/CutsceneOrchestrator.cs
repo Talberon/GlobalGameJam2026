@@ -24,7 +24,7 @@ public partial class CutsceneOrchestrator : Node3D
 	[Export] public MeshInstance3D Moon;
 	[Export] public Node3D EclipseTarget;
 	[Export] public Landscape LandscapeScene;
-	[Export] public SpotLight3D EclipseSpotlight;
+	[Export] public ColorRect whiteoutScreen;
 
 	[Export] public Path3D WestStairsPath;
 	[Export] public Path3D EastStairsPath;
@@ -185,41 +185,29 @@ public partial class CutsceneOrchestrator : Node3D
 
 	private async Task PlayEclipseAnimation()
 	{
-		// 1. Position the light to face the camera
-		// We place it at the EclipseTarget but make it look at the camera
-		EclipseSpotlight.GlobalPosition = EclipseTarget.GlobalPosition;
-		EclipseSpotlight.LookAt(FinalCamera.GlobalPosition);
-		EclipseSpotlight.LightEnergy = 0f;
-		EclipseSpotlight.Visible = true;
-
 		Tween eclipseTween = CreateTween().SetParallel(true);
 		eclipseTween.SetTrans(Tween.TransitionType.Quart);
 		eclipseTween.SetEase(Tween.EaseType.InOut);
 
-		Vector3 sunTarget = new Vector3(EclipseTarget.GlobalPosition.X, EclipseTarget.GlobalPosition.Y, Sun.GlobalPosition.Z);
-		Vector3 moonTarget = new Vector3(EclipseTarget.GlobalPosition.X, EclipseTarget.GlobalPosition.Y, Moon.GlobalPosition.Z);
+		var sunTarget = new Vector3(EclipseTarget.GlobalPosition.X, EclipseTarget.GlobalPosition.Y, Sun.GlobalPosition.Z);
+		var moonTarget = new Vector3(EclipseTarget.GlobalPosition.X, EclipseTarget.GlobalPosition.Y, Moon.GlobalPosition.Z);
 
-		// 2. Tween celestial bodies
 		eclipseTween.TweenProperty(Sun, "global_position", sunTarget, 10.0f);
 		eclipseTween.TweenProperty(Moon, "global_position", moonTarget, 10.0f);
 
-		// 3. Tween the Light to "Flood" levels
-		// Normal light is 1.0; 100.0+ will start blowing out the HDR buffer
-		eclipseTween.TweenProperty(EclipseSpotlight, "light_energy", 120.0f, 10.0f);
-	
-		// If using Volumetric Fog, this makes the air itself turn white
-		eclipseTween.TweenProperty(EclipseSpotlight, "light_volumetric_fog_energy", 50.0f, 10.0f);
-
+		var solid = new Color(1f, .69f, .35f, 1f);
+		eclipseTween.TweenProperty(whiteoutScreen, "color", solid, 10f);
+		
+		
 		await ToSignal(eclipseTween, Tween.SignalName.Finished);
 	
 		// Switch the scene assets
 		LandscapeScene.EnableEclipseScene();
 
-		// 4. Fade the light back out so we can see the new scene
-		Tween fadeOut = CreateTween();
-		fadeOut.TweenProperty(EclipseSpotlight, "light_energy", 0f, 2.0f);
-		await ToSignal(fadeOut, Tween.SignalName.Finished);
-		EclipseSpotlight.Visible = false;
+		var endingTween = CreateTween();
+		var empty = new Color(1f, .69f, .35f, 0f);
+		endingTween.TweenProperty(whiteoutScreen, "color", empty, 1f);
+		await ToSignal(endingTween, Tween.SignalName.Finished);
 	}
 
 	private void ReturnCameraToPlayer(Tween tween)

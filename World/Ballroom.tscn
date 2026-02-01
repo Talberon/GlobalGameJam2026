@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=32 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
@@ -17,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
 [ext_resource type="PackedScene" uid="uid://r6p3uoiflyvn" path="res://World/Environment/Wall.tscn" id="7_bda4g"]
 [ext_resource type="PackedScene" uid="uid://baov2i62sarhd" path="res://World/Environment/Bystander.tscn" id="8_6nyel"]
+
+[sub_resource type="Environment" id="Environment_ebevd"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.001
+volumetric_fog_anisotropy = -0.2
 
 [sub_resource type="Curve3D" id="Curve3D_ebevd"]
 _data = {
@@ -86,6 +91,18 @@ height = 0.01
 
 [node name="Ballroom" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ebevd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -1.0
+offset_top = -4.0
+offset_right = 1156.0
+offset_bottom = 650.0
+color = Color(1, 0.69803923, 0.3529412, 0)
+
 [node name="Metronome" parent="." node_paths=PackedStringArray("upNote", "downNote", "melody") instance=ExtResource("5_ikc2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.529793, 35.53196, -9.125069)
 upNote = NodePath("../SoundManager/FXUpNote")
@@ -94,7 +111,7 @@ melody = NodePath("../SoundManager/BGMMelodyOnly")
 
 [node name="SoundManager" parent="." instance=ExtResource("1_sokdh")]
 
-[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "FinalCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "Sun", "Moon", "EclipseTarget", "LandscapeScene", "EclipseSpotlight", "WestStairsPath", "EastStairsPath", "FinalScenePath", "Upstairs") instance=ExtResource("1_bxd6k")]
+[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "FinalCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "Sun", "Moon", "EclipseTarget", "LandscapeScene", "whiteoutScreen", "WestStairsPath", "EastStairsPath", "FinalScenePath", "Upstairs") instance=ExtResource("1_bxd6k")]
 CutsceneCamera = NodePath("../Cutscene Camera")
 FinalCamera = NodePath("../Ending Scene/FinalCameraPath/PathFollow3D/Final Camera")
 PlayerCamera = NodePath("../Actors/Player/Camera3D")
@@ -107,7 +124,7 @@ Sun = NodePath("../Ending Scene/Background/Landscape/Pre-Eclipse/Sun")
 Moon = NodePath("../Ending Scene/Background/Landscape/Pre-Eclipse/Moon")
 EclipseTarget = NodePath("../Ending Scene/Background/Landscape/Pre-Eclipse/EclipseTarget")
 LandscapeScene = NodePath("../Ending Scene/Background/Landscape")
-EclipseSpotlight = NodePath("../Ending Scene/FinalCameraPath/PathFollow3D/Final Camera/SpotLight3D")
+whiteoutScreen = NodePath("../CanvasLayer/ColorRect")
 WestStairsPath = NodePath("../Actors/Pathfinding/West Staircase")
 EastStairsPath = NodePath("../Actors/Pathfinding/East Staircase")
 FinalScenePath = NodePath("../Ending Scene/FinalCameraPath")
@@ -171,7 +188,7 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.9998906, -0.00010337751, -0.0061437297, -7.2753e-12, 0.9998461, -0.016823297, 0.0061442326, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
+transform = Transform3D(0.99988997, -0.00010337751, -0.0061437297, -7.2752954e-12, 0.9998461, -0.016823297, 0.0061442284, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
@@ -179,10 +196,13 @@ current = true
 fov = 20.3
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Ending Scene/FinalCameraPath/PathFollow3D/Final Camera"]
-transform = Transform3D(-1, 0, 8.707866e-08, 5.820766e-11, 1, 0, -8.754432e-08, 7.450581e-09, -1.0000001, -0.0371131, -0.4175048, -6.025112)
+transform = Transform3D(-1, 2.910383e-11, 8.707866e-08, 8.731149e-11, 1, 7.450581e-09, -8.800998e-08, 7.450581e-09, -1.0000001, -0.014256135, -0.16037083, -2.3143463)
 light_color = Color(1, 1, 0.5411765, 1)
 light_energy = 16.0
 light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+shadow_normal_bias = 1.215
+distance_fade_shadow = 1.0
 spot_range = 12.509869
 spot_angle = 45.320297
 
