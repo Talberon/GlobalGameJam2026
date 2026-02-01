@@ -1,0 +1,93 @@
+[gd_scene load_steps=21 format=3 uid="uid://dp32kufd0nen5"]
+
+[ext_resource type="Texture2D" uid="uid://c48q7j7xny3x3" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Background1.png" id="1_p02ta"]
+[ext_resource type="Texture2D" uid="uid://sopkephlbg62" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Back_Mountains.png" id="2_4yqbw"]
+[ext_resource type="Texture2D" uid="uid://hw038f6l0spr" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Fog.png" id="3_0corx"]
+[ext_resource type="Texture2D" uid="uid://b1ol4bp430jvd" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Front_Mountains.png" id="4_fqjap"]
+[ext_resource type="Texture2D" uid="uid://cg4j588hefptv" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Right_Fog.png" id="5_i5xp2"]
+[ext_resource type="Texture2D" uid="uid://c6so0200rf3a6" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Sun.png" id="6_q2q1a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p02ta"]
+transparency = 1
+albedo_texture = ExtResource("1_p02ta")
+
+[sub_resource type="QuadMesh" id="QuadMesh_x24ev"]
+material = SubResource("StandardMaterial3D_p02ta")
+size = Vector2(140, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtsio"]
+transparency = 1
+albedo_texture = ExtResource("6_q2q1a")
+
+[sub_resource type="QuadMesh" id="QuadMesh_gvqpu"]
+material = SubResource("StandardMaterial3D_xtsio")
+size = Vector2(140, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0corx"]
+transparency = 1
+albedo_texture = ExtResource("2_4yqbw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_fqjap"]
+material = SubResource("StandardMaterial3D_0corx")
+size = Vector2(140, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqjap"]
+transparency = 1
+albedo_texture = ExtResource("3_0corx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_i5xp2"]
+material = SubResource("StandardMaterial3D_fqjap")
+size = Vector2(140, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5xp2"]
+transparency = 1
+albedo_texture = ExtResource("4_fqjap")
+
+[sub_resource type="QuadMesh" id="QuadMesh_q2q1a"]
+material = SubResource("StandardMaterial3D_i5xp2")
+size = Vector2(140, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2q1a"]
+transparency = 1
+albedo_texture = ExtResource("5_i5xp2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_us3x8"]
+material = SubResource("StandardMaterial3D_q2q1a")
+size = Vector2(140, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_us3x8"]
+transparency = 1
+albedo_texture = ExtResource("5_i5xp2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xtsio"]
+material = SubResource("StandardMaterial3D_us3x8")
+size = Vector2(140, 80)
+
+[node name="Landscape" type="Node3D"]
+
+[node name="Sky" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_x24ev")
+
+[node name="Sun" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2114811)
+mesh = SubResource("QuadMesh_gvqpu")
+
+[node name="Rear Mountains" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9088726)
+mesh = SubResource("QuadMesh_fqjap")
+
+[node name="Fog" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5803547)
+mesh = SubResource("QuadMesh_i5xp2")
+
+[node name="Front Mountains" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.455803)
+mesh = SubResource("QuadMesh_q2q1a")
+
+[node name="Left Fog" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.9635124)
+mesh = SubResource("QuadMesh_us3x8")
+
+[node name="Right Fog" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.1453896)
+mesh = SubResource("QuadMesh_xtsio")

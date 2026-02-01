@@ -1,13 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=28 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
 [ext_resource type="Texture2D" uid="uid://c2m6xaql8ae0x" path="res://Resources/Checkerboard.png" id="1_q8mcj"]
+[ext_resource type="PackedScene" uid="uid://dp32kufd0nen5" path="res://World/Environment/Landscape.tscn" id="2_bda4g"]
 [ext_resource type="PackedScene" uid="uid://cppu6uhd6tyay" path="res://World/NPC/NPC.tscn" id="2_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://cuevwofnklg7g" path="res://World/Environment/StairsRight.tscn" id="3_46dr0"]
 [ext_resource type="PackedScene" uid="uid://dk8c5ikvuoeh3" path="res://World/Environment/StairsLeft.tscn" id="4_ng0ga"]
 [ext_resource type="PackedScene" uid="uid://dxlfq43dxm2tl" path="res://World/Metronome/Metronome.tscn" id="5_ikc2b"]
 [ext_resource type="PackedScene" uid="uid://wj3c8qyar6e5" path="res://World/Environment/Chair.tscn" id="5_omqc4"]
+[ext_resource type="PackedScene" uid="uid://bg27cpg11t0c1" path="res://World/Environment/RailEnd.tscn" id="5_ybp73"]
 [ext_resource type="PackedScene" uid="uid://bjo7o3osahxgj" path="res://World/Environment/Pillar.tscn" id="6_i5md5"]
 [ext_resource type="PackedScene" uid="uid://rq62offowt15" path="res://World/Environment/RailMiddle.tscn" id="6_nhhcf"]
 [ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
@@ -120,6 +122,9 @@ light_energy = 0.66
 
 [node name="Background" type="Node" parent="Room"]
 
+[node name="Landscape" parent="Room/Background" instance=ExtResource("2_bda4g")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 910.6042, -2406.6223)
+
 [node name="Building" type="Node" parent="Room"]
 
 [node name="Floor" type="StaticBody3D" parent="Room/Building"]
@@ -143,6 +148,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.0041012764, 20.856665)
 
 [node name="RailMiddle3" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.0041012764, 20.856665)
+
+[node name="RailEndLeft" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("5_ybp73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.117341, 0, 20.878277)
+
+[node name="RailEndRight" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("5_ybp73")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 12.23211, 0, 20.846693)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Building/Floor"]
 shape = SubResource("ConcavePolygonShape3D_pcc8v")

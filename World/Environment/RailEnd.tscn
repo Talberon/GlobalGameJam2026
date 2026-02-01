@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg27cpg11t0c1"]
+
+[ext_resource type="Texture2D" uid="uid://cpf8ensgn50hk" path="res://RawAssets/Environment/Rail_End.png" id="1_obwin"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8iph"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_obwin")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ona6g"]
+material = SubResource("StandardMaterial3D_r8iph")
+size = Vector2(0.73, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l135k"]
+size = Vector3(0.7283163, 0.9368286, 1)
+
+[node name="RailMiddle" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4834913, 0)
+mesh = SubResource("QuadMesh_ona6g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0011916161, 0.46829224, 0)
+shape = SubResource("BoxShape3D_l135k")
