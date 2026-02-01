@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=24 format=3 uid="uid://c53pt3lfvquff"]
 
+[ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
 [ext_resource type="Texture2D" uid="uid://c2m6xaql8ae0x" path="res://Resources/Checkerboard.png" id="1_q8mcj"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dxlfq43dxm2tl" path="res://World/Metronome/Metronome.tscn" id="5_ikc2b"]
 [ext_resource type="PackedScene" uid="uid://wj3c8qyar6e5" path="res://World/Environment/Chair.tscn" id="5_omqc4"]
 [ext_resource type="PackedScene" uid="uid://bjo7o3osahxgj" path="res://World/Environment/Pillar.tscn" id="6_i5md5"]
+[ext_resource type="PackedScene" uid="uid://rq62offowt15" path="res://World/Environment/RailMiddle.tscn" id="6_nhhcf"]
 [ext_resource type="PackedScene" uid="uid://hj1r1o1ydx85" path="res://World/Environment/Butler.tscn" id="7_6nyel"]
 [ext_resource type="PackedScene" uid="uid://baov2i62sarhd" path="res://World/Environment/Bystander.tscn" id="8_6nyel"]
 
@@ -59,6 +61,14 @@ height = 0.01
 
 [node name="Ballroom" type="Node3D"]
 
+[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "Romeo", "Juliet", "WestStairs", "EastStairs", "Upstairs") instance=ExtResource("1_bxd6k")]
+CutsceneCamera = NodePath("../Cutscene Camera")
+Romeo = NodePath("../Actors/Romeo")
+Juliet = NodePath("../Actors/Juliette")
+WestStairs = NodePath("../Room/Building/StairsLeft")
+EastStairs = NodePath("../Room/Building/StairsRight")
+Upstairs = NodePath("../Room/UpstairsPointOfInterest")
+
 [node name="Cutscene Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6617699, 0.749707, 0, -0.749707, 0.6617699, 0, 7.255889, 0.27455568)
 
@@ -99,16 +109,28 @@ mesh = SubResource("PlaneMesh_pcc8v")
 skeleton = NodePath("../../..")
 
 [node name="Upper Floor" type="MeshInstance3D" parent="Room/Building/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.7550144, -39.28005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.3518744, -39.28005)
 material_override = SubResource("StandardMaterial3D_ebwhw")
 mesh = SubResource("PlaneMesh_46dr0")
 skeleton = NodePath("../../..")
+
+[node name="RailMiddle" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.0041012764, 20.856665)
+
+[node name="RailMiddle2" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.0041012764, 20.856665)
+
+[node name="RailMiddle3" parent="Room/Building/Floor/Upper Floor" instance=ExtResource("6_nhhcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.0041012764, 20.856665)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Building/Floor"]
 shape = SubResource("ConcavePolygonShape3D_pcc8v")
 
 [node name="Wall" parent="Room/Building" instance=ExtResource("1_ebwhw")]
 transform = Transform3D(0.781353, 0, 4.719938, 0, 1.829, 0, -0.781353, 0, 4.719938, -21.0348, 0, 21.213203)
+
+[node name="BalconyWall" parent="Room/Building" instance=ExtResource("1_ebwhw")]
+transform = Transform3D(-1.8002736e-07, 0, 6.675, 0, 7.789, 0, -1.105, 0, -1.0874955e-06, 1.5748062, 5.3625603, -27.970146)
 
 [node name="Wall4" parent="Room/Building" instance=ExtResource("1_ebwhw")]
 transform = Transform3D(0.70710677, 0, 4.270925, 0, 8.755, 0, -0.70710677, 0, 4.270925, 21.391607, 0, -21.213203)
@@ -120,10 +142,10 @@ transform = Transform3D(-0.781353, 0, 4.719938, 0, 1.829, 0, -0.781353, 0, -4.71
 transform = Transform3D(-0.70710677, 0, 4.270925, 0, 8.755, 0, -0.70710677, 0, -4.270925, -21.0348, 0, -21.213203)
 
 [node name="StairsRight" parent="Room/Building" instance=ExtResource("3_46dr0")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 11.879936, 4.1028686, -9.872357)
+transform = Transform3D(1, 0, 0, 0, 0.99929065, -0.037655268, 0, 0.037655268, 0.99929065, 11.879936, 4.3195677, -9.871529)
 
 [node name="StairsLeft" parent="Room/Building" instance=ExtResource("4_ng0ga")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -11.786135, 4.0584474, -9.892985)
+transform = Transform3D(1, 0, 0, 0, 0.99929065, -0.037655268, 0, 0.037655268, 0.99929065, -11.786135, 4.2759542, -9.893814)
 
 [node name="Furniture" type="Node" parent="Room"]
 
@@ -559,10 +581,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.697655, 0, 13.023527)
 [node name="Pillar6" parent="Room/Pillars" instance=ExtResource("6_i5md5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.692924, 0, 2.542797)
 
+[node name="UpstairsPointOfInterest" type="Node3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9822569, 7.019723, -23.145233)
+
 [node name="Actors" type="Node" parent="."]
 
 [node name="Metronome" parent="Actors" instance=ExtResource("5_ikc2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4968078, 3.557118, -15.875412)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4968078, 8.557117, -26.875412)
 
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8609915, 0.017641068, 1.2016611)

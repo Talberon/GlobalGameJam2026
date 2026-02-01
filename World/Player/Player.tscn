@@ -33,6 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3811784, 0.03479886)
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("character")]
 transform = Transform3D(1, 0, 0, 0, 0.7061188, 0.7080934, 0, -0.7080934, 0.7061188, 0, 18.020441, -0.23924398)
+current = true
 fov = 38.0
 size = 15.0
 script = ExtResource("2_kogn4")

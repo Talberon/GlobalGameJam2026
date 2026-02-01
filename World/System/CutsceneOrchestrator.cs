@@ -3,6 +3,9 @@ using System;
 
 public partial class CutsceneOrchestrator : Node3D
 {
+	[ExportGroup("Camera Config")] [Export]
+	public Camera3D CutsceneCamera;
+	
 	[ExportGroup("Points of Interest")] [Export]
 	public Npc Romeo;
 
