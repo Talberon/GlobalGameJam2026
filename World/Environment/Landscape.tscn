@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dp32kufd0nen5"]
+[gd_scene load_steps=54 format=3 uid="uid://dp32kufd0nen5"]
 
 [ext_resource type="Texture2D" uid="uid://c48q7j7xny3x3" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Background1.png" id="1_p02ta"]
 [ext_resource type="Script" uid="uid://ct5yw2dqbx5wg" path="res://World/Environment/Eclipse.cs" id="1_xtsio"]
@@ -32,6 +32,17 @@ albedo_texture = ExtResource("6_q2q1a")
 
 [sub_resource type="QuadMesh" id="QuadMesh_gvqpu"]
 material = SubResource("StandardMaterial3D_xtsio")
+size = Vector2(140, 80)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gfee1"]
+load_path = "res://.godot/imported/End_Splash_Sun.png-3b05ffa6be39cc7aa47578ddf04e8bba.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_waxl7"]
+transparency = 1
+albedo_texture = SubResource("CompressedTexture2D_gfee1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2lytn"]
+material = SubResource("StandardMaterial3D_waxl7")
 size = Vector2(140, 80)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0corx"]
@@ -122,6 +133,21 @@ albedo_texture = ExtResource("14_okpyb")
 material = SubResource("StandardMaterial3D_nijub")
 size = Vector2(140, 80)
 
+[sub_resource type="Animation" id="Animation_fnua3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lytn"]
 transparency = 1
 albedo_texture = ExtResource("10_1eay6")
@@ -139,7 +165,7 @@ transparency = 1
 albedo_texture = ExtResource("17_waxl7")
 
 [sub_resource type="Animation" id="Animation_u3pq5"]
-resource_name = "eclipse"
+resource_name = "sun"
 length = 3.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -154,25 +180,10 @@ tracks/0/keys = {
 "values": [SubResource("StandardMaterial3D_2lytn"), SubResource("StandardMaterial3D_200ch"), SubResource("StandardMaterial3D_8okfj"), SubResource("StandardMaterial3D_ow7hp"), SubResource("StandardMaterial3D_200ch"), SubResource("StandardMaterial3D_2lytn"), SubResource("StandardMaterial3D_8okfj"), SubResource("StandardMaterial3D_ow7hp")]
 }
 
-[sub_resource type="Animation" id="Animation_fnua3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sun:material_override")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83b5i"]
 _data = {
 &"RESET": SubResource("Animation_fnua3"),
-&"eclipse": SubResource("Animation_u3pq5")
+&"sun": SubResource("Animation_u3pq5")
 }
 
 [node name="Landscape" type="Node3D"]
@@ -187,6 +198,11 @@ skeleton = NodePath("../..")
 [node name="Sun" type="MeshInstance3D" parent="Pre-Eclipse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2114811)
 mesh = SubResource("QuadMesh_gvqpu")
+skeleton = NodePath("../..")
+
+[node name="Moon" type="MeshInstance3D" parent="Pre-Eclipse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.12556, 0, 2.2440414)
+mesh = SubResource("QuadMesh_2lytn")
 skeleton = NodePath("../..")
 
 [node name="Rear Mountains" type="MeshInstance3D" parent="Pre-Eclipse"]
@@ -250,4 +266,4 @@ skeleton = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_83b5i")
 }
-autoplay = "eclipse"
+autoplay = "sun"
