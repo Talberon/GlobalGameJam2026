@@ -1,10 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://8uhf1bxrekl0"]
+[gd_scene load_steps=32 format=3 uid="uid://8uhf1bxrekl0"]
 
 [ext_resource type="Script" uid="uid://cc6xulawt1h6b" path="res://World/Pose/ActorPose.cs" id="1_t3moo"]
 [ext_resource type="Texture2D" uid="uid://bf4yjhpxwiqjn" path="res://RawAssets/Dance_Balet.png" id="2_golyu"]
 [ext_resource type="Texture2D" uid="uid://conufdavs8bwd" path="res://RawAssets/Dance_Cossack.png" id="3_7glxv"]
-[ext_resource type="Shader" path="res://Resources/Shaders/outline.gdshader" id="5_4216y"]
+[ext_resource type="Shader" uid="uid://c5748rykqy43a" path="res://Resources/Shaders/outline.gdshader" id="5_4216y"]
 [ext_resource type="Texture2D" uid="uid://c3xg3yhn2632i" path="res://RawAssets/Dance_Ballroom_Lead.png" id="5_q7nut"]
+[ext_resource type="Texture2D" uid="uid://od4rr4jel1qt" path="res://RawAssets/Dance_Balet_Female.png" id="6_4216y"]
+[ext_resource type="Texture2D" uid="uid://nu75bhrxc7xs" path="res://RawAssets/Dance_Ballroom_Lead_Female.png" id="7_q7nut"]
+[ext_resource type="Texture2D" uid="uid://cd8p64aud4rby" path="res://RawAssets/Dance_Cossack_Female.png" id="8_gh07g"]
+[ext_resource type="Texture2D" uid="uid://cqvymuwnbyrs1" path="res://RawAssets/Dance_Cheer1_Female.png" id="9_o0ghy"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_4216y"]
 
@@ -136,13 +140,117 @@ tracks/0/keys = {
 "values": [SubResource("ShaderMaterial_o0ghy")]
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2a4q"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("6_4216y")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/spin_rotation = 0.0
+
+[sub_resource type="Animation" id="Animation_xd5dy"]
+resource_name = "ballet_dress"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_y2a4q")]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xd5dy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("7_q7nut")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/spin_rotation = 0.0
+
+[sub_resource type="Animation" id="Animation_q7nut"]
+resource_name = "ballroom_lead_dress"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_xd5dy")]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_awi1f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("8_gh07g")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/spin_rotation = 0.0
+
+[sub_resource type="Animation" id="Animation_urjxb"]
+resource_name = "cossack_dress"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_awi1f")]
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urjxb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_4216y")
+shader_parameter/albedo_texture = ExtResource("9_o0ghy")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/spin_rotation = 0.0
+
+[sub_resource type="Animation" id="Animation_xx2hi"]
+resource_name = "salutation_dress"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_urjxb")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y2a4q"]
 _data = {
 &"RESET": SubResource("Animation_o0ghy"),
 &"ballet": SubResource("Animation_4216y"),
+&"ballet_dress": SubResource("Animation_xd5dy"),
 &"ballroom_lead": SubResource("Animation_awi1f"),
+&"ballroom_lead_dress": SubResource("Animation_q7nut"),
 &"cossack": SubResource("Animation_8iq56"),
-&"salutation": SubResource("Animation_a1efe")
+&"cossack_dress": SubResource("Animation_urjxb"),
+&"salutation": SubResource("Animation_a1efe"),
+&"salutation_dress": SubResource("Animation_xx2hi")
 }
 
 [node name="ActorPose" type="Node3D" node_paths=PackedStringArray("poseLabel", "AnimationPlayer", "mesh")]

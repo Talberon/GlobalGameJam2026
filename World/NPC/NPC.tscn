@@ -104,3 +104,8 @@ anim_speed_max = 6.14
 [node name="TimingCircle" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_whvfb")
 skeleton = NodePath("../NpcController/DancePartnerZone")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+light_color = Color(1, 1, 0.5647059, 1)
+omni_range = 3.0

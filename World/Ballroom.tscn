@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=48 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://bq37yh8m720tk" path="res://World/Player/Player.tscn" id="1_h2gwy"]
@@ -90,6 +90,81 @@ material = SubResource("StandardMaterial3D_bda4g")
 radius = 4.185
 height = 0.01
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y826o"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xafy"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_j7hld"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0xafy")
+radius = 4.185
+height = 0.01
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0xafy"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7hld"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8838m"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_j7hld")
+radius = 4.185
+height = 0.01
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gn0si"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agkn7"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7n3mp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_agkn7")
+radius = 4.185
+height = 0.01
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ktm3g"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q584t"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_y3gtc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_q584t")
+radius = 4.185
+height = 0.01
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u0dh2"]
+resource_local_to_scene = true
+radius = 4.1655273
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trk3a"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.29803923, 0.38039216, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_i406m"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_trk3a")
+radius = 4.185
+height = 0.01
+
 [node name="Ballroom" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -177,6 +252,7 @@ MaskType = 10
 
 [node name="ActorPose" parent="Ending Scene/JulietActor/Visuals" index="1"]
 CurrentPose = 2
+hasDress = true
 
 [node name="RomeoActor" parent="Ending Scene" instance=ExtResource("4_ebevd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6526408, 7.3176923, -56.566418)
@@ -191,7 +267,7 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.9998895, -0.00010337751, -0.0061437297, -7.275292e-12, 0.9998461, -0.016823297, 0.0061442256, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
+transform = Transform3D(0.9998894, -0.00010337751, -0.0061437297, -7.275291e-12, 0.9998461, -0.016823297, 0.006144225, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
@@ -768,7 +844,7 @@ mesh = SubResource("SphereMesh_bxd6k")
 curve = SubResource("Curve3D_bda4g")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/West Staircase"]
-transform = Transform3D(0.99995947, 4.7877066e-08, 5.061174e-05, 3.5525697e-15, 0.999908, -0.0009459932, -5.0611336e-05, 0.0009459369, 0.99996746, -12.884984, 0.95069695, -3.9296803)
+transform = Transform3D(0.99995947, 4.7877055e-08, 5.061173e-05, 3.5525697e-15, 0.99990773, -0.00094599294, -5.0611336e-05, 0.00094593666, 0.9999672, -12.884984, 0.95069695, -3.9296803)
 
 [node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
@@ -780,6 +856,9 @@ shape = SubResource("CylinderShape3D_nhhcf")
 
 [node name="Facemask" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet/NpcController/Visuals" index="0"]
 IsJuliette = true
+
+[node name="ActorPose" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet/NpcController/Visuals" index="1"]
+hasDress = true
 
 [node name="TimingCircle" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet" index="1"]
 mesh = SubResource("SphereMesh_ybp73")
@@ -817,25 +896,70 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.34
 metronome = NodePath("../../Metronome")
 initialMask = 6
 
+[node name="CollisionShape3D" parent="Actors/Sad/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_y826o")
+
+[node name="ActorPose" parent="Actors/Sad/NpcController/Visuals" index="1"]
+hasDress = true
+
+[node name="TimingCircle" parent="Actors/Sad" index="1"]
+mesh = SubResource("SphereMesh_j7hld")
+
 [node name="Donkey" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.20731, 0, 7.024269)
 metronome = NodePath("../../Metronome")
 initialMask = 7
+
+[node name="CollisionShape3D" parent="Actors/Donkey/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_0xafy")
+
+[node name="ActorPose" parent="Actors/Donkey/NpcController/Visuals" index="1"]
+hasDress = true
+
+[node name="TimingCircle" parent="Actors/Donkey" index="1"]
+mesh = SubResource("SphereMesh_8838m")
 
 [node name="CheshireCat" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.371801, 0, 16.69321)
 metronome = NodePath("../../Metronome")
 initialMask = 8
 
+[node name="CollisionShape3D" parent="Actors/CheshireCat/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_gn0si")
+
+[node name="ActorPose" parent="Actors/CheshireCat/NpcController/Visuals" index="1"]
+hasDress = true
+
+[node name="TimingCircle" parent="Actors/CheshireCat" index="1"]
+mesh = SubResource("SphereMesh_7n3mp")
+
 [node name="Owl" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.604919, 9.536743e-07, 16.265884)
 metronome = NodePath("../../Metronome")
 initialMask = 9
 
+[node name="CollisionShape3D" parent="Actors/Owl/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_ktm3g")
+
+[node name="ActorPose" parent="Actors/Owl/NpcController/Visuals" index="1"]
+hasDress = true
+
+[node name="TimingCircle" parent="Actors/Owl" index="1"]
+mesh = SubResource("SphereMesh_y3gtc")
+
 [node name="Moon" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.015169144, 0, 19.20665)
 metronome = NodePath("../../Metronome")
 initialMask = 10
+
+[node name="CollisionShape3D" parent="Actors/Moon/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_u0dh2")
+
+[node name="ActorPose" parent="Actors/Moon/NpcController/Visuals" index="1"]
+hasDress = true
+
+[node name="TimingCircle" parent="Actors/Moon" index="1"]
+mesh = SubResource("SphereMesh_i406m")
 
 [editable path="SoundManager"]
 [editable path="Ending Scene/Background/Landscape"]
@@ -844,3 +968,8 @@ initialMask = 10
 [editable path="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo"]
 [editable path="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet"]
 [editable path="Actors/Player"]
+[editable path="Actors/Sad"]
+[editable path="Actors/Donkey"]
+[editable path="Actors/CheshireCat"]
+[editable path="Actors/Owl"]
+[editable path="Actors/Moon"]

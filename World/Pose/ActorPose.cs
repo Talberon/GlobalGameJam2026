@@ -1,6 +1,5 @@
 using System;
 using Godot;
-using Godot.Collections;
 
 namespace Masquerade.World.Pose;
 
@@ -33,6 +32,7 @@ public partial class ActorPose : Node3D
 	[Export] public AnimationPlayer AnimationPlayer;
 
 	[Export] private MeshInstance3D mesh;
+	[Export] private bool hasDress;
 
 	public override void _Ready()
 	{
@@ -69,10 +69,14 @@ public partial class ActorPose : Node3D
 
 	private string AnimationForPose(Poses pose) => pose switch
 	{
-		Poses.Cossack => "cossack",
-		Poses.Ballet => "ballet",
-		Poses.Leading => "ballroom_lead",
-		Poses.Salutation => "salutation",
+		Poses.Cossack when hasDress => "cossack_dress",
+		Poses.Cossack when !hasDress => "cossack",
+		Poses.Ballet when hasDress => "ballet_dress",
+		Poses.Ballet when !hasDress => "ballet",
+		Poses.Leading when hasDress => "ballroom_lead_dress",
+		Poses.Leading when !hasDress => "ballroom_lead",
+		Poses.Salutation when hasDress => "salutation_dress",
+		Poses.Salutation when !hasDress => "salutation",
 		_ => throw new ArgumentOutOfRangeException(nameof(pose), pose, null)
 	};
 
