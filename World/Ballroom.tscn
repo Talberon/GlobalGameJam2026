@@ -824,12 +824,12 @@ metronome = NodePath("../../Metronome")
 initialMask = 8
 
 [node name="Owl" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.955349, 9.536743e-07, 17.07959)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.604919, 9.536743e-07, 16.265884)
 metronome = NodePath("../../Metronome")
 initialMask = 9
 
 [node name="Moon" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.015169144, 0, 20.11237)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.015169144, 0, 19.20665)
 metronome = NodePath("../../Metronome")
 initialMask = 10
 
