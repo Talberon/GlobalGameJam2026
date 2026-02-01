@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://sopkephlbg62" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Back_Mountains.png" id="2_4yqbw"]
 [ext_resource type="Texture2D" uid="uid://hw038f6l0spr" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Fog.png" id="3_0corx"]
 [ext_resource type="Texture2D" uid="uid://b1ol4bp430jvd" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Front_Mountains.png" id="4_fqjap"]
+[ext_resource type="Texture2D" uid="uid://dvgfu3f2qicnp" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Moon.png" id="4_nijub"]
 [ext_resource type="Texture2D" uid="uid://cg4j588hefptv" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Right_Fog.png" id="5_i5xp2"]
 [ext_resource type="Texture2D" uid="uid://c6so0200rf3a6" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Sun.png" id="6_q2q1a"]
 [ext_resource type="Texture2D" uid="uid://c6xepeblwgeb5" path="res://RawAssets/End_Splash/Pre-Eclipse/End_Splash_Left_Fog.png" id="6_us3x8"]
@@ -34,12 +35,9 @@ albedo_texture = ExtResource("6_q2q1a")
 material = SubResource("StandardMaterial3D_xtsio")
 size = Vector2(140, 80)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gfee1"]
-load_path = "res://.godot/imported/End_Splash_Sun.png-3b05ffa6be39cc7aa47578ddf04e8bba.s3tc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_waxl7"]
 transparency = 1
-albedo_texture = SubResource("CompressedTexture2D_gfee1")
+albedo_texture = ExtResource("4_nijub")
 
 [sub_resource type="QuadMesh" id="QuadMesh_2lytn"]
 material = SubResource("StandardMaterial3D_waxl7")
@@ -192,16 +190,19 @@ script = ExtResource("1_xtsio")
 [node name="Pre-Eclipse" type="Node3D" parent="."]
 
 [node name="Sky" type="MeshInstance3D" parent="Pre-Eclipse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.470253)
 mesh = SubResource("QuadMesh_x24ev")
 skeleton = NodePath("../..")
 
 [node name="Sun" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2114811)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.984158, -12.723141, 0.79615974)
 mesh = SubResource("QuadMesh_gvqpu")
 skeleton = NodePath("../..")
 
 [node name="Moon" type="MeshInstance3D" parent="Pre-Eclipse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.12556, 0, 2.2440414)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.256584, -10.270466, 3.6171951)
+extra_cull_margin = 2935.83
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_2lytn")
 skeleton = NodePath("../..")
 
@@ -231,34 +232,41 @@ mesh = SubResource("QuadMesh_xtsio")
 skeleton = NodePath("../..")
 
 [node name="Post-Eclipse" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 41.998665)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81222534)
+visible = false
 
 [node name="Sky" type="MeshInstance3D" parent="Post-Eclipse"]
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_d511d")
 skeleton = NodePath("../..")
 
 [node name="Sun" type="MeshInstance3D" parent="Post-Eclipse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2114811)
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_okpyb")
 skeleton = NodePath("../..")
 
 [node name="Rear Mountains" type="MeshInstance3D" parent="Post-Eclipse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.456314)
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_bmery")
 skeleton = NodePath("../..")
 
 [node name="Front Mountains" type="MeshInstance3D" parent="Post-Eclipse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.323856)
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_v055b")
 skeleton = NodePath("../..")
 
 [node name="Left Fog" type="MeshInstance3D" parent="Post-Eclipse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.08258, 0, 20.451756)
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_gfee1")
 skeleton = NodePath("../..")
 
 [node name="Right Fog" type="MeshInstance3D" parent="Post-Eclipse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.344889, 0, 25.228588)
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_waxl7")
 skeleton = NodePath("../..")
 
