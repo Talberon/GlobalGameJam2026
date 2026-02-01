@@ -60,11 +60,13 @@ public partial class Npc : Node3D
 
 		metronome.OnBeat += () =>
 		{
+			if (HasTraded) return;
 			targetHeight = onBeatHeight;
 			TestWithCurrentPose(playerPartner);
 		};
 		metronome.OffBeat += () =>
 		{
+			if (HasTraded) return;
 			targetHeight = offBeatHeight;
 			ZoneMesh.Radius = 0;
 			beatTimer = 0f;
@@ -147,7 +149,9 @@ public partial class Npc : Node3D
 				//TODO: Spin this dancer as they trade
 				player.TradeMasksWith(this);
 				HasTraded = true;
-				actorPose.SpinForSeconds(0.7f);
+				const double fiveHours = 60f * 60f * 5f;
+				GD.Print("Traded mask with player. Spin for 5 hours");
+				actorPose.SpinForSeconds(fiveHours);
 				// loveParticle.Emitting = true; FIXME: This is broken
 				DisconnectPartner(player);
 			}

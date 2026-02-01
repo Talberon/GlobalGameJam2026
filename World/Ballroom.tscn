@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c53pt3lfvquff"]
+[gd_scene load_steps=26 format=3 uid="uid://c53pt3lfvquff"]
 
 [ext_resource type="PackedScene" uid="uid://coq1o1j7gmnal" path="res://World/System/CutsceneOrchestrator.tscn" id="1_bxd6k"]
 [ext_resource type="PackedScene" uid="uid://3apnd3yfdqr5" path="res://World/Terrain/Wall.tscn" id="1_ebwhw"]
@@ -29,6 +29,13 @@ size = Vector2(55, 41.74)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pcc8v"]
 data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
 
+[sub_resource type="Curve3D" id="Curve3D_nhhcf"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 11.318624, 0.71019316, -0.6555269, 0, 0, 0, 0, 0, 0, 12.882615, 3.7072322, -6.773201, 0, 0, 0, 0, 0, 0, 14.439677, 6.503073, -13.886364, 0, 0, 0, 0, 0, 0, 14.11882, 8.003851, -18.26858, 0, 0, 0, 0, 0, 0, 11.688928, 7.3409386, -21.704412, 0, 0, 0, 0, 0, 0, 1.461396, 7.4760838, -19.954977, 0, 0, 0, 0, 0, 0, 1.3835301, 7.519408, -31.75794),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i5md5"]
 resource_local_to_scene = true
 radius = 4.1655273
@@ -43,6 +50,13 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_6nyel")
 radius = 4.185
 height = 0.01
+
+[sub_resource type="Curve3D" id="Curve3D_bda4g"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.884984, 0.95069695, -3.9296803, 0, 0, 0, 0, 0, 0, -13.176235, 4.796898, -10.600981, 0, 0, 0, 0, 0, 0, -14.235123, 7.4839096, -18.257, 0, 0, 0, 0, 0, 0, -12.992295, 7.3659577, -21.971415, 0, 0, 0, 0, 0, 0, -0.68795896, 7.466032, -19.974398, 0, 0, 0, 0, 0, 0, -0.14949131, 7.637969, -32.399094),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nhhcf"]
 resource_local_to_scene = true
@@ -61,16 +75,16 @@ height = 0.01
 
 [node name="Ballroom" type="Node3D"]
 
-[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "WestStairs", "EastStairs", "Upstairs") instance=ExtResource("1_bxd6k")]
+[node name="CutsceneOrchestrator" parent="." node_paths=PackedStringArray("CutsceneCamera", "PlayerCamera", "Romeo", "Juliet", "Sol", "Luna", "Player", "WestStairsPath", "EastStairsPath", "Upstairs") instance=ExtResource("1_bxd6k")]
 CutsceneCamera = NodePath("../Cutscene Camera")
 PlayerCamera = NodePath("../Actors/Player/Camera3D")
-Romeo = NodePath("../Actors/Romeo")
-Juliet = NodePath("../Actors/Juliet")
+Romeo = NodePath("../Actors/Pathfinding/East Staircase/PathFollow3D/Romeo")
+Juliet = NodePath("../Actors/Pathfinding/West Staircase/PathFollow3D/Juliet")
 Sol = NodePath("../Actors/Sun")
 Luna = NodePath("../Actors/Moon")
 Player = NodePath("../Actors/Player")
-WestStairs = NodePath("../Room/Building/StairsLeft")
-EastStairs = NodePath("../Room/Building/StairsRight")
+WestStairsPath = NodePath("../Actors/Pathfinding/West Staircase")
+EastStairsPath = NodePath("../Actors/Pathfinding/East Staircase")
 Upstairs = NodePath("../Room/UpstairsPointOfInterest")
 
 [node name="Cutscene Camera" type="Camera3D" parent="."]
@@ -592,36 +606,50 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9822569, 7.019723, -23.1452
 [node name="Actors" type="Node" parent="."]
 
 [node name="Metronome" parent="Actors" instance=ExtResource("5_ikc2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4968078, 8.557117, -26.875412)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0282955, 35.53196, -26.875412)
+
+[node name="Pathfinding" type="Node" parent="Actors"]
+
+[node name="East Staircase" type="Path3D" parent="Actors/Pathfinding"]
+curve = SubResource("Curve3D_nhhcf")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/East Staircase"]
+transform = Transform3D(0.96883845, -0.106203265, -0.223759, -7.4505646e-09, 0.90339804, -0.42878398, 0.24768484, 0.41542232, 0.87525064, 11.318624, 0.71019316, -0.6555269)
+
+[node name="Romeo" parent="Actors/Pathfinding/East Staircase/PathFollow3D" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
+metronome = NodePath("../../../../Metronome")
+
+[node name="CollisionShape3D" parent="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_i5md5")
+
+[node name="Facemask" parent="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo/NpcController/Visuals" index="0"]
+IsRomeo = true
+
+[node name="TimingCircle" parent="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo" index="1"]
+mesh = SubResource("SphereMesh_bxd6k")
+
+[node name="West Staircase" type="Path3D" parent="Actors/Pathfinding"]
+curve = SubResource("Curve3D_bda4g")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/West Staircase"]
+transform = Transform3D(0.99901706, 0.021767478, 0.03779426, -2.7938802e-09, 0.86647546, -0.49910292, -0.04361442, 0.4985983, 0.86570233, -12.884984, 0.95069695, -3.9296803)
+
+[node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+metronome = NodePath("../../../../Metronome")
+
+[node name="CollisionShape3D" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet/NpcController/DancePartnerZone" index="0"]
+shape = SubResource("CylinderShape3D_nhhcf")
+
+[node name="Facemask" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet/NpcController/Visuals" index="0"]
+IsJuliette = true
+
+[node name="TimingCircle" parent="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet" index="1"]
+mesh = SubResource("SphereMesh_ybp73")
 
 [node name="Player" parent="Actors" instance=ExtResource("1_h2gwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8609915, 0.017641068, 1.2016611)
-
-[node name="Romeo" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.136902, 0, -2.863099)
-metronome = NodePath("../Metronome")
-
-[node name="CollisionShape3D" parent="Actors/Romeo/NpcController/DancePartnerZone" index="0"]
-shape = SubResource("CylinderShape3D_i5md5")
-
-[node name="Facemask" parent="Actors/Romeo/NpcController/Visuals" index="0"]
-IsRomeo = true
-
-[node name="TimingCircle" parent="Actors/Romeo" index="1"]
-mesh = SubResource("SphereMesh_bxd6k")
-
-[node name="Juliet" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10.746731, 0, -2.6459208)
-metronome = NodePath("../Metronome")
-
-[node name="CollisionShape3D" parent="Actors/Juliet/NpcController/DancePartnerZone" index="0"]
-shape = SubResource("CylinderShape3D_nhhcf")
-
-[node name="Facemask" parent="Actors/Juliet/NpcController/Visuals" index="0"]
-IsJuliette = true
-
-[node name="TimingCircle" parent="Actors/Juliet" index="1"]
-mesh = SubResource("SphereMesh_ybp73")
 
 [node name="Happy" parent="Actors" node_paths=PackedStringArray("metronome") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7247474, 1.9073486e-06, -5.6379128)
@@ -673,6 +701,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.01
 metronome = NodePath("../Metronome")
 initialMask = 10
 
+[editable path="Actors/Pathfinding/East Staircase/PathFollow3D/Romeo"]
+[editable path="Actors/Pathfinding/West Staircase/PathFollow3D/Juliet"]
 [editable path="Actors/Player"]
-[editable path="Actors/Romeo"]
-[editable path="Actors/Juliet"]

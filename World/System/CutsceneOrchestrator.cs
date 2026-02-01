@@ -17,15 +17,17 @@ public partial class CutsceneOrchestrator : Node3D
 	[Export] public Npc Luna;
 	[Export] public Player Player;
 
-	[Export] public Node3D WestStairs;
-	[Export] public Node3D EastStairs;
+	[Export] public Path3D WestStairsPath;
+	[Export] public Path3D EastStairsPath;
 
 	[Export] public Node3D Upstairs;
-	//TODO: Balcony
+
+	private Node3D? followWithCamera;
 
 	public override void _Ready()
 	{
-		PlayIdentifyTargetsCutscene();
+		//TODO: Re-enable me when game is done
+		// PlayIdentifyTargetsCutscene();
 	}
 
 	public override void _Process(double delta)
@@ -51,6 +53,12 @@ public partial class CutsceneOrchestrator : Node3D
 			PlayEndingCutscene();
 		}
 
+		if (followWithCamera is not null)
+		{
+			var offset = new Vector3(0, 10, 10);
+			CutsceneCamera.GlobalTransform = CalculateViewTransform(followWithCamera.GlobalPosition, offset);
+		}
+
 		base._Process(delta);
 	}
 
@@ -72,27 +80,78 @@ public partial class CutsceneOrchestrator : Node3D
 		LookAtNpc(tween, Luna);
 		LookAtNpc(tween, Player);
 
-		//Return to player camera
-		tween.TweenProperty(CutsceneCamera, "global_transform", PlayerCamera.GlobalTransform, 1.5f);
+		ReturnCameraToPlayer(tween);
 
 		await ToSignal(tween, Tween.SignalName.Finished);
 
 		PlayerCamera.MakeCurrent();
 	}
 
-	public void PlaySunRisesInEastCutscene()
+	private const float StairsSceneDurationSecs = 8f;
+	
+	public async void PlaySunRisesInEastCutscene()
 	{
-		//TODO Use Tweens to move camera and then release to character camera
+		// 1. Setup: Match the cutscene camera to the player's current view so the transition is seamless
+		CutsceneCamera.GlobalTransform = PlayerCamera.GlobalTransform;
+		CutsceneCamera.MakeCurrent(); // Take over the screen
+
+		Tween tween = CreateTween();
+
+		tween.SetParallel(false); // Run steps one after another
+		tween.SetTrans(Tween.TransitionType.Cubic);
+		tween.SetEase(Tween.EaseType.InOut);
+
+		MakeActorFollowPath(tween, EastStairsPath, StairsSceneDurationSecs);
+		followWithCamera = Romeo;
+		
+		ReturnCameraToPlayer(tween);
+
+		await ToSignal(tween, Tween.SignalName.Finished);
+
+		PlayerCamera.MakeCurrent();
+		followWithCamera = null;
 	}
 
-	public void PlayMoonRisesInWestCutscene()
+	public async void PlayMoonRisesInWestCutscene()
 	{
-		//TODO Use Tweens to move camera and then release to character camera
+		// 1. Setup: Match the cutscene camera to the player's current view so the transition is seamless
+		CutsceneCamera.GlobalTransform = PlayerCamera.GlobalTransform;
+		CutsceneCamera.MakeCurrent(); // Take over the screen
+
+		Tween tween = CreateTween();
+
+		tween.SetParallel(false); // Run steps one after another
+		tween.SetTrans(Tween.TransitionType.Cubic);
+		tween.SetEase(Tween.EaseType.InOut);
+
+		MakeActorFollowPath(tween, WestStairsPath, StairsSceneDurationSecs);
+		followWithCamera = Juliet;
+		
+		ReturnCameraToPlayer(tween);
+
+		await ToSignal(tween, Tween.SignalName.Finished);
+
+		PlayerCamera.MakeCurrent();
+		followWithCamera = null;
 	}
 
 	public void PlayEndingCutscene()
 	{
 		//TODO Use Tweens to move camera and end the game
+	}
+
+	private void ReturnCameraToPlayer(Tween tween)
+	{
+		//Return to player camera
+		tween.TweenProperty(CutsceneCamera, "global_transform", PlayerCamera.GlobalTransform, 1.5f);
+	}
+
+	private void MakeActorFollowPath(Tween tween, Path3D path3D, float durationSecs)
+	{
+		// Animates the progress from 0 to 1 over the duration
+		tween.TweenProperty(path3D.GetChild<PathFollow3D>(0), "progress_ratio", 1.0f, durationSecs)
+			.SetTrans(Tween.TransitionType.Cubic)
+			.SetEase(Tween.EaseType.InOut);
 	}
 
 	private void LookAtNpc(Tween tween, Node3D actor)

@@ -72,7 +72,7 @@ public partial class Facemask : Node3D
 		MaskTypes.CheshireCat => maskType is MaskTypes.Donkey,
 		MaskTypes.Owl => maskType is MaskTypes.CheshireCat,
 		MaskTypes.Moon => maskType is MaskTypes.Owl,
-		_ => throw new ArgumentOutOfRangeException()
+		_ => false
 	};
 
 	public override void _Ready()
