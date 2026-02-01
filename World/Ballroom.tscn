@@ -47,10 +47,10 @@ data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0,
 
 [sub_resource type="Curve3D" id="Curve3D_nhhcf"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 11.318624, 0.71019316, -0.6555269, 0, 0, 0, 0, 0, 0, 12.882615, 3.7072322, -6.773201, 0, 0, 0, 0, 0, 0, 14.439677, 6.503073, -13.886364, 0, 0, 0, 0, 0, 0, 14.11882, 8.003851, -18.26858, 0, 0, 0, 0, 0, 0, 11.688928, 7.3409386, -21.704412, 0, 0, 0, 0, 0, 0, 1.461396, 7.4760838, -19.954977, 0, 0, 0, 0, 0, 0, 1.3835301, 7.519408, -31.75794),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 11.318624, 0.71019316, -0.6555269, 0, 0, 0, 0, 0, 0, 11.319, 0.71, -0.981, 0, 0, 0, 0, 0, 0, 12.882615, 3.7072322, -6.773201, 0, 0, 0, 0, 0, 0, 14.439677, 6.503073, -13.886364, 0, 0, 0, 0, 0, 0, 14.11882, 8.003851, -18.26858, 0, 0, 0, 0, 0, 0, 11.688928, 7.3409386, -21.704412, 0, 0, 0, 0, 0, 0, 1.461396, 7.4760838, -21.947712, 0, 0, 0, 0, 0, 0, 1.3835301, 7.519408, -31.75794),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 7
+point_count = 8
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i5md5"]
 resource_local_to_scene = true
@@ -69,10 +69,10 @@ height = 0.01
 
 [sub_resource type="Curve3D" id="Curve3D_bda4g"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.884984, 0.95069695, -3.9296803, 0, 0, 0, 0, 0, 0, -13.176235, 4.796898, -10.600981, 0, 0, 0, 0, 0, 0, -14.235123, 7.4839096, -18.257, 0, 0, 0, 0, 0, 0, -12.992295, 7.3659577, -21.971415, 0, 0, 0, 0, 0, 0, -0.68795896, 7.466032, -19.974398, 0, 0, 0, 0, 0, 0, -0.14949131, 7.637969, -32.399094),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.884984, 0.95069695, -3.9296803, 0, 0, 0, 0, 0, 0, -12.885, 0.951, -4.25, 0, 0, 0, 0, 0, 0, -13.176235, 4.796898, -10.600981, 0, 0, 0, 0, 0, 0, -14.235123, 7.4839096, -18.257, 0, 0, 0, 0, 0, 0, -12.746698, 7.3659587, -21.107061, 0, 0, 0, 0, 0, 0, -0.68795896, 7.466032, -21.840988, 0, 0, 0, 0, 0, 0, -0.14949131, 7.637969, -32.399094),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 6
+point_count = 7
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nhhcf"]
 resource_local_to_scene = true
@@ -97,10 +97,12 @@ environment = SubResource("Environment_ebevd")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_left = -1.0
-offset_top = -4.0
-offset_right = 1156.0
-offset_bottom = 650.0
+offset_left = -1237.0
+offset_top = -1011.0
+offset_right = 2827.0
+offset_bottom = 1970.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color(1, 0.69803923, 0.3529412, 0)
 
 [node name="Metronome" parent="." node_paths=PackedStringArray("upNote", "downNote", "melody") instance=ExtResource("5_ikc2b")]
@@ -188,7 +190,7 @@ CurrentPose = 1
 curve = SubResource("Curve3D_ebevd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Ending Scene/FinalCameraPath"]
-transform = Transform3D(0.99988985, -0.00010337751, -0.0061437297, -7.2752945e-12, 0.9998461, -0.016823297, 0.006144228, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
+transform = Transform3D(0.9998898, -0.00010337751, -0.0061437297, -7.275294e-12, 0.9998461, -0.016823297, 0.0061442275, 0.01682329, 0.9998087, 0.046704173, 8.861832, -30.345814)
 
 [node name="Final Camera" type="Camera3D" parent="Ending Scene/FinalCameraPath/PathFollow3D"]
 transform = Transform3D(1.0000168, 0, 0, 0, 0.9986411, -0.052336838, 0, 0.052336562, 0.9986463, 0, 0, 0)
@@ -742,7 +744,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9822569, 7.019723, -23.1452
 curve = SubResource("Curve3D_nhhcf")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/East Staircase"]
-transform = Transform3D(0.96883845, -0.106203265, -0.223759, -7.4505646e-09, 0.90339804, -0.42878398, 0.24768484, 0.41542232, 0.87525064, 11.318624, 0.71019316, -0.6555269)
+transform = Transform3D(0.9999972, 6.869447e-07, -0.0011573882, -2.8421648e-14, 0.99999124, 0.0005935276, 0.0011573932, -0.0005935258, 0.9999929, 11.318624, 0.71019316, -0.6555269)
 
 [node name="Romeo" parent="Actors/Pathfinding/East Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
@@ -762,7 +764,7 @@ mesh = SubResource("SphereMesh_bxd6k")
 curve = SubResource("Curve3D_bda4g")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Actors/Pathfinding/West Staircase"]
-transform = Transform3D(0.99901706, 0.021767478, 0.03779426, -2.7938802e-09, 0.86647546, -0.49910292, -0.04361442, 0.4985983, 0.86570233, -12.884984, 0.95069695, -3.9296803)
+transform = Transform3D(0.99995947, 4.7877336e-08, 5.0612023e-05, 3.5525697e-15, 0.9999136, -0.0009459985, -5.0611336e-05, 0.0009459422, 0.99997306, -12.884984, 0.95069695, -3.9296803)
 
 [node name="Juliet" parent="Actors/Pathfinding/West Staircase/PathFollow3D" node_paths=PackedStringArray("metronome", "cutscene") instance=ExtResource("2_ebwhw")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
